@@ -41,6 +41,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // `context` is available in the template as a prop and as a variable in GraphQL
 
   if (posts.length > 0) {
+    function getDuplicateSlugs(posts) {
+      const counts = posts.reduce(
+        (p, c) => ({ ...p, [c.fields.slug]: (p[c.fields.slug] || 0) + 1 }), {});
+      const duplicates = Object.keys(counts).filter(x => counts[x] > 1);
+      return duplicates.length > 0 ? duplicates : null;
+    }
+    const duplicateSlugs = getDuplicateSlugs(posts);
+    if (duplicateSlugs) {
+      reporter.panicOnBuild(
+        `Duplicate slugs detected`,
+        { duplicateSlugs }
+      )
+    }
     posts.forEach((post, index) => {
       const previousPostId = index === 0 ? null : posts[index - 1].id
       const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
@@ -62,7 +75,11 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const slug = createFilePath({ node, getNode })
+
+    const value = slug.match(/([^/]+)\/$/)
+      ? `/${RegExp.$1}/`
+      : slug;
 
     createNodeField({
       name: `slug`,
