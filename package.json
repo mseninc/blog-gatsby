@@ -19,7 +19,7 @@
     "gatsby-plugin-sharp": "^3.11.0",
     "gatsby-remark-copy-linked-files": "^4.8.0",
     "gatsby-remark-images": "^5.8.0",
-    "gatsby-remark-prismjs": "^5.8.0",
+    "gatsby-remark-prismjs": "^5.9.0",
     "gatsby-remark-prismjs-title": "^1.0.0",
     "gatsby-remark-responsive-iframe": "^4.8.0",
     "gatsby-remark-smartypants": "^4.8.0",

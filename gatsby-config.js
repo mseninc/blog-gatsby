@@ -40,12 +40,6 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: 'gatsby-remark-prismjs-title',
-            options: {
-              className: 'your-custom-class-name'
-            }
-          },
-          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 630,
@@ -57,7 +51,13 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
+          'gatsby-remark-prismjs-title',
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
