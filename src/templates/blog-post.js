@@ -10,6 +10,8 @@ const BlogPostTemplate = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
 
+  const author = post.frontmatter.author;
+
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
@@ -31,7 +33,14 @@ const BlogPostTemplate = ({ data, location }) => {
         />
         <hr />
         <footer>
-          <Bio />
+          { author
+            ? <Bio
+                github={author.id}
+                name={author.name}
+                bio={author.bio}
+                avatarImage={post.frontmatter.avatarImage}
+                />
+            : null }
         </footer>
       </article>
       <nav className="blog-post-nav">
@@ -85,6 +94,16 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        author {
+          id
+          name
+          bio
+        }
+        avatarImage {
+          childImageSharp {
+            gatsbyImageData(width: 50, height: 50, layout: FIXED)
+          }
+        }
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
