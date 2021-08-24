@@ -20,6 +20,7 @@
     "gatsby-remark-copy-linked-files": "^4.8.0",
     "gatsby-remark-images": "^5.8.0",
     "gatsby-remark-prismjs": "^5.8.0",
+    "gatsby-remark-prismjs-title": "^1.0.0",
     "gatsby-remark-responsive-iframe": "^4.8.0",
     "gatsby-remark-smartypants": "^4.8.0",
     "gatsby-source-filesystem": "^3.11.0",
@@ -27,14 +28,17 @@
     "gatsby-transformer-sharp": "^3.11.0",
     "gatsby-transformer-yaml": "^3.12.0",
     "got": "^11.8.2",
+    "lodash": "^4.17.21",
     "prismjs": "^1.24.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "typeface-merriweather": "0.0.72",
-    "typeface-montserrat": "0.0.75"
+    "typeface-montserrat": "0.0.75",
+    "typescript": "^4.3.5"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.2",
     "prettier": "2.3.2"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
@@ -54,6 +58,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "typecheck": "tsc"
   }
 }
