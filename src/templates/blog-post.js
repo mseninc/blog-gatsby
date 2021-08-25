@@ -5,6 +5,7 @@ import TagList from "../components/tag-list"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import PostToc from "../components/post-toc"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -15,7 +16,6 @@ const BlogPostTemplate = ({ data, location }) => {
   const tagList = tags ? <TagList tags={tags} /> : null;
 
   const author = post.frontmatter.author;
-
   const bio = author
     ? <Bio
         github={author.id}
@@ -25,6 +25,11 @@ const BlogPostTemplate = ({ data, location }) => {
         />
     : null;
 
+  const { headings } = post;
+  const toc = headings?.length > 0
+    ? <PostToc headings={headings} page={post.fields.slug} />
+    : null;
+
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
@@ -32,6 +37,7 @@ const BlogPostTemplate = ({ data, location }) => {
         description={post.frontmatter.description || post.excerpt}
         keywords={tags}
       />
+      {toc}
       <article
         className="blog-post"
         itemScope
@@ -113,6 +119,14 @@ export const pageQuery = graphql`
             gatsbyImageData(width: 50, height: 50, layout: FIXED)
           }
         }
+      }
+      headings {
+        depth
+        id
+        value
+      }
+      fields {
+        slug
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
