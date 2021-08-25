@@ -19,6 +19,7 @@ module.exports = {
       options: {
         path: `${__dirname}/content/blog`,
         name: `blog`,
+        ignore: [`${__dirname}/content/blog/*.md`],
       },
     },
     {
