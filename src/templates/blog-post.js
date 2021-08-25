@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
+import TagList from "../components/tag-list"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -10,13 +11,26 @@ const BlogPostTemplate = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
 
+  const tags = post.frontmatter.tags;
+  const tagList = tags ? <TagList tags={tags} /> : null;
+
   const author = post.frontmatter.author;
+
+  const bio = author
+    ? <Bio
+        github={author.id}
+        name={author.name}
+        bio={author.bio}
+        avatarImage={post.frontmatter.avatarImage}
+        />
+    : null;
 
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
+        keywords={tags}
       />
       <article
         className="blog-post"
@@ -26,6 +40,7 @@ const BlogPostTemplate = ({ data, location }) => {
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
+          {tagList}
         </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
@@ -33,14 +48,7 @@ const BlogPostTemplate = ({ data, location }) => {
         />
         <hr />
         <footer>
-          { author
-            ? <Bio
-                github={author.id}
-                name={author.name}
-                bio={author.bio}
-                avatarImage={post.frontmatter.avatarImage}
-                />
-            : null }
+          {bio}
         </footer>
       </article>
       <nav className="blog-post-nav">
@@ -94,6 +102,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        tags
         author {
           id
           name
