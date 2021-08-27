@@ -1,46 +1,33 @@
 import React from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
-import { getImage, GatsbyImage } from "gatsby-plugin-image";
+import { graphql, Link } from "gatsby";
+import { getImage, GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+
+type Post = {
+  id: string
+  excerpt?: string
+  frontmatter: {
+    title: string
+    date: string
+    description?: string
+    tags: string
+    author?: {
+      id: string
+      name: string
+    }
+    avatarImage?: IGatsbyImageData
+  }
+  fields: {
+    slug: string
+  }
+};
 
 type Props = {
-  id: string;
-}
+  post: Post;
+};
 
-export default function PostCard({ id }: Props) {
+export default function PostCard({ post }: Props) {
 
-  const data = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark {
-        edges {
-          node {
-            id
-            excerpt(pruneLength: 80, truncate: true)
-            frontmatter {
-              title
-              date(formatString: "YYYY-MM-DD")
-              description
-              tags
-              author {
-                id
-                name
-              }
-              avatarImage {
-                childImageSharp {
-                  gatsbyImageData(width: 50, height: 50, layout: FIXED)
-                }
-              }
-            }
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  const { node: post } = data.allMarkdownRemark.edges.find((x: any) => x.node.id === id);
-  const image = getImage(post.frontmatter.avatarImage);
+  const image = post.frontmatter.avatarImage ? getImage(post.frontmatter.avatarImage) : null;
   return (
     <div className="post-card">
       <div className="post-title">
@@ -55,9 +42,34 @@ export default function PostCard({ id }: Props) {
         ? <GatsbyImage
             image={image}
             className="bio-avatar"
-            alt={post.frontmatter.author?.name}
+            alt={post.frontmatter.author?.name || ''}
             />
         : null}
     </div>
   );
 }
+
+export const query = graphql`
+  fragment PostSummary on MarkdownRemark {
+    id
+    excerpt(pruneLength: 80)
+    frontmatter {
+      title
+      date(formatString: "YYYY/MM/DD")
+      description
+      tags
+      author {
+        id
+        name
+      }
+      avatarImage {
+        childImageSharp {
+          gatsbyImageData(width: 50, height: 50, layout: FIXED)
+        }
+      }
+    }
+    fields {
+      slug
+    }
+  }
+`
