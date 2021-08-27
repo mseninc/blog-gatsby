@@ -1,4 +1,5 @@
 const path = require(`path`)
+const fs = require(`fs`)
 const _ = require("lodash")
 const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
@@ -93,6 +94,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 }
 
+function getMatchedHeroImagePath(fileAbsolutePath, slug) {
+  const candidateExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']
+  for (const ext of candidateExtensions) {
+    const testPath = path.join(fileAbsolutePath, '..', 'images', `${slug}\.${ext}`)
+    try {
+      fs.statSync(testPath)
+      return path.relative(path.join(fileAbsolutePath, '..'), testPath)
+    }
+    catch {}
+  }
+  return null
+}
+
 exports.onCreateNode = async ({
   node,
   actions,
@@ -106,6 +120,7 @@ exports.onCreateNode = async ({
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode })
 
+    // Flatten slug (e.g. /kenzauros/2021/hogehoge/ => /hogehoge/)
     const value = slug.match(/([^/]+)\/$/)
       ? `/${RegExp.$1}/`
       : slug;
@@ -116,6 +131,16 @@ exports.onCreateNode = async ({
       value,
     })
 
+    // Hero image (eye catch image)
+    const filename = slug.match(/([^/]+)\/$/) ? RegExp.$1 : '';
+    const heroImagePath = getMatchedHeroImagePath(node.fileAbsolutePath, filename)
+    createNodeField({
+      name: `heroImage`,
+      node,
+      value: heroImagePath,
+    })
+
+    // Author avatar from exteranal source
     if (node.frontmatter.author) {
       const url = `https://avatars.githubusercontent.com/${node.frontmatter.author}`;
       // https://www.gatsbyjs.com/docs/how-to/images-and-media/preprocessing-external-images/
@@ -152,6 +177,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type Fields {
       slug: String
+      heroImagePath: String
     }
   `)
 }

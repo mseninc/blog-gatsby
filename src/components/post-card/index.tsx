@@ -18,6 +18,7 @@ export type PostSummary = {
   }
   fields: {
     slug: string
+    heroImage?: IGatsbyImageData
   }
 };
 
@@ -25,34 +26,10 @@ type Props = {
   post: PostSummary;
 };
 
-export default function PostCard({ post }: Props) {
-
-  const image = post.frontmatter.avatarImage ? getImage(post.frontmatter.avatarImage) : null;
-  return (
-    <div className="post-card">
-      <div className="post-title">
-        <Link to={post.fields.slug}>
-          {post.frontmatter.title}
-        </Link>
-      </div>
-      <div className="post-description">{post.frontmatter.description || post.excerpt}</div>
-      <div className="post-tags">{post.frontmatter.tags}</div>
-      <div className="post-author">{post.frontmatter.author?.name}</div>
-      { image
-        ? <GatsbyImage
-            image={image}
-            className="bio-avatar"
-            alt={post.frontmatter.author?.name || ''}
-            />
-        : null}
-    </div>
-  );
-}
-
 export const query = graphql`
   fragment PostSummary on MarkdownRemark {
     id
-    excerpt(pruneLength: 80)
+    excerpt(pruneLength: 120)
     frontmatter {
       title
       date(formatString: "YYYY/MM/DD")
@@ -70,6 +47,46 @@ export const query = graphql`
     }
     fields {
       slug
+      heroImage {
+        childImageSharp {
+          gatsbyImageData(width: 320, layout: CONSTRAINED)
+        }
+      }
     }
   }
 `
+
+export default function PostCard({ post }: Props) {
+
+  const heroImage = post.fields.heroImage ? getImage(post.fields.heroImage) : null;
+  const avatarImage = post.frontmatter.avatarImage ? getImage(post.frontmatter.avatarImage) : null;
+  return (
+    <div className="post-card">
+      <div className="post-hero">
+        { heroImage
+          ? <GatsbyImage
+              image={heroImage}
+              alt={post.frontmatter.title}
+              />
+          : null}
+      </div>
+      <div className="post-title">
+        <Link to={post.fields.slug}>
+          {post.frontmatter.title}
+        </Link>
+      </div>
+      <div className="post-description">{post.frontmatter.description || post.excerpt}</div>
+      <div className="post-tags">{post.frontmatter.tags}</div>
+      <div className="post-author">
+        { avatarImage
+          ? <GatsbyImage
+              image={avatarImage}
+              className="bio-avatar"
+              alt={post.frontmatter.author?.name || ''}
+              />
+          : null}
+        {post.frontmatter.author?.name}
+      </div>
+    </div>
+  );
+}
