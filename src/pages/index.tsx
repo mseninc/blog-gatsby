@@ -11,7 +11,10 @@ type DataType = {
       title: string
     }
   }
-  allMarkdownRemark: {
+  topics1: {
+    nodes?: PostSummary[]
+  }
+  topics2: {
     nodes?: PostSummary[]
   }
 };
@@ -23,13 +26,16 @@ type Props = {
 
 const BlogIndex = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
 
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title="All posts" />
       <ol style={{ listStyle: `none` }}>
-        {posts?.map((post: PostSummary) => <PostCard post={post} />) || null}
+        {data.topics1.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+      </ol>
+      <hr/>
+      <ol style={{ listStyle: `none` }}>
+        {data.topics2.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
       </ol>
     </Layout>
   )
@@ -44,7 +50,20 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    topics1: allMarkdownRemark (
+      sort: {fields: frontmatter___date, order: DESC}
+      limit: 5
+      filter: {frontmatter: {tags: {eq: "Web"}}}
+    ) {
+      nodes {
+        ...PostSummary
+      }
+    }
+    topics2: allMarkdownRemark (
+      sort: {fields: frontmatter___date, order: DESC}
+      limit: 5
+      filter: {frontmatter: {tags: {eq: "AWS"}}}
+    ) {
       nodes {
         ...PostSummary
       }
