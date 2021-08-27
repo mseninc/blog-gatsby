@@ -2,7 +2,7 @@ import React from "react";
 import { graphql, Link } from "gatsby";
 import { getImage, GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 
-type Post = {
+export type PostSummary = {
   id: string
   excerpt?: string
   frontmatter: {
@@ -22,7 +22,7 @@ type Post = {
 };
 
 type Props = {
-  post: Post;
+  post: PostSummary;
 };
 
 export default function PostCard({ post }: Props) {
