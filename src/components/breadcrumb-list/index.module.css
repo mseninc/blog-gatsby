@@ -8,20 +8,26 @@
 }
 
 .breadcrumbList li {
-  display: inline-block;
+  display: inline-flex;
+  align-items: baseline;
   list-style: none;
-  margin-right: 1.5em;
-  position: relative;
+  margin: var(--spacing-0);
+  margin-right: var(--spacing-3);
   font-size: 0.95em;
-  vertical-align: middle;
 }
 
 .breadcrumbList li::after {
-  content: '>';
-  position: absolute;
-  font-size: 0.5em;
-  right: -1.5em;
-  margin-top: 0.25em;
+  content: '';
+  display: block;
+  font-size: 0.5rem;
+  margin-left: var(--spacing-1);
+  border-style: solid;
+  border-color: gainsboro;
+  border-width: 2px 2px 0 0;
+  width: 1em;
+  height: 1em;
+  transform: rotate(45deg);
+  /* margin-top: var(--spacing-1); */
 }
 
 .breadcrumbList li:last-child::after {

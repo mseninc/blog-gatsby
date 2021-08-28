@@ -11,6 +11,7 @@ import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
 import { tagNameToPageUrl } from "utils/tag"
 import AuthorLink from "components/author-link"
 
+import './blog-post.css'
 
 type DataType = {
   site: {
@@ -113,54 +114,35 @@ export default function BlogPostTemplate({ data, location }: Props) {
         description={post.frontmatter.description || post.excerpt}
         keywords={tags}
       />
-      <BreadcrumbList items={breadcrumb} />
-      {toc}
-      <article
-        className="blog-post"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
-        <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
-          {tagList}
-          {authorLink}
-        </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          itemProp="articleBody"
-        />
-        <hr />
-        <footer>
-          {bio}
-        </footer>
-      </article>
-      <nav className="blog-post-nav">
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
+      <div className="main-container">
+        <main>
+          <article
+            itemScope
+            itemType="http://schema.org/Article"
+          >
+            <BreadcrumbList items={breadcrumb} />
+            <header>
+              {tagList}
+              <h1 itemProp="headline">{post.frontmatter.title}</h1>
+              <div className="header-meta">
+                <div className="post-date">{post.frontmatter.date}</div>
+                {authorLink}
+              </div>
+            </header>
+            <section
+              dangerouslySetInnerHTML={{ __html: post.html }}
+              itemProp="articleBody"
+            />
+            <hr />
+            <footer>
+              {bio}
+            </footer>
+          </article>
+        </main>
+        <aside className="sidebar">
+          {toc}
+        </aside>
+      </div>
     </Layout>
   )
 }

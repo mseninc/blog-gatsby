@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import { Helmet } from "react-helmet"
 
 type Props = {
   location: { pathname: string }
@@ -28,12 +29,13 @@ const Layout = ({ location, title, children }: Props) => {
 
   return (
     <div className="global-wrapper" data-is-root-path={isRootPath}>
-      <header className="global-header">{header}</header>
-      <main>{children}</main>
+      <Helmet>
+      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
+      </Helmet>
+      <div className="global-header">{header}</div>
+      {children}
       <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
+        © {new Date().getFullYear()}, MSEN Inc.
       </footer>
     </div>
   )

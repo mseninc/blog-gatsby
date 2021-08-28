@@ -14,7 +14,7 @@ export default function AuthorLink(props: Props) {
   const avatarImage = getImage(props.avatarImage)
 
   return (
-    <div className={styles.container}>
+    <div className={`author-link ${styles.container}`}>
       { avatarImage
         ? <GatsbyImage
             image={avatarImage}

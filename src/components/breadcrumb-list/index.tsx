@@ -35,7 +35,7 @@ export default function BreadcrumbList(props: Props) {
     );
   }
   return (
-    <div className={styles.breadcrumbList}>
+    <div className={`breadcrumb-list ${styles.breadcrumbList}`}>
       <ol itemScope itemType="https://schema.org/BreadcrumbList">
         {props.items.map((x, i) => createListItem(x, i + 1))}
       </ol>
