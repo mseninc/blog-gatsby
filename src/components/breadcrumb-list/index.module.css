@@ -13,7 +13,6 @@
   list-style: none;
   margin: var(--spacing-0);
   margin-right: var(--spacing-3);
-  font-size: 0.95em;
 }
 
 .breadcrumbList li::after {
@@ -27,7 +26,6 @@
   width: 1em;
   height: 1em;
   transform: rotate(45deg);
-  /* margin-top: var(--spacing-1); */
 }
 
 .breadcrumbList li:last-child::after {

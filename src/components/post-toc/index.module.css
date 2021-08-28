@@ -1,5 +1,10 @@
+.container ul {
+  margin: 0;
+  padding: 0;
+}
+
 .container li {
-  line-height: 1.5em;
+  line-height: var(--lineHeight-normal);
   list-style: none;
   margin: 0;
 }

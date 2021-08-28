@@ -115,12 +115,12 @@ export default function BlogPostTemplate({ data, location }: Props) {
         keywords={tags}
       />
       <div className="main-container">
+        <BreadcrumbList items={breadcrumb} />
         <main>
           <article
             itemScope
             itemType="http://schema.org/Article"
           >
-            <BreadcrumbList items={breadcrumb} />
             <header>
               {tagList}
               <h1 itemProp="headline">{post.frontmatter.title}</h1>
