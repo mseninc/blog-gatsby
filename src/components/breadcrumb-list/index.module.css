@@ -1,0 +1,24 @@
+.breadcrumbList {
+  display: block;
+}
+
+.breadcrumbList li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 1.5em;
+  position: relative;
+  font-size: 0.95em;
+  vertical-align: middle;
+}
+
+.breadcrumbList li::after {
+  content: '>';
+  position: absolute;
+  font-size: 0.5em;
+  right: -1.5em;
+  margin-top: 0.25em;
+}
+
+.breadcrumbList li:last-child::after {
+  display: none;
+}

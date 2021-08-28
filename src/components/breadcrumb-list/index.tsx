@@ -1,4 +1,5 @@
 import React from "react";
+import * as styles from "./index.module.css"
 
 export type BreadcrumbListItem = {
   url?: string
@@ -15,7 +16,6 @@ export default function BreadcrumbList(props: Props) {
   function createListItem(item: BreadcrumbListItem, position: number) {
     return (
       <li
-        className="breadcrumb-list-item"
         itemProp="itemListElement"
         itemScope
         itemType="https://schema.org/ListItem">
@@ -35,7 +35,10 @@ export default function BreadcrumbList(props: Props) {
     );
   }
   return (
-    <ol itemScope itemType="https://schema.org/BreadcrumbList" className="breadcrumb-list">
+    <ol
+      itemScope itemType="https://schema.org/BreadcrumbList"
+      className={styles.breadcrumbList}
+    >
       {props.items.map((x, i) => createListItem(x, i + 1))}
     </ol>
   );
