@@ -2,6 +2,11 @@
   display: block;
 }
 
+.breadcrumbList ul, .breadcrumbList ol {
+  margin: var(--spacing-0);
+  padding: var(--spacing-0);
+}
+
 .breadcrumbList li {
   display: inline-block;
   list-style: none;

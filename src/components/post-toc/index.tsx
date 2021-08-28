@@ -1,5 +1,6 @@
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 import React from "react";
+import * as styles from "./index.module.css"
 
 type Heading = {
   id: string,
@@ -19,7 +20,7 @@ export default function PostToc(props: Props) {
     return (
       <li
         key={`post-toc-item-${h.id}`}
-        className={`post-toc-item post-toc-item-depth-${h.depth}`}
+        className={`post-toc-item post-toc-item-depth-${h.depth - 1} ${styles[`depth${h.depth - 1}`]}`}
       >
         <AnchorLink to={`${props.page}#${h.id}`}>{h.value}</AnchorLink>
       </li>
@@ -27,9 +28,11 @@ export default function PostToc(props: Props) {
   }
 
   return (
-    <ul className={`post-toc ${props.className || ''}`}>
-      {props.headings.map(x => createHeading(x))}
-    </ul>
+    <div className={`post-toc ${styles.container}`}>
+      <ul className={props.className || ''}>
+        {props.headings.map(x => createHeading(x))}
+      </ul>
+    </div>
   );
 
 }

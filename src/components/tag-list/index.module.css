@@ -1,0 +1,14 @@
+.container {
+
+}
+
+.container ul {
+  margin: var(--spacing-0);
+  padding: var(--spacing-0);
+}
+
+.container ul li {
+  list-style: none;
+  display: inline-block;
+  margin-right: var(--spacing-2);
+}

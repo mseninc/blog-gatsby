@@ -35,11 +35,10 @@ export default function BreadcrumbList(props: Props) {
     );
   }
   return (
-    <ol
-      itemScope itemType="https://schema.org/BreadcrumbList"
-      className={styles.breadcrumbList}
-    >
-      {props.items.map((x, i) => createListItem(x, i + 1))}
-    </ol>
+    <div className={styles.breadcrumbList}>
+      <ol itemScope itemType="https://schema.org/BreadcrumbList">
+        {props.items.map((x, i) => createListItem(x, i + 1))}
+      </ol>
+    </div>
   );
 }
