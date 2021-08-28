@@ -18,9 +18,6 @@ export default function Seo({ description, lang, meta, title, keywords }: Props)
           siteMetadata {
             title
             description
-            social {
-              twitter
-            }
           }
         }
       }
@@ -62,10 +59,6 @@ export default function Seo({ description, lang, meta, title, keywords }: Props)
         {
           name: `twitter:card`,
           content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.social?.twitter || ``,
         },
         {
           name: `twitter:title`,
