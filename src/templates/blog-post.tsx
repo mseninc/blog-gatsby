@@ -7,6 +7,8 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import PostToc from "../components/post-toc"
 import { IGatsbyImageData } from "gatsby-plugin-image"
+import BreadcrumbList, { BreadcrumbListItem } from "../components/breadcrumb-list"
+import { tagNameToPageUrl } from "../utils/tag"
 
 
 type DataType = {
@@ -86,6 +88,15 @@ export default function BlogPostTemplate({ data, location }: Props) {
     ? <PostToc headings={headings} page={post.fields.slug} />
     : null;
 
+  const breadcrumb: BreadcrumbListItem[] = [
+    { name: 'ホーム', current: false },
+    { name: post.frontmatter.title, current: true },
+  ]
+
+  if (tags?.length) {
+    breadcrumb.splice(1, 0, { name: tags[0], url: tagNameToPageUrl(tags[0]), current: false });
+  }
+
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
@@ -93,6 +104,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
         description={post.frontmatter.description || post.excerpt}
         keywords={tags}
       />
+      <BreadcrumbList items={breadcrumb} />
       {toc}
       <article
         className="blog-post"
