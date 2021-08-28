@@ -6,8 +6,64 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import PostToc from "../components/post-toc"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 
-const BlogPostTemplate = ({ data, location }) => {
+
+type DataType = {
+  site: {
+    siteMetadata: {
+      title: string
+    }
+  }
+  markdownRemark: {
+    id: string
+    excerpt: string
+    html: string
+    frontmatter: {
+      title: string
+      date: string
+      description: string
+      tags: string[]
+      author: {
+        id: string
+        name: string
+        bio: string
+      }
+      avatarImage: IGatsbyImageData
+    }
+    headings: {
+      depth: number
+      id: string
+      value: string
+    }[]
+    fields: {
+      slug: string
+    }
+  }
+  previous: {
+    fields: {
+      slug: string
+    }
+    frontmatter: {
+      title: string
+    }
+  }
+  next: {
+    fields: {
+      slug: string
+    }
+    frontmatter: {
+      title: string
+    }
+  }
+};
+
+type Props = {
+  data: DataType
+  location: any
+};
+
+export default function BlogPostTemplate({ data, location }: Props) {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
@@ -86,8 +142,6 @@ const BlogPostTemplate = ({ data, location }) => {
     </Layout>
   )
 }
-
-export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
