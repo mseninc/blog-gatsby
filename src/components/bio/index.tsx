@@ -1,6 +1,6 @@
 import * as React from "react"
 import { GatsbyImage, getImage, IGatsbyImageData, StaticImage } from "gatsby-plugin-image"
-import styles from "./bio.module.css"
+import * as styles from "./index.module.css"
 
 type Props = {
   bio: string
@@ -18,30 +18,31 @@ const Bio = (props: Props) => {
 
   return (
     <div className={styles.bio}>
-      { avatarImage
+      {avatarImage
         ? <GatsbyImage
-            image={avatarImage}
-            className={styles.bioAvatar}
-            alt={github}
-            />
+          image={avatarImage}
+          className={styles.avatar}
+          alt={github}
+        />
         : <StaticImage
-            src="https://www.gravatar.com/avatar/?d=mp&s=50"
-            className={styles.bioAvatar}
-            width={50}
-            height={50}
-            layout="fixed"
-            alt={`${github} - GitHub`}
-            />}
+          src="https://www.gravatar.com/avatar/?d=mp&s=50"
+          className={styles.avatar}
+          width={50}
+          height={50}
+          layout="fixed"
+          alt={`${github} - GitHub`}
+        />
+      }
       <div>
         <p>
           <strong>{name}</strong>
           <a href={githubUrl} target="_blank" rel="noreferrer" title={github}>
             <StaticImage
-              src="../images/github-icon-light.png"
+              src="../../images/github-icon-light.png"
               width={20}
               height={20}
               alt={`${github} - GitHub`}
-              />
+            />
             @{github}
           </a>
         </p>

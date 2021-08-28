@@ -1,0 +1,10 @@
+.container {
+  display: inline-flex;
+}
+
+.avatar {
+  margin-right: var(--spacing-2);
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+}

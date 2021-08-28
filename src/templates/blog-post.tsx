@@ -9,6 +9,7 @@ import PostToc from "../components/post-toc"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import BreadcrumbList, { BreadcrumbListItem } from "../components/breadcrumb-list"
 import { tagNameToPageUrl } from "../utils/tag"
+import AuthorLink from "../components/author-link"
 
 
 type DataType = {
@@ -32,6 +33,7 @@ type DataType = {
         bio: string
       }
       avatarImage: IGatsbyImageData
+      avatarImage25: IGatsbyImageData
     }
     headings: {
       depth: number
@@ -74,6 +76,13 @@ export default function BlogPostTemplate({ data, location }: Props) {
   const tagList = tags ? <TagList tags={tags} /> : null;
 
   const author = post.frontmatter.author;
+  const authorLink = author
+    ? <AuthorLink
+        github={author.id}
+        name={author.name}
+        avatarImage={post.frontmatter.avatarImage25}
+        />
+    : null;
   const bio = author
     ? <Bio
         github={author.id}
@@ -115,6 +124,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
           {tagList}
+          {authorLink}
         </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
@@ -183,6 +193,11 @@ export const pageQuery = graphql`
         avatarImage {
           childImageSharp {
             gatsbyImageData(width: 50, height: 50, layout: FIXED)
+          }
+        }
+        avatarImage25: avatarImage {
+          childImageSharp {
+            gatsbyImageData(width: 25, height: 25, layout: FIXED)
           }
         }
       }
