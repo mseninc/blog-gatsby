@@ -1,5 +1,6 @@
 import * as React from "react"
 import { GatsbyImage, getImage, IGatsbyImageData, StaticImage } from "gatsby-plugin-image"
+import styles from "./bio.module.css"
 
 type Props = {
   bio: string
@@ -16,16 +17,16 @@ const Bio = (props: Props) => {
   const avatarImage = getImage(props.avatarImage)
 
   return (
-    <div className="bio">
+    <div className={styles.bio}>
       { avatarImage
         ? <GatsbyImage
             image={avatarImage}
-            className="bio-avatar"
+            className={styles.bioAvatar}
             alt={github}
             />
         : <StaticImage
             src="https://www.gravatar.com/avatar/?d=mp&s=50"
-            className="bio-avatar"
+            className={styles.bioAvatar}
             width={50}
             height={50}
             layout="fixed"
