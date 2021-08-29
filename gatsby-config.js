@@ -121,13 +121,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `MSeeeeN`,
+        short_name: `MSeeeeN`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/mseeeen-logo-square.png`,
       },
     },
     `gatsby-plugin-react-helmet`,

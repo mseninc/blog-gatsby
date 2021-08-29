@@ -144,35 +144,46 @@ table thead tr th {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: auto 1fr;
-  column-gap: var(--spacing-3);
-  row-gap: var(--spacing-3);
-  grid-template-areas: "main nav";
+  gap: var(--spacing-3);
 }
 
 .main-container > * {
   min-width: 0;
-  /* overflow: auto; */
 }
 
 .main-container main {
-  grid-area: main;
   background-color: var(--color-bg);
   padding: var(--spacing-4);
   grid-row: 2 / 3;
 }
 
 .main-container aside {
-  grid-area: nav;
   grid-row: 2 / 3;
 }
 
-
-.breadcrumb-list {
+.main-container .breadcrumb-list {
   grid-column: 1 / 3;
   grid-row: 1 / 2;
   font-size: var(--fontSize-breadcrumb);
   background-color: var(--color-bg);
   padding: var(--spacing-2) var(--spacing-3);
+}
+
+@media (max-width: 750px) {
+  .main-container {
+    display: grid;
+  }
+  .main-container main {
+    padding: var(--spacing-3);
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+  }
+  .main-container aside {
+    display: none;
+  }
+  .main-container .breadcrumb-list {
+    display: none;
+  }
 }
 
 .post-toc {
@@ -184,6 +195,13 @@ table thead tr th {
   background-color: var(--color-bg);
   margin: 0;
   padding: var(--spacing-2) var(--spacing-3);
+}
+
+.post-toc::before {
+  content: 'もくじ';
+  display: block;
+  height: 2em;
+  top: -2em;
 }
 
 .post-toc a {

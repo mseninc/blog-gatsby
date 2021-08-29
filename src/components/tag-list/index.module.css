@@ -6,5 +6,4 @@
 .container ul li {
   list-style: none;
   display: inline-block;
-  margin-right: var(--spacing-2);
 }

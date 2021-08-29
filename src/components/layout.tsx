@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import { Helmet } from "react-helmet"
+import { StaticImage } from "gatsby-plugin-image"
 
 type Props = {
   location: { pathname: string }
@@ -22,22 +23,31 @@ const Layout = ({ location, title, children }: Props) => {
   } else {
     header = (
       <Link className="header-link-home" to="/">
-        {title}
+        <StaticImage
+          src="../images/mseeeen-logo-light.png"
+          width={180}
+          layout="fixed"
+          alt={title}
+          />
       </Link>
     )
   }
 
   return (
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
+    <>
       <Helmet>
-      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
       </Helmet>
-      <div className="global-header">{header}</div>
-      {children}
-      <footer>
-        © {new Date().getFullYear()}, MSEN Inc.
-      </footer>
-    </div>
+      <div className="global-header">
+        <div className="global-header-wrapper">{header}</div>
+      </div>
+      <div className="global-wrapper" data-is-root-path={isRootPath}>
+        {children}
+        <footer>
+          © {new Date().getFullYear()}, MSEN Inc.
+        </footer>
+      </div>
+    </>
   )
 }
 

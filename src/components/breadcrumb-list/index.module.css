@@ -9,6 +9,7 @@
 
 .breadcrumbList li {
   display: inline-flex;
+  position: relative;
   align-items: baseline;
   list-style: none;
   margin: var(--spacing-0);
