@@ -19,15 +19,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: scaleY(-1);
-  transition: transform 1s;
   box-shadow: var(--box-shadow);
   outline: none;
 }
 
-.button.toBottom {
-  transform: scaleY(1);
-}
 
 .button::before {
   content: "";
@@ -37,6 +32,10 @@
   border-width: 0 var(--icon-thickness) var(--icon-thickness) 0;
   width: var(--icon-size);
   height: var(--icon-size);
-  transform: rotate(45deg)
+  transform: rotate(225deg);
+  transition: transform 1s;
 }
 
+.button.toBottom::before {
+  transform: rotate(45deg);
+}
