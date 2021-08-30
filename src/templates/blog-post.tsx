@@ -1,12 +1,12 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import TagList from "components/tag-list"
 
 import Bio from "components/bio"
 import Layout from "components/layout"
 import Seo from "components/seo"
 import PostToc from "components/post-toc"
-import { IGatsbyImageData } from "gatsby-plugin-image"
+import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
 import { tagNameToPageUrl } from "utils/tag"
 import AuthorLink from "components/author-link"
@@ -43,6 +43,7 @@ type DataType = {
     }[]
     fields: {
       slug: string
+      heroImage: IGatsbyImageData
     }
   }
   previous: {
@@ -72,6 +73,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
+  const { title } = post.frontmatter;
 
   const tags = post.frontmatter.tags;
   const tagList = tags ? <TagList tags={tags} /> : null;
@@ -100,17 +102,28 @@ export default function BlogPostTemplate({ data, location }: Props) {
 
   const breadcrumb: BreadcrumbListItem[] = [
     { name: 'ホーム', current: false },
-    { name: post.frontmatter.title, current: true },
+    { name: title, current: true },
   ]
 
   if (tags?.length) {
     breadcrumb.splice(1, 0, { name: tags[0], url: tagNameToPageUrl(tags[0]), current: false });
   }
 
+  const heroImage = post.fields.heroImage && getImage(post.fields.heroImage);
+  const hero = (heroImage
+    ? <div className="post-hero">
+        <GatsbyImage
+          image={heroImage}
+          alt={title}
+          />
+      </div>
+    : null
+  );
+
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
-        title={post.frontmatter.title}
+        title={title}
         description={post.frontmatter.description || post.excerpt}
         keywords={tags}
       />
@@ -122,13 +135,14 @@ export default function BlogPostTemplate({ data, location }: Props) {
             itemType="http://schema.org/Article"
           >
             <header>
+              <h1 itemProp="headline">{title}</h1>
               {tagList}
-              <h1 itemProp="headline">{post.frontmatter.title}</h1>
               <div className="header-meta">
                 <div className="post-date">{post.frontmatter.date}</div>
                 {authorLink}
               </div>
             </header>
+            {hero}
             <section
               dangerouslySetInnerHTML={{ __html: post.html }}
               itemProp="articleBody"
@@ -144,8 +158,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
         </aside>
       </div>
     </Layout>
-  )
-}
+  )}
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
@@ -190,6 +203,11 @@ export const pageQuery = graphql`
       }
       fields {
         slug
+        heroImage {
+          childImageSharp {
+            gatsbyImageData(width: 720, layout: CONSTRAINED)
+          }
+        }
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

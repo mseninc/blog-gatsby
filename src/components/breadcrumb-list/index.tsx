@@ -16,6 +16,7 @@ export default function BreadcrumbList(props: Props) {
   function createListItem(item: BreadcrumbListItem, position: number) {
     return (
       <li
+        key={`breadcrumb-list-item-${position}`}
         itemProp="itemListElement"
         itemScope
         itemType="https://schema.org/ListItem">

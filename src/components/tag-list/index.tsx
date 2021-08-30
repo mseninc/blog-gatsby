@@ -6,7 +6,7 @@ import * as styles from "./index.module.css"
 export default function TagList(props: { tags: string[] }) {
 
   return (
-    <div className={styles.container}>
+    <div className={`tag-list ${styles.container}`}>
       <ul itemProp="keywords">
         {props.tags.map(tag => (
           <li

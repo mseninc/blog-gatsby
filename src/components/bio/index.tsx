@@ -34,7 +34,7 @@ const Bio = (props: Props) => {
         />
       }
       <div>
-        <p className={styles.nameInfo}>
+        <div className={styles.nameInfo}>
           <strong>{name}</strong>
           <a href={githubUrl} target="_blank" rel="noreferrer" title={github}>
             <StaticImage
@@ -45,7 +45,7 @@ const Bio = (props: Props) => {
             />
             <span>{github}</span>
           </a>
-        </p>
+        </div>
         <p className={styles.bioText}>{bio}</p>
       </div>
     </div>

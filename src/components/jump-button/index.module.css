@@ -1,0 +1,42 @@
+.container {
+  position: fixed;
+  right: var(--spacing-3);
+  bottom: var(--spacing-3);
+  --button-size: 2.5em;
+  --icon-size: 0.5em;
+  --icon-thickness: 3px;
+}
+
+.button {
+  cursor: pointer;
+  position: relative;
+  background-color: var(--color-jump-button-bg);
+  text-align: center;
+  width: var(--button-size);
+  height: var(--button-size);
+  border-width: 0;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scaleY(-1);
+  transition: transform 1s;
+  box-shadow: var(--box-shadow);
+  outline: none;
+}
+
+.button.toBottom {
+  transform: scaleY(1);
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  border-color: white;
+  border-style: solid;
+  border-width: 0 var(--icon-thickness) var(--icon-thickness) 0;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  transform: rotate(45deg)
+}
+
