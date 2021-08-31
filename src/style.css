@@ -161,6 +161,12 @@ a:focus {
   color: var(--color-text-dark) !important;
 }
 
+.breadcrumb-list {
+  font-size: var(--fontSize-breadcrumb);
+  background-color: var(--color-bg);
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
 /*
   mobile max: 480px;
   mobile large min: 481px;

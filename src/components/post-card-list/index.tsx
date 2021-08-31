@@ -9,7 +9,7 @@ export default function PostCardList({ posts }: Props) {
 
   return (
     <div className="post-card-list">
-      {posts.map((post: PostSummary) => <PostCard post={post} />)}
+      {posts.map((post: PostSummary) => <PostCard key={`post-card-${post.id}`} post={post} />)}
     </div>
   );
 }
