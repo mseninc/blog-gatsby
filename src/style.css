@@ -58,12 +58,14 @@
   --color-primary: #005b99;
   --color-text: #2e353f;
   --color-text-light: #4f5969;
+  --color-text-dark: #eee;
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #d1dce5;
-  --color-text-dark: #eee;
   --color-tag-border: #fcfcfc;
   --color-tag-bg: #f1f1f1;
+  --color-paginator-link-bg: darkgray;
+  --color-paginator-link-bg-current: steelblue;
   --color-jump-button-bg: lightsteelblue;
   --corner-radius: 0.25em;
   --box-shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.2);

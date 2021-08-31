@@ -2,12 +2,14 @@ const path = require(`path`)
 const fs = require(`fs`)
 const _ = require("lodash")
 const { createFilePath, createRemoteFileNode } = require(`gatsby-source-filesystem`)
+const { paginate } = require('gatsby-awesome-pagination')
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   // Define a template for blog post
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
+  const postListTemplate = path.resolve(`./src/templates/post-list.tsx`)
   const tagTemplate = path.resolve("src/templates/tags.tsx")
 
   // Get all markdown blog posts sorted by date
@@ -76,7 +78,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         },
       })
     })
-    
+
+    paginate({
+      createPage,
+      items: posts,
+      itemsPerPage: 30,
+      pathPrefix: '/posts',
+      component: postListTemplate,
+    })
 
     // Extract tag data from query
     const tags = result.data.tagsGroup.group
