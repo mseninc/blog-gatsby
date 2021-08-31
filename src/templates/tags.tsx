@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { PageContext as PageContextOrg } from "types/pagination";
 import Paginator from "components/paginator";
 import Layout from "components/layout";
@@ -41,7 +41,7 @@ export default function TagPostList({ pageContext, data }: Props) {
   
   const breadcrumb: BreadcrumbListItem[] = [
     { name: 'ホーム', current: false },
-    { name: 'タグ', current: false, url: '/tags/' },
+    { name: 'タグ索引', current: false, url: '/tags/' },
     { name: tag, current: humanPageNumber === 1, url: basePath },
   ]
   if (humanPageNumber !== 1) {

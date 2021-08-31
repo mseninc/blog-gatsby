@@ -12,16 +12,17 @@ export default function TagList(props: { tags: string[] }) {
 
   return (
     <div className={`tag-list ${styles.container}`}>
-      <ul itemProp="keywords">
+      <ul itemProp="keywords" className={`tag-highlight-first`} role="list">
         {tags.map(tag => (
-          <li
+          <Link
             key={`tag-${tag}`}
-            className="tag"
+            to={tagNameToPageUrl(tag)}
+            title={tag}
+            className={`tag`}
+            role="listitem"
           >
-            <Link to={tagNameToPageUrl(tag)} title={tag}>
-              {tag}
-            </Link>
-          </li>
+            {tag}
+          </Link>
         ))}
       </ul>
     </div>

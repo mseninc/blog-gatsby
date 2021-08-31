@@ -1,0 +1,24 @@
+.tagmap-group {
+  background-color: var(--color-bg);
+  display: grid;
+  grid-template-columns: 5em 1fr;
+  margin: var(--spacing-4) var(--spacing-0);
+}
+
+.tagmap-first-char {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--spacing-3);
+  padding: var(--spacing-0);
+  padding-bottom: var(--spacing-1);
+}
+
+.tagmap-tag-container {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-wrap: wrap;
+  padding: var(--spacing-2);
+  padding-bottom: var(--spacing-1);
+}
