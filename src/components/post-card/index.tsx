@@ -1,6 +1,9 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import { getImage, GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import AuthorLink from "components/author-link";
+import * as styles from "./index.module.css"
+import TagList from "components/tag-list";
 
 export type PostSummary = {
   id: string
@@ -9,7 +12,7 @@ export type PostSummary = {
     title: string
     date: string
     description?: string
-    tags: string
+    tags: string[]
     author?: {
       id: string
       name: string
@@ -41,7 +44,7 @@ export const query = graphql`
       }
       avatarImage {
         childImageSharp {
-          gatsbyImageData(width: 50, height: 50, layout: FIXED)
+          gatsbyImageData(width: 25, height: 25, layout: FIXED)
         }
       }
     }
@@ -49,7 +52,7 @@ export const query = graphql`
       slug
       heroImage {
         childImageSharp {
-          gatsbyImageData(width: 320, layout: CONSTRAINED)
+          gatsbyImageData(width: 400, height: 240, layout: CONSTRAINED)
         }
       }
     }
@@ -62,30 +65,35 @@ export default function PostCard({ post }: Props) {
   const avatarImage = post.frontmatter.avatarImage ? getImage(post.frontmatter.avatarImage) : null;
   return (
     <div className="post-card">
-      <div className="post-hero">
+      <div className="post-card-hero">
         { heroImage
           ? <GatsbyImage
               image={heroImage}
               alt={post.frontmatter.title}
               />
-          : null}
+          : <div className={`post-hero-placeholder ${styles.postHeroPlaceholder}`}>
+              <span>{post.frontmatter.tags?.[0] || post.frontmatter.author?.id || ''}</span>
+            </div>
+        }
       </div>
-      <div className="post-title">
+      <div className="post-card-title">
         <Link to={post.fields.slug}>
           {post.frontmatter.title}
         </Link>
       </div>
-      <div className="post-description">{post.frontmatter.description || post.excerpt}</div>
-      <div className="post-tags">{post.frontmatter.tags}</div>
-      <div className="post-author">
-        { avatarImage
-          ? <GatsbyImage
-              image={avatarImage}
-              className="bio-avatar"
-              alt={post.frontmatter.author?.name || ''}
+      {
+        post.frontmatter.tags?.length
+        ? <div className="post-card-tags">{<TagList tags={post.frontmatter.tags} />}</div>
+        : null
+      }
+      <div className="post-card-author">
+        { avatarImage && post.frontmatter.author
+          ? <AuthorLink
+              name={post.frontmatter.author.name}
+              github={post.frontmatter.author.id}
+              avatarImage={avatarImage}
               />
           : null}
-        {post.frontmatter.author?.name}
       </div>
     </div>
   );

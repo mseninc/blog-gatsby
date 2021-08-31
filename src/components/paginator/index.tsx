@@ -17,14 +17,16 @@ export default function Paginator({ pathPrefix, context }: Props) {
     .map(n =>
       !n
       ? <>
-          <span className={`paginator-ellipse`} />
+          <span
+            key={`paginator-${n}`}
+            className={`paginator-ellipse`} />
         </>
       : (
         n === context.humanPageNumber
-        ? <span className={`paginator-link paginator-link-current`}>
+        ? <span key={`paginator-${n}`} className={`paginator-link paginator-link-current`}>
             <span>{n}</span>
           </span>
-        : <span className={`paginator-link`}>
+        : <span key={`paginator-${n}`} className={`paginator-link`}>
             <Link to={n === 1 ? pathPrefix : `${pathPrefix.replace(/\/$/, '')}/${n}`}>
               {n}
             </Link>

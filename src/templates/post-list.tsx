@@ -41,6 +41,7 @@ export default function PostListTemplate({ data, location, pageContext }: Props)
       />
       <div className="full-wide-container">
         <main>
+          <Paginator pathPrefix='/posts' context={pageContext} />
           <PostCardList posts={data.allMarkdownRemark.nodes} />
           <Paginator pathPrefix='/posts' context={pageContext} />
         </main>
