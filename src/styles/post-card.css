@@ -5,27 +5,27 @@
   background-color: var(--color-bg);
 }
 
-.post-card-hero {
+.post-card .post-card-hero {
 }
 
-.post-card-hero > .post-hero-placeholder {
+.post-card .post-card-hero > .post-hero-placeholder {
   height: 160px;
   line-height: var(--lineHeight-tight);
   background-color: var(--color-hero-placeholder-bg);
   color: var(--color-hero-placeholder-text);
 }
 
-.post-card-title {
+.post-card .post-card-title {
   margin: var(--spacing-2);
   line-height: var(--lineHeight-tight);
 }
 
-.post-card-tags {
+.post-card .post-card-tags {
   margin: var(--spacing-2) var(--spacing-2);
   margin-top: var(--spacing-0);
 }
 
-.post-card-tags .tag {
+.post-card .post-card-tags .tag {
   padding: var(--spacing-1) var(--spacing-2);
   overflow: hidden;
   display: inline-block;
@@ -34,7 +34,7 @@
   margin-bottom: var(--spacing-0);
 }
 
-.post-card-tags .tag a {
+.post-card .post-card-tags .tag a {
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
@@ -42,7 +42,13 @@
   text-overflow: ellipsis;
 }
 
-.post-card-author {
+.post-description {
+  margin: var(--spacing-2) var(--spacing-3);
+  margin-top: var(--spacing-0);
+  font-size: var(--fontSize-0);
+}
+
+.post-card .post-card-author {
   align-self: flex-end;
   margin: var(--spacing-2) var(--spacing-2);
   margin-top: auto; /* Keep to bottom */

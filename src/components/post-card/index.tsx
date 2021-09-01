@@ -27,12 +27,13 @@ export type PostSummary = {
 
 type Props = {
   post: PostSummary;
+  showDescription?: boolean
 };
 
 export const query = graphql`
   fragment PostSummary on MarkdownRemark {
     id
-    excerpt(pruneLength: 120)
+    excerpt(pruneLength: 160)
     frontmatter {
       title
       date(formatString: "YYYY/MM/DD")
@@ -59,10 +60,13 @@ export const query = graphql`
   }
 `
 
-export default function PostCard({ post }: Props) {
+export default function PostCard({ post, showDescription }: Props) {
 
   const heroImage = post.fields.heroImage ? getImage(post.fields.heroImage) : null;
   const avatarImage = post.frontmatter.avatarImage ? getImage(post.frontmatter.avatarImage) : null;
+  const description = showDescription
+    ? post.frontmatter.description || post.excerpt
+    : null
   return (
     <div className="post-card">
       <div className="post-card-hero">
@@ -84,6 +88,11 @@ export default function PostCard({ post }: Props) {
       {
         post.frontmatter.tags?.length
         ? <div className="post-card-tags">{<TagList tags={post.frontmatter.tags} />}</div>
+        : null
+      }
+      {
+        showDescription
+        ? <div className="post-description">{description}</div>
         : null
       }
       <div className="post-card-author">

@@ -48,7 +48,8 @@ export default function BlogIndex({ data, location }: Props) {
           <div className="global-wrapper">
             <TopPageHeading title="最新記事" sub="Latest articles" />
             <div className={`featured-post-card-list`}>
-              {data.latestPosts.nodes.map((post: PostSummary) => <PostCard key={`post-card-${post.id}`} post={post} />)}
+              {data.latestPosts.nodes.map((post: PostSummary, n: number) =>
+                <PostCard key={`post-card-${post.id}`} post={post} showDescription={n === 0} />)}
             </div>
           </div>
         </div>
