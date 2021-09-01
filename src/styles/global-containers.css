@@ -29,6 +29,7 @@
 
 .global-header-wrapper {
   display: flex;
+  position: relative;
   margin: var(--spacing-0) auto;
   padding: var(--spacing-1) var(--spacing-1);
 }
@@ -36,6 +37,12 @@
 .global-header-wrapper .header-link-home {
   margin-left: auto;
   margin-right: auto;
+}
+
+.global-header-wrapper .theme-switcher {
+  position: absolute;
+  right: var(--spacing-2);
+  top: var(--spacing-2);
 }
 
 /* mobile */

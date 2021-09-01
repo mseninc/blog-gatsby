@@ -1,0 +1,44 @@
+.themeSwitcher {
+  --theme-switcher-base-size: 1.2em;
+  --theme-switcher-color-bg-light: lightgray;
+  --theme-switcher-color-bg-dark: darkgray;
+  --theme-switcher-color-knob-bg: royalblue;
+  --theme-switcher-color-knob-border: #eee;
+  --theme-switcher-transition-duration: 0.5s;
+  font-size: var(--theme-switcher-base-size);
+}
+
+.themeSwitcher input[type=checkbox] {
+  display: none;
+}
+
+.themeSwitcher input[type=checkbox] + label {
+  display: inline-block;
+  align-items: center;
+  position: relative;
+  width: 2em;
+  height: 1em;
+  border-radius: 1em;
+  background: linear-gradient(
+    135deg,
+    var(--theme-switcher-color-bg-light) 50%,
+    var(--theme-switcher-color-bg-dark) 50%);
+}
+
+.themeSwitcher input[type=checkbox] + label::after {
+  content: '';
+  display: block;
+  border-radius: 100%;
+  position: absolute;
+  width: 0.9em;
+  height: 0.9em;
+  margin: 0.05em 0.1em;
+  left: 0;
+  background-color: var(--theme-switcher-color-knob-bg);
+  border: solid 1px var(--theme-switcher-color-knob-border);
+  transition: left var(--theme-switcher-transition-duration);
+}
+
+.themeSwitcher input[type=checkbox]:checked + label::after {
+  left: 0.9em;
+}

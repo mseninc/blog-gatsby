@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import JumpButton from "./jump-button"
 import { useEffect } from "react"
+import ThemeSwitcher from "./theme-switcher"
 
 type Props = {
   location: { pathname: string }
@@ -52,21 +53,16 @@ const Layout = ({ location, title, children }: Props) => {
     )
   }
 
-  useEffect(() => {
-    if (localStorage) {
-      const key = `${title}_theme`
-      const theme = localStorage.getItem(key) ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-      document.body.classList.remove(`theme-light`);
-      document.body.classList.remove(`theme-dark`);
-      document.body.classList.add(`theme-${theme}`);
-    }
-  })
-
   return (
     <>
       <div className="global-header">
-        <div className="global-header-wrapper">{header}</div>
+        <div className="global-header-wrapper">
+          {header}
+          <ThemeSwitcher
+            settingKey={`${title}_theme`}
+            tooltip={`ダークテーマ/ライトテーマ切り替え`}
+            />
+        </div>
       </div>
       <div className={isRootPath ? '' : `global-wrapper`} data-is-root-path={isRootPath}>
         {children}

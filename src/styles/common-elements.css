@@ -16,6 +16,7 @@ body {
   font-size: var(--fontSize-1);
   color: var(--color-text);
   background-color: var(--color-bg-body);
+  transition: .5s;
 }
 
 footer {
