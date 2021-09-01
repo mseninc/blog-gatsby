@@ -21,7 +21,7 @@
 }
 
 .global-header {
-  background-color: white;
+  background-color: var(--color-bg);
   box-shadow: var(--box-shadow);
   margin-bottom: var(--spacing-0);
   border-bottom: solid 1px var(--color-bg-body);

@@ -86,15 +86,15 @@
   --fontSize-tag: 0.85rem;
   --fontSize-breadcrumb: 0.8rem;
 
-  --color-bg: white;
   --color-bg-body: #efefef;
-  --color-primary: #005b99;
+  --color-bg: white;
+  --color-primary: #0b58af;
+  --color-bright: #2857FF;
   --color-text: #2e353f;
   --color-text-light-light: #8e99aa;
   --color-text-light: #4f5969;
-  --color-text-dark: #eee;
+  --color-text-invert: #eee;
   --color-heading: #1a202c;
-  --color-heading-black: black;
   --color-accent: #d1dce5;
   --color-tag-border: #fcfcfc;
   --color-tag-bg: #f1f1f1;
@@ -109,4 +109,28 @@
   --text-shadow-top-page-hero-copy: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.7);
   --corner-radius: 0.25em;
   --box-shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-body: black;
+    --color-bg: #202020;
+    --color-primary: #1577e7;
+    --color-bright: #2857FF;
+    --color-text: #d1d1d1;
+    --color-text-light-light: #8e99aa;
+    --color-text-light: #4f5969;
+    --color-text-invert: #eee;
+    --color-heading: #e1e1e1;
+    --color-accent: #d1dce5;
+    --color-tag-border: #222;
+    --color-tag-bg: #444;
+    --color-paginator-link-bg: darkgray;
+    --color-paginator-link-bg-current: steelblue;
+    --color-jump-button-bg: steelblue;
+    --color-hero-placeholder-bg: #b4bccc;
+    --color-hero-placeholder-text: white;
+    --color-top-page-hero-bg: black;
+    --color-top-page-hero-copy: white;
+  }
 }

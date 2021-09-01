@@ -30,13 +30,13 @@
   margin-right: var(--element-margin);
   border-radius: var(--corner-radius);
   background-color: var(--color-paginator-link-bg);
-  color: var(--color-text-dark);
+  color: var(--color-text-invert);
 }
 
 .paginator-link > a,
 .paginator-link > span {
   text-decoration: none;
-  color: var(--color-text-dark);
+  color: var(--color-text-invert);
   padding: var(--spacing-1) var(--spacing-2);
 }
 

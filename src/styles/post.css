@@ -32,7 +32,7 @@
 .post h1 {
   font-weight: var(--fontWeight-bold);
   font-size: var(--fontSize-6);
-  color: var(--color-heading-black);
+  color: var(--color-heading);
 }
 
 .post h2 {

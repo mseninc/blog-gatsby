@@ -22,7 +22,7 @@ a.tag {
 
 a.tag small {
   background-color: var(--color-primary);
-  color: var(--color-text-dark);
+  color: var(--color-text-invert);
   line-height: var(--lineHeight-none);
   padding: 0.15em 0.25em;
   margin-left: var(--spacing-1);
@@ -31,9 +31,9 @@ a.tag small {
 
 .tag-highlight-first .tag:first-child {
   background-color: var(--color-primary);
-  color: var(--color-text-dark);
+  color: var(--color-text-invert);
 }
 
 .tag-highlight-first a.tag:first-child {
-  color: var(--color-text-dark) !important;
+  color: var(--color-text-invert) !important;
 }
