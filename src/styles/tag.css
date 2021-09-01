@@ -1,0 +1,39 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border: solid 1px;
+  border-radius: var(--corner-radius);
+  border-color: var(--color-tag-border);
+  padding: var(--spacing-1) var(--spacing-2);
+  background-color: var(--color-tag-bg);
+  color: var(--color-text);
+  font-size: var(--fontSize-tag);
+  margin-right: var(--spacing-1);
+  margin-bottom: var(--spacing-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+a.tag {
+  text-decoration: none;
+  color: var(--color-text) !important;
+}
+
+a.tag small {
+  background-color: var(--color-primary);
+  color: var(--color-text-dark);
+  line-height: var(--lineHeight-none);
+  padding: 0.15em 0.25em;
+  margin-left: var(--spacing-1);
+  border-radius: var(--corner-radius);
+}
+
+.tag-highlight-first .tag:first-child {
+  background-color: var(--color-primary);
+  color: var(--color-text-dark);
+}
+
+.tag-highlight-first a.tag:first-child {
+  color: var(--color-text-dark) !important;
+}

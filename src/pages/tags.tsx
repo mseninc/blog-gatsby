@@ -4,7 +4,6 @@ import Layout from "components/layout"
 import Seo from "components/seo"
 import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
 import { tagNameToPageUrl } from "utils/tag"
-import "styles/tag-list-page.css"
 
 type DataType = {
   site: {

@@ -19,6 +19,7 @@ const Layout = ({ location, title, children }: Props) => {
       src="../images/mseeeen-logo-light.png"
       width={180}
       layout="fixed"
+      placeholder="none"
       alt={title}
     />
   )
@@ -27,7 +28,9 @@ const Layout = ({ location, title, children }: Props) => {
   if (isRootPath) {
     header = (
       <h1>
-        {headerLogo}
+        <Link className="header-link-home" to="/">
+          {headerLogo}
+        </Link>
       </h1>
     )
   } else {
@@ -40,13 +43,10 @@ const Layout = ({ location, title, children }: Props) => {
 
   return (
     <>
-      <Helmet>
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
-      </Helmet>
       <div className="global-header">
         <div className="global-header-wrapper">{header}</div>
       </div>
-      <div className="global-wrapper" data-is-root-path={isRootPath}>
+      <div className={isRootPath ? '' : `global-wrapper`} data-is-root-path={isRootPath}>
         {children}
         <footer>
           © {new Date().getFullYear()}, MSEN Inc.

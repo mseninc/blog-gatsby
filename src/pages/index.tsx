@@ -1,9 +1,12 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
-import PostCard, { PostSummary } from "../components/post-card";
-import Layout from "../components/layout";
-import Seo from "../components/seo";
+import PostCard, { PostSummary } from "components/post-card";
+import Layout from "components/layout";
+import Seo from "components/seo";
+import TopPageHeading from "components/top-page-heading";
+import TopPageHero from "components/top-page-hero";
+import { Helmet } from "react-helmet";
 
 type DataType = {
   site: {
@@ -11,43 +14,71 @@ type DataType = {
       title: string
     }
   }
+  latestPosts: {
+    nodes?: PostSummary[]
+  }
   topics1: {
     nodes?: PostSummary[]
   }
   topics2: {
     nodes?: PostSummary[]
   }
-};
+}
 
 type Props = {
   data: DataType
   location: { pathname: string }
 };
 
-const BlogIndex = ({ data, location }: Props) => {
+export default function BlogIndex({ data, location }: Props) {
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
   return (
     <Layout location={location} title={siteTitle}>
-      <Seo title="All posts" />
-      <ol style={{ listStyle: `none` }}>
-        {data.topics1.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
-      </ol>
-      <hr/>
-      <ol style={{ listStyle: `none` }}>
-        {data.topics2.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
-      </ol>
+      <Helmet>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="crossOrigin" />
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet" />
+      </Helmet>
+      <Seo />
+      <TopPageHero />
+      <div className="global-wrapper">
+        {data.latestPosts.nodes
+        ? (
+          <>
+            <TopPageHeading title="最新記事" sub="Latest articles" />
+            <div className={`featured-post-card-list`}>
+              {data.latestPosts.nodes.map((post: PostSummary) => <PostCard key={`post-card-${post.id}`} post={post} />)}
+            </div>
+          </>
+        )
+        : null}
+        <TopPageHeading title="Web" sub="Web related" />
+        <div className={`featured-post-card-list`}>
+          {data.topics1.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+        </div>
+        <TopPageHeading title="AWS" sub="Amazon Web Service" />
+        <div className={`featured-post-card-list`}>
+          {data.topics2.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+        </div>
+      </div>
     </Layout>
   )
 }
-
-export default BlogIndex
 
 export const pageQuery = graphql`
   query {
     site {
       siteMetadata {
         title
+      }
+    }
+    latestPosts: allMarkdownRemark (
+      sort: {fields: frontmatter___date, order: DESC}
+      limit: 5
+    ) {
+      nodes {
+        ...PostSummary
       }
     }
     topics1: allMarkdownRemark (

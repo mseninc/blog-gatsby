@@ -1,0 +1,5 @@
+.breadcrumb-list {
+  font-size: var(--fontSize-breadcrumb);
+  background-color: var(--color-bg);
+  padding: var(--spacing-2) var(--spacing-3);
+}

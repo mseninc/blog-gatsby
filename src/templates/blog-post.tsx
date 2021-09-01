@@ -11,8 +11,6 @@ import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
 import { tagNameToPageUrl } from "utils/tag"
 import AuthorLink from "components/author-link"
 
-import './blog-post.css'
-
 type DataType = {
   site: {
     siteMetadata: {

@@ -9,9 +9,6 @@ import { PostSummary } from "components/post-card"
 import { PageContext } from "types/pagination"
 import Paginator from "components/paginator"
 
-import "../styles/post-card-list.css"
-import "../styles/paginator.css"
-
 type DataType = {
   site: {
     siteMetadata: {

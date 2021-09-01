@@ -1,0 +1,106 @@
+
+/*
+  mobile max: 480px;
+  mobile large min: 481px;
+  mobile large max: 767px;
+  tablet min: 768px;
+  tablet max: 1024px;
+  pc min: 1025px;
+  pc max: 1600px;
+  wide min: 1601px;
+  wide max: 9999px;
+  --maxWidth-mobile: 100%;
+  --maxWidth-tablet: 768px;
+  --maxWidth-pc: 1024px;
+  --maxWidth-wide: 1600px;
+*/
+
+.global-wrapper {
+  margin: var(--spacing-0) auto;
+  padding: var(--spacing-0) var(--spacing-0) var(--spacing-10) var(--spacing-0);
+}
+
+.global-header {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  margin-bottom: var(--spacing-0);
+  border-bottom: solid 1px var(--color-bg-body);
+}
+
+.global-header-wrapper {
+  display: flex;
+  margin: var(--spacing-0) auto;
+  padding: var(--spacing-1) var(--spacing-1);
+}
+
+.global-header-wrapper .header-link-home {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* mobile */
+@media screen and (max-width: 480px) {
+  .global-wrapper {
+    max-width: var(--maxWidth-mobile);
+  }
+  .global-header-wrapper {
+    max-width: var(--maxWidth-mobile);
+  }
+}
+
+/* mobile large */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  .global-wrapper {
+    max-width: var(--maxWidth-tablet);
+  }
+  .global-header-wrapper {
+    max-width: var(--maxWidth-tablet);
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .global-wrapper {
+    max-width: var(--maxWidth-tablet);
+  }
+  .global-header-wrapper {
+    max-width: var(--maxWidth-tablet);
+  }
+}
+
+/* pc */
+@media screen and (min-width: 1025px) and (max-width: 1600px) {
+  .global-wrapper {
+    max-width: var(--maxWidth-pc);
+  }
+  .global-header-wrapper {
+    max-width: var(--maxWidth-pc);
+  }
+}
+
+/* wide */
+@media screen and (min-width: 1601px) {
+  .global-wrapper {
+    max-width: var(--maxWidth-wide);
+  }
+  .global-header-wrapper {
+    max-width: var(--maxWidth-wide);
+  }
+}
+
+/* pc ~ wide */
+@media screen and (min-width: 1024px) {
+  .global-wrapper {
+    padding: var(--spacing-0) var(--spacing-5) var(--spacing-10) var(--spacing-5);
+  }
+  .global-header-wrapper {
+    padding: var(--spacing-1) var(--spacing-5);
+  }
+  .global-header + .global-wrapper {
+    margin-top: var(--spacing-3);
+  }
+  .global-header-wrapper .header-link-home {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
