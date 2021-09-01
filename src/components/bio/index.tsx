@@ -41,6 +41,7 @@ const Bio = (props: Props) => {
               src="../../images/github-icon-light.png"
               width={20}
               height={20}
+              imgClassName="github-icon"
               alt={`${github} - GitHub`}
             />
             <span>{github}</span>

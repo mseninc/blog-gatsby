@@ -2,6 +2,7 @@ import * as React from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import JumpButton from "./jump-button"
+import { useEffect } from "react"
 
 type Props = {
   location: { pathname: string }
@@ -14,13 +15,24 @@ const Layout = ({ location, title, children }: Props) => {
   const isRootPath = location.pathname === rootPath
 
   const headerLogo = (
-    <StaticImage
-      src="../images/mseeeen-logo-light.png"
-      width={180}
-      layout="fixed"
-      placeholder="none"
-      alt={title}
-    />
+    <>
+      <StaticImage
+        src="../images/mseeeen-logo-light.png"
+        width={180}
+        layout="fixed"
+        placeholder="none"
+        className="site-logo-light"
+        alt={title}
+      />
+      <StaticImage
+        src="../images/mseeeen-logo-dark.png"
+        width={180}
+        layout="fixed"
+        placeholder="none"
+        className="site-logo-dark"
+        alt={title}
+      />
+    </>
   )
 
   let header
@@ -39,6 +51,17 @@ const Layout = ({ location, title, children }: Props) => {
       </Link>
     )
   }
+
+  useEffect(() => {
+    if (localStorage) {
+      const key = `${title}_theme`
+      const theme = localStorage.getItem(key) ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      document.body.classList.remove(`theme-light`);
+      document.body.classList.remove(`theme-dark`);
+      document.body.classList.add(`theme-${theme}`);
+    }
+  })
 
   return (
     <>

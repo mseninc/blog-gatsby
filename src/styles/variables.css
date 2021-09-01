@@ -111,8 +111,7 @@
   --box-shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+body.theme-dark {
     --color-bg-body: black;
     --color-bg: #202020;
     --color-primary: #1577e7;
@@ -132,5 +131,5 @@
     --color-hero-placeholder-text: white;
     --color-top-page-hero-bg: black;
     --color-top-page-hero-copy: white;
+    --box-shadow: 0em 0em 0.5em rgba(255, 255, 255, 0.2);
   }
-}
