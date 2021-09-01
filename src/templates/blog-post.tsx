@@ -127,7 +127,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
       />
       <div className="main-container">
         <BreadcrumbList items={breadcrumb} />
-        <main>
+        <main className={`post`}>
           <article
             itemScope
             itemType="http://schema.org/Article"

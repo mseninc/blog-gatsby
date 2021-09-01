@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
 import JumpButton from "./jump-button"
 

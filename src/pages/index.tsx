@@ -42,24 +42,30 @@ export default function BlogIndex({ data, location }: Props) {
       </Helmet>
       <Seo />
       <TopPageHero />
-      <div className="global-wrapper">
-        {data.latestPosts.nodes
-        ? (
-          <>
+      {data.latestPosts.nodes
+      ? (
+        <div className="global-root-group">
+          <div className="global-wrapper">
             <TopPageHeading title="最新記事" sub="Latest articles" />
             <div className={`featured-post-card-list`}>
               {data.latestPosts.nodes.map((post: PostSummary) => <PostCard key={`post-card-${post.id}`} post={post} />)}
             </div>
-          </>
-        )
-        : null}
-        <TopPageHeading title="Web" sub="Web related" />
-        <div className={`featured-post-card-list`}>
-          {data.topics1.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+          </div>
         </div>
-        <TopPageHeading title="AWS" sub="Amazon Web Service" />
-        <div className={`featured-post-card-list`}>
-          {data.topics2.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+      )
+      : null}
+      <div className="global-root-group">
+        <div className="global-wrapper">
+          <TopPageHeading title="Web" sub="Web related" />
+          <div className={`featured-post-card-list`}>
+            {data.topics1.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+          </div>
+        </div>
+        <div className="global-wrapper">
+          <TopPageHeading title="AWS" sub="Amazon Web Service" />
+          <div className={`featured-post-card-list`}>
+            {data.topics2.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+          </div>
         </div>
       </div>
     </Layout>

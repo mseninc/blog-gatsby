@@ -32,8 +32,8 @@ export default function Seo({ description, lang, meta, title, keywords }: Props)
       htmlAttributes={{
         lang: lang || 'ja',
       }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
+      title={title || defaultTitle}
+      titleTemplate={title && defaultTitle ? `%s | ${defaultTitle}` : undefined}
       meta={[
         {
           name: `description`,

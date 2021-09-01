@@ -1,11 +1,9 @@
-/* Heading */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.post h1,
+.post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
   margin-top: var(--spacing-1);
   margin-bottom: var(--spacing-1);
   font-family: var(--font-heading);
@@ -13,67 +11,67 @@ h6 {
   letter-spacing: -0.025em;
 }
 
-h2,
-h3,
-h4,
-h5,
-h6 {
+.post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
   margin-top: var(--spacing-12);
   margin-bottom: var(--spacing-6);
 }
 
-h2,
-h3,
-h4,
-h5,
-h6 {
+.post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
   font-weight: var(--fontWeight-bold);
   color: var(--color-heading);
 }
 
-h1 {
+.post h1 {
   font-weight: var(--fontWeight-bold);
   font-size: var(--fontSize-6);
   color: var(--color-heading-black);
 }
 
-h2 {
+.post h2 {
   font-size: var(--fontSize-5);
 }
 
-h3 {
+.post h3 {
   font-size: var(--fontSize-4);
 }
 
-h4 {
+.post h4 {
   font-size: var(--fontSize-3);
 }
 
-h5 {
+.post h5 {
   font-size: var(--fontSize-2);
 }
 
-h6 {
+.post h6 {
   font-size: var(--fontSize-1);
 }
 
-h1 > a {
+.post h1 > a {
   color: inherit;
   text-decoration: none;
 }
 
-h2 > a,
-h3 > a,
-h4 > a,
-h5 > a,
-h6 > a {
+.post h2 > a,
+.post h3 > a,
+.post h4 > a,
+.post h5 > a,
+.post h6 > a {
   text-decoration: none;
   color: inherit;
 }
 
 /* Prose */
 
-p {
+.post p {
   line-height: var(--lineHeight-relaxed);
   --baseline-multiplier: 0.179;
   --x-height-multiplier: 0.35;
@@ -81,8 +79,8 @@ p {
   padding: var(--spacing-0);
 }
  
-ul,
-ol {
+.post ul,
+.post ol {
   margin-right: var(--spacing-0);
   padding: var(--spacing-0) var(--spacing-6);
   margin-bottom: var(--spacing-8);
@@ -90,26 +88,26 @@ ol {
   list-style-image: none;
 }
 
-ul li,
-ol li {
+.post ul li,
+.post ol li {
   padding-left: var(--spacing-0);
   margin-bottom: var(--spacing-2);
 }
 
-li > p {
+.post li > p {
   margin-bottom: calc(var(--spacing-8) / 2);
 }
 
-li *:last-child {
+.post li *:last-child {
   margin-bottom: var(--spacing-0);
 }
 
-li > ul {
+.post li > ul {
   margin-left: var(--spacing-8);
   margin-top: calc(var(--spacing-8) / 2);
 }
 
-blockquote {
+.post blockquote {
   color: var(--color-text-light);
   margin-left: calc(-1 * var(--spacing-6));
   margin-right: var(--spacing-8);
@@ -120,23 +118,23 @@ blockquote {
   margin-bottom: var(--spacing-8);
 }
 
-blockquote > :last-child {
+.post blockquote > :last-child {
   margin-bottom: var(--spacing-0);
 }
 
-blockquote > ul,
-blockquote > ol {
+.post blockquote > ul,
+.post blockquote > ol {
   list-style-position: inside;
 }
 
-table {
+.post table {
   width: 100%;
   margin-bottom: var(--spacing-8);
   border-collapse: collapse;
   border-spacing: 0.25rem;
 }
 
-table thead tr th {
+.post table thead tr th {
   border-bottom: 1px solid var(--color-accent);
 }
 
@@ -185,53 +183,27 @@ table thead tr th {
   }
 }
 
-header {
+.post header {
   margin-bottom: var(--spacing-6);
 }
 
-header .tag-list {
+.post header .tag-list {
   margin-top: var(--spacing-4);
 }
 
-header .header-meta {
+.post header .header-meta {
   display: flex;
   margin-top: var(--spacing-2);
   font-size: var(--fontSize-0);
   align-items: center;
 }
 
-header .header-meta :last-child {
+.post header .header-meta :last-child {
   margin-left: auto;
 }
 
 .post-hero {
   margin-bottom: var(--spacing-5);
-}
-
-.post-toc {
-  position: sticky;
-  grid-column: 2;
-  display: block;
-  top: var(--spacing-3);
-  font-size: var(--fontSize-toc);
-  background-color: var(--color-bg);
-  margin: 0;
-  padding: var(--spacing-2) var(--spacing-3);
-}
-
-.post-toc::before {
-  content: 'もくじ';
-  display: block;
-  height: 2em;
-  top: -2em;
-}
-
-.post-toc a {
-  text-decoration: none;
-}
-
-.post-toc a:hover {
-  text-decoration: underline;
 }
 
 .gatsby-highlight-code-line {
@@ -278,4 +250,60 @@ header .header-meta :last-child {
 
 :not(pre) > code[class*="language-"] {
   padding: .1em .25em;
+}
+
+
+/* post-toc */
+
+.post-toc {
+  position: sticky;
+  grid-column: 2;
+  display: block;
+  top: var(--spacing-3);
+  font-size: var(--fontSize-toc);
+  background-color: var(--color-bg);
+  margin: 0;
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+.post-toc::before {
+  content: 'もくじ';
+  display: block;
+  height: 2em;
+  top: -2em;
+}
+
+.post-toc a {
+  text-decoration: none;
+}
+
+.post-toc a:hover {
+  text-decoration: underline;
+}
+
+.post-toc ul {
+  margin: 0;
+  padding: 0;
+}
+
+.post-toc li {
+  line-height: var(--lineHeight-normal);
+  list-style: none;
+  margin: 0;
+}
+
+.post-toc .post-toc-item-depth-1 {
+  padding-left: 0;
+}
+
+.post-toc .post-toc-item-depth-2 {
+  padding-left: var(--spacing-4);
+}
+
+.post-toc .post-toc-item-depth-3 {
+  padding-left: var(--spacing-8);
+}
+
+.post-toc .post-toc-item-depth-4 {
+  padding-left: var(--spacing-12);
 }
