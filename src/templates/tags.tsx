@@ -29,9 +29,10 @@ type PageContext = PageContextOrg & {
 type Props = {
   data: DataType
   pageContext: PageContext
+  location: any
 };
 
-export default function TagPostList({ pageContext, data }: Props) {
+export default function TagPostList({ pageContext, data, location }: Props) {
   const { tag, basePath, humanPageNumber } = pageContext
   const { edges } = data.allMarkdownRemark
   

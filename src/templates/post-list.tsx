@@ -26,8 +26,8 @@ type DataType = {
 
 type Props = {
   data: DataType
-  location: any
   pageContext: PageContext
+  location: any
 };
 
 export default function PostListTemplate({ data, location, pageContext }: Props) {

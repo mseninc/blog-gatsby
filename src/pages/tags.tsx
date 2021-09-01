@@ -23,7 +23,8 @@ type DataType = {
 
 type Props = {
   data: DataType
-};
+  location: any
+}
 
 type TagObject = {
   tagName: string
@@ -41,6 +42,7 @@ export default function TagsPage(props: Props) {
       },
       allMarkdownRemark: { group },
     },
+    location,
   } = props;
 
   const tags = group.map(({ fieldValue: tagName, totalCount }) =>

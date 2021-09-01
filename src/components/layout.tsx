@@ -13,23 +13,27 @@ type Props = {
 const Layout = ({ location, title, children }: Props) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
-  let header
 
+  const headerLogo = (
+    <StaticImage
+      src="../images/mseeeen-logo-light.png"
+      width={180}
+      layout="fixed"
+      alt={title}
+    />
+  )
+
+  let header
   if (isRootPath) {
     header = (
-      <h1 className="main-heading">
-        <Link to="/">{title}</Link>
+      <h1>
+        {headerLogo}
       </h1>
     )
   } else {
     header = (
       <Link className="header-link-home" to="/">
-        <StaticImage
-          src="../images/mseeeen-logo-light.png"
-          width={180}
-          layout="fixed"
-          alt={title}
-          />
+        {headerLogo}
       </Link>
     )
   }
