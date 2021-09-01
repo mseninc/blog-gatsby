@@ -9,7 +9,7 @@ const { paginate } = require('gatsby-awesome-pagination')
 export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
+  const postTemplate = path.resolve(`./src/templates/post.tsx`)
   const postListTemplate = path.resolve(`./src/templates/post-list.tsx`)
   const tagPageTemplate = path.resolve("src/templates/tags.tsx")
   
@@ -86,7 +86,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
 
       createPage({
         path: post.fields.slug,
-        component: blogPost,
+        component: postTemplate,
         context: {
           id: post.id,
           previousPostId,

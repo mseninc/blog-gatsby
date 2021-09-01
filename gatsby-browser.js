@@ -21,5 +21,5 @@ import "./src/styles/post-card-list.css"
 // for pages
 import "./src/styles/tag-list-page.css"
 import "./src/styles/top-page.css"
-import "./src/styles/blog-post.css"
+import "./src/styles/post.css"
 
