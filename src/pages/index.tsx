@@ -1,12 +1,12 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { Helmet } from "react-helmet";
 
-import PostCard, { PostSummary } from "components/post-card";
 import Layout from "components/layout";
 import Seo from "components/seo";
+import PostCard, { PostSummary } from "components/post-card";
 import TopPageHeading from "components/top-page-heading";
 import TopPageHero from "components/top-page-hero";
-import { Helmet } from "react-helmet";
 
 type DataType = {
   site: {

@@ -3,11 +3,12 @@ import { graphql } from "gatsby"
 
 import Layout from "components/layout"
 import Seo from "components/seo"
-
 import PostCardList from "components/post-card-list"
+import Paginator from "components/paginator"
+
 import { PostSummary } from "components/post-card"
 import { PageContext } from "types/pagination"
-import Paginator from "components/paginator"
+
 
 type DataType = {
   site: {

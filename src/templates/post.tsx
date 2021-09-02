@@ -1,14 +1,15 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import TagList from "components/tag-list"
 
-import Bio from "components/bio"
+import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
+import { tagNameToPageUrl } from "utils/tag"
+
 import Layout from "components/layout"
 import Seo from "components/seo"
-import PostToc from "components/post-toc"
-import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
-import { tagNameToPageUrl } from "utils/tag"
+import TagList from "components/tag-list"
+import Bio from "components/bio"
+import PostToc from "components/post-toc"
 import AuthorLink from "components/author-link"
 
 type DataType = {

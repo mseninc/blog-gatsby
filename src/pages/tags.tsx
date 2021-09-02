@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import { tagNameToPageUrl } from "utils/tag"
 import Layout from "components/layout"
 import Seo from "components/seo"
 import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
-import { tagNameToPageUrl } from "utils/tag"
 
 type DataType = {
   site: {

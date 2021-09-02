@@ -1,12 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { PageContext as PageContextOrg } from "types/pagination";
-import Paginator from "components/paginator";
+
 import Layout from "components/layout";
+import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list";
+import Paginator from "components/paginator";
 import Seo from "components/seo";
 import PostCardList from "components/post-card-list";
 import { PostSummary } from "components/post-card";
-import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list";
 
 type DataType = {
   site: {
