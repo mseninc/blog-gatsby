@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `MSeeeeN`,
-    description: `大阪福島の株式会社 MSEN による IT メディア`,
+    description: `大阪発 IT メディア by MSEN`,
     siteUrl: `https://mseeeen.msen.jp/`,
   },
   plugins: [

@@ -25,7 +25,7 @@ export default function Seo({ description, lang, meta, title, keywords }: Props)
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const defaultTitle = `${site.siteMetadata?.title} | ${site.siteMetadata.description}`
 
   return (
     <Helmet
