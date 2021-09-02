@@ -33,6 +33,7 @@
     "gatsby-transformer-sharp": "^3.11.0",
     "gatsby-transformer-yaml": "^3.12.0",
     "got": "^11.8.2",
+    "graceful-fs": "^4.2.8",
     "lodash": "^4.17.21",
     "prismjs": "^1.24.1",
     "react": "^17.0.1",
@@ -58,7 +59,8 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "git submodule update --remote && gatsby build",
+    "build": "gatsby build",
+    "build-release": "git submodule update --remote && gatsby build",
     "dev": "gatsby develop",
     "dev-verbose": "gatsby develop --verbose",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",

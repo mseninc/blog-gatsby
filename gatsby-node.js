@@ -1,5 +1,9 @@
 "use strict"
 
+const fs = require('fs');
+const gracefulFs = require('graceful-fs');
+gracefulFs.gracefulify(fs);
+
 require("ts-node").register({
   compilerOptions: {
     module: "commonjs",
