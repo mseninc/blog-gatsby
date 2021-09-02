@@ -33,6 +33,11 @@ type Props = {
 export default function BlogIndex({ data, location }: Props) {
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
+  const latestPosts = data.latestPosts.nodes;
+  const latestPostIdList = latestPosts?.map(x => x.id)
+  const topics1 = data.topics1.nodes?.filter(x => !latestPostIdList?.includes(x.id)).slice(0, 5)
+  const topics2 = data.topics2.nodes?.filter(x => !latestPostIdList?.includes(x.id)).slice(0, 5)
+
   return (
     <Layout location={location} title={siteTitle}>
       <Helmet>
@@ -42,13 +47,13 @@ export default function BlogIndex({ data, location }: Props) {
       </Helmet>
       <Seo />
       <TopPageHero />
-      {data.latestPosts.nodes
+      {latestPosts
       ? (
         <div className="global-root-group">
           <div className="global-wrapper">
             <TopPageHeading title="最新記事" sub="Latest articles" />
             <div className={`featured-post-card-list`}>
-              {data.latestPosts.nodes.map((post: PostSummary, n: number) =>
+              {latestPosts.map((post: PostSummary, n: number) =>
                 <PostCard key={`post-card-${post.id}`} post={post} showDescription={n === 0} />)}
             </div>
           </div>
@@ -59,13 +64,15 @@ export default function BlogIndex({ data, location }: Props) {
         <div className="global-wrapper">
           <TopPageHeading title="Web" sub="Web related" />
           <div className={`featured-post-card-list`}>
-            {data.topics1.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+            {topics1?.map((post: PostSummary, n: number) =>
+              <PostCard post={post} showDescription={n === 0} />) || null}
           </div>
         </div>
         <div className="global-wrapper">
           <TopPageHeading title="AWS" sub="Amazon Web Service" />
           <div className={`featured-post-card-list`}>
-            {data.topics2.nodes?.map((post: PostSummary) => <PostCard post={post} />) || null}
+            {topics2?.map((post: PostSummary, n: number) =>
+              <PostCard post={post} showDescription={n === 0} />) || null}
           </div>
         </div>
       </div>
@@ -90,7 +97,7 @@ export const pageQuery = graphql`
     }
     topics1: allMarkdownRemark (
       sort: {fields: frontmatter___date, order: DESC}
-      limit: 5
+      limit: 10
       filter: {frontmatter: {tags: {eq: "Web"}}}
     ) {
       nodes {
@@ -99,7 +106,7 @@ export const pageQuery = graphql`
     }
     topics2: allMarkdownRemark (
       sort: {fields: frontmatter___date, order: DESC}
-      limit: 5
+      limit: 10
       filter: {frontmatter: {tags: {eq: "AWS"}}}
     ) {
       nodes {

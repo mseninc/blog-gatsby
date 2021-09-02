@@ -6,13 +6,32 @@
 }
 
 .post-card .post-card-hero {
+  background-color: #878787;
+  overflow: hidden;
 }
 
-.post-card .post-card-hero > .post-hero-placeholder {
+.post-card .post-card-hero a {
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+}
+.post-card .post-card-hero .gatsby-image-wrapper {
+  box-shadow: var(--box-shadow-hero-margin);
+}
+
+.post-card .post-card-hero .post-hero-placeholder {
+  display: flex;
+  flex: 1;
   height: 160px;
   line-height: var(--lineHeight-tight);
-  background-color: var(--color-hero-placeholder-bg);
+  background: transparent;
   color: var(--color-hero-placeholder-text);
+  background: var(--color-hero-placeholder-bg);
+  text-shadow: var(--text-shadow-hero-placeholder);
+}
+
+.post-card:nth-of-type(even) .post-card-hero .post-hero-placeholder {
+  background: var(--color-hero-placeholder-bg2);
 }
 
 .post-card .post-card-title {
@@ -42,15 +61,43 @@
   text-overflow: ellipsis;
 }
 
-.post-description {
-  margin: var(--spacing-2) var(--spacing-3);
+.post-card .post-card-description {
+  position: relative;
+  flex: 1;
+  margin: var(--spacing-3);
   margin-top: var(--spacing-0);
+  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-2);
   font-size: var(--fontSize-0);
+  background-color: var(--color-post-card-description-bg);
+  border-radius: 0.5em;
+  color: var(--color-text-light);
 }
 
-.post-card .post-card-author {
-  align-self: flex-end;
+.post-card .post-card-description::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 8px;
+  border-style: solid;
+  border-color: var(--color-post-card-description-bg);
+  border-width: 0 6px 6px 0;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg) skew(calc(30deg / 2), calc(30deg / 2));
+}
+.post-card .post-card-footer {
   margin: var(--spacing-2) var(--spacing-2);
   margin-top: auto; /* Keep to bottom */
   font-size: var(--fontSize-0);
+  display: flex;
+  align-items: center;
+  color: var(--color-text-light-light);
+}
+
+.post-card .post-card-date {
+}
+
+.post-card .post-card-author {
+  margin-left: auto;
 }

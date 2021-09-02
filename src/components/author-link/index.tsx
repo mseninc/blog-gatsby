@@ -6,6 +6,7 @@ type Props = {
   name: string
   github: string
   avatarImage: IGatsbyImageData
+  reverse?: boolean
 };
 
 export default function AuthorLink(props: Props) {
@@ -14,7 +15,8 @@ export default function AuthorLink(props: Props) {
   const avatarImage = getImage(props.avatarImage)
 
   return (
-    <div className={`author-link ${styles.container}`}>
+    <div className={`author-link ${styles.container} ${props.reverse ? styles.reverse : ''}`}>
+      { props.reverse ? <div>{name}</div> : null }
       { avatarImage
         ? <GatsbyImage
             image={avatarImage}
@@ -30,7 +32,7 @@ export default function AuthorLink(props: Props) {
             alt={`${github} - GitHub`}
             />
       }
-      <div>{name}</div>
+      { !props.reverse ? <div>{name}</div> : null }
     </div>
   )
 }

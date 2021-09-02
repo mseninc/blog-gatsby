@@ -60,6 +60,7 @@
   "scripts": {
     "build": "git submodule update --remote && gatsby build",
     "dev": "gatsby develop",
+    "dev-verbose": "gatsby develop --verbose",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",

@@ -91,8 +91,8 @@
   --color-primary: #0b58af;
   --color-bright: #2857FF;
   --color-text: #2e353f;
-  --color-text-light-light: #8e99aa;
   --color-text-light: #4f5969;
+  --color-text-light-light: #8e99aa;
   --color-text-invert: #eee;
   --color-heading: #1a202c;
   --color-accent: #d1dce5;
@@ -101,14 +101,20 @@
   --color-paginator-link-bg: darkgray;
   --color-paginator-link-bg-current: steelblue;
   --color-jump-button-bg: lightsteelblue;
-  --color-hero-placeholder-bg: #b4bccc;
+  --color-hero-placeholder-bg: linear-gradient(135deg, rgba(9,121,83,1) 0%, rgba(0,145,175,1) 100%);
+  --color-hero-placeholder-bg2: linear-gradient(135deg, rgba(171,78,34,1) 0%, rgba(112,45,173,1) 100%);
   --color-hero-placeholder-text: white;
   --color-top-page-hero-bg: black;
   --color-top-page-hero-copy: white;
+  --color-post-card-description-bg: #e6f3ff;
   
-  --text-shadow-top-page-hero-copy: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.7);
   --corner-radius: 0.25em;
+
+  --text-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.5);
+  --text-shadow-top-page-hero-copy: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.7);
+  --text-shadow-hero-placeholder: var(--text-shadow);
   --box-shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.2);
+  --box-shadow-hero-margin: 0em 0em 1.5em rgba(0, 0, 0, 0.5);
 }
 
 body.theme-dark {
@@ -117,9 +123,9 @@ body.theme-dark {
   --color-primary: #1577e7;
   --color-bright: #2857FF;
   --color-text: #d1d1d1;
-  --color-text-light-light: #8e99aa;
-  --color-text-light: #4f5969;
-  --color-text-invert: #eee;
+  --color-text-light: #b3bfd3;
+  --color-text-light-light: #9fabbe;
+  --color-text-invert: rgb(2, 2, 2);
   --color-heading: #e1e1e1;
   --color-accent: #d1dce5;
   --color-tag-border: #222;
@@ -127,9 +133,10 @@ body.theme-dark {
   --color-paginator-link-bg: darkgray;
   --color-paginator-link-bg-current: steelblue;
   --color-jump-button-bg: steelblue;
-  --color-hero-placeholder-bg: #b4bccc;
+  --color-hero-placeholder-bg: #8f9ab3;
   --color-hero-placeholder-text: white;
   --color-top-page-hero-bg: black;
   --color-top-page-hero-copy: white;
+  --color-post-card-description-bg: #2e384d;
   --box-shadow: 0em 0em 0.5em rgba(255, 255, 255, 0.2);
 }

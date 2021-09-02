@@ -36,7 +36,7 @@ export const query = graphql`
     excerpt(pruneLength: 160)
     frontmatter {
       title
-      date(formatString: "YYYY/MM/DD")
+      date(formatString: "YYYY.MM.DD")
       description
       tags
       author {
@@ -70,15 +70,17 @@ export default function PostCard({ post, showDescription }: Props) {
   return (
     <div className="post-card">
       <div className="post-card-hero">
-        { heroImage
-          ? <GatsbyImage
-              image={heroImage}
-              alt={post.frontmatter.title}
-              />
-          : <div className={`post-hero-placeholder ${styles.postHeroPlaceholder}`}>
-              <span>{post.frontmatter.tags?.[0] || post.frontmatter.author?.id || ''}</span>
-            </div>
-        }
+        <Link to={post.fields.slug}>
+          { heroImage
+            ? <GatsbyImage
+                image={heroImage}
+                alt={post.frontmatter.title}
+                />
+            : <div className={`post-hero-placeholder ${styles.postHeroPlaceholder}`}>
+                <span>{post.frontmatter.tags?.[0] || post.frontmatter.author?.id || ''}</span>
+              </div>
+          }
+        </Link>
       </div>
       <div className="post-card-title">
         <Link to={post.fields.slug}>
@@ -92,17 +94,23 @@ export default function PostCard({ post, showDescription }: Props) {
       }
       {
         showDescription
-        ? <div className="post-description">{description}</div>
+        ? <div className="post-card-description">{description}</div>
         : null
       }
-      <div className="post-card-author">
-        { avatarImage && post.frontmatter.author
-          ? <AuthorLink
-              name={post.frontmatter.author.name}
-              github={post.frontmatter.author.id}
-              avatarImage={avatarImage}
-              />
-          : null}
+      <div className="post-card-footer">
+      <div className="post-card-date">
+          { post.frontmatter.date }
+        </div>
+        <div className="post-card-author">
+          { avatarImage && post.frontmatter.author
+            ? <AuthorLink
+                name={post.frontmatter.author.name}
+                github={post.frontmatter.author.id}
+                avatarImage={avatarImage}
+                reverse={true}
+                />
+            : null}
+        </div>
       </div>
     </div>
   );

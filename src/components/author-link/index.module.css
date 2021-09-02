@@ -4,8 +4,14 @@
 }
 
 .avatar {
+  margin-left: var(--spacing-0);
   margin-right: var(--spacing-1);
   width: 25px;
   height: 25px;
   border-radius: 100%;
+}
+
+.reverse .avatar {
+  margin-left: var(--spacing-1);
+  margin-right: var(--spacing-0);
 }
