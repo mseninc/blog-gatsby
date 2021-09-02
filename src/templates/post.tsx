@@ -100,7 +100,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
     : null;
 
   const breadcrumb: BreadcrumbListItem[] = [
-    { name: 'ホーム', current: false },
+    { name: 'ホーム', current: false, url: '/' },
     { name: title, current: true },
   ]
 

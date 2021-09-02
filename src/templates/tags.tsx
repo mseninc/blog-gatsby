@@ -42,7 +42,7 @@ export default function TagPostList({ pageContext, data, location }: Props) {
   const posts = edges.map(x => x.node)
   
   const breadcrumb: BreadcrumbListItem[] = [
-    { name: 'ホーム', current: false },
+    { name: 'ホーム', current: false, url: '/' },
     { name: 'タグ一覧', current: false, url: '/tags/' },
     { name: tag, current: humanPageNumber === 1, url: basePath },
   ]

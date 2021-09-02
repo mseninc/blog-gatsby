@@ -81,7 +81,7 @@ export default function TagsPage(props: Props) {
   }))
 
   const breadcrumb: BreadcrumbListItem[] = [
-    { name: 'ホーム', current: false },
+    { name: 'ホーム', current: false, url: '/' },
     { name: 'タグ一覧', current: true, url: '/tags/' },
   ]
 
