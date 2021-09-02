@@ -51,6 +51,11 @@ module.exports = {
             resolve: `gatsby-remark-prismjs`,
             options: {
               classPrefix: "language-",
+              aliases: {
+                'xaml': 'xml',
+                'sh': 'bash',
+                'ps': 'powershell',
+              },
             },
           },
           `gatsby-remark-copy-linked-files`,
