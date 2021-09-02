@@ -19,10 +19,6 @@ body {
   transition: .5s;
 }
 
-footer {
-  padding: var(--spacing-6) var(--spacing-0);
-}
-
 hr {
   background: var(--color-accent);
   height: 1px;
@@ -60,6 +56,17 @@ body.theme-dark .site-logo-dark {
   display: block;
 }
 
-footer {
-  padding: 0;
+::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb);
+  border-radius: calc(var(--scrollbar-size) / 2);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-scrollbar-track);
+  border-radius: calc(var(--scrollbar-size) / 2);
 }

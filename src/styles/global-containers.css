@@ -17,26 +17,20 @@
 
 .global-wrapper {
   margin: var(--spacing-0) auto;
-  padding: var(--spacing-0) var(--spacing-0) var(--spacing-10) var(--spacing-0);
+  padding: var(--spacing-0);
 }
 
 .global-header {
   background-color: var(--color-bg);
-  box-shadow: var(--box-shadow);
   margin-bottom: var(--spacing-0);
   border-bottom: solid 1px var(--color-bg-body);
+  padding: var(--spacing-1) var(--spacing-1);
 }
 
 .global-header-wrapper {
   display: flex;
   position: relative;
   margin: var(--spacing-0) auto;
-  padding: var(--spacing-1) var(--spacing-1);
-}
-
-.global-header-wrapper .header-link-home {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .global-header-wrapper .theme-switcher {
@@ -68,10 +62,10 @@
 /* tablet */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .global-wrapper {
-    max-width: var(--maxWidth-tablet);
+    max-width: var(--maxWidth-pc);
   }
   .global-header-wrapper {
-    max-width: var(--maxWidth-tablet);
+    max-width: var(--maxWidth-pc);
   }
 }
 
@@ -96,18 +90,14 @@
 }
 
 /* pc ~ wide */
-@media screen and (min-width: 1024px) {
-  .global-wrapper {
-    padding: var(--spacing-0) var(--spacing-5) var(--spacing-10) var(--spacing-5);
-  }
-  .global-header-wrapper {
+@media screen and (min-width: 1025px) {
+  .global-header {
     padding: var(--spacing-1) var(--spacing-5);
   }
   .global-header + .global-wrapper {
     margin-top: var(--spacing-3);
   }
-  .global-header-wrapper .header-link-home {
-    margin-left: 0;
-    margin-right: 0;
+  .global-wrapper {
+    padding: var(--spacing-0) var(--spacing-0) var(--spacing-10) var(--spacing-0);
   }
 }

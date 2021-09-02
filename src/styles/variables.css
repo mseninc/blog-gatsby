@@ -26,7 +26,7 @@
   --maxWidth-pc: 1024px;
   --maxWidth-wide: 1600px;
 
-  --spacing-px: "1px";
+  --spacing-px: 1px;
   --spacing-0: 0;
   --spacing-1: 0.25rem;
   --spacing-2: 0.5rem;
@@ -96,12 +96,12 @@
   --color-text-invert: #eee;
   --color-heading: #1a202c;
   --color-accent: #d1dce5;
-  --color-footer-bg: white;
+  --color-footer-bg: #272c36;
   --color-tag-border: #fcfcfc;
   --color-tag-bg: #f1f1f1;
   --color-paginator-link-bg: darkgray;
   --color-paginator-link-bg-current: steelblue;
-  --color-jump-button-bg: lightsteelblue;
+  --color-jump-button-bg: #6197c4;
   --color-hero-placeholder-bg: linear-gradient(135deg, rgba(9,121,83,1) 0%, rgba(0,145,175,1) 100%);
   --color-hero-placeholder-bg2: linear-gradient(135deg, rgba(171,78,34,1) 0%, rgba(112,45,173,1) 100%);
   --color-hero-placeholder-text: white;
@@ -114,8 +114,13 @@
   --text-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.5);
   --text-shadow-top-page-hero-copy: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.7);
   --text-shadow-hero-placeholder: var(--text-shadow);
+  
   --box-shadow: 0em 0em 0.5em rgba(0, 0, 0, 0.2);
   --box-shadow-hero-margin: 0em 0em 1.5em rgba(0, 0, 0, 0.5);
+
+  --scrollbar-size: 12px;
+  --color-scrollbar-thumb: #59616d;
+  --color-scrollbar-track: #d6d7da;
 }
 
 body.theme-dark {
@@ -129,7 +134,7 @@ body.theme-dark {
   --color-text-invert: rgb(2, 2, 2);
   --color-heading: #e1e1e1;
   --color-accent: #d1dce5;
-  --color-footer-bg: #202026;
+  --color-footer-bg: #272c36;
   --color-tag-border: #222;
   --color-tag-bg: #444;
   --color-paginator-link-bg: darkgray;
@@ -142,4 +147,6 @@ body.theme-dark {
   --color-post-card-description-bg: #2e384d;
 
   --box-shadow: 0em 0em 0.5em rgba(255, 255, 255, 0.2);
+  --color-scrollbar-thumb: #727b88;
+  --color-scrollbar-track: #4c4d50;
 }

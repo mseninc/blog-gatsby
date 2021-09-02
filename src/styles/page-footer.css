@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: stretch;
   background-color: var(--color-footer-bg);
+  overflow: hidden;
 }
 
 .page-footer .page-footer-logo {

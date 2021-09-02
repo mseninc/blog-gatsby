@@ -1,17 +1,27 @@
 import * as React from "react"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 
 type Props = {
-  logoImage?: any
 }
+
+const logoImage = (
+  <>
+    <StaticImage
+      src="../../images/mseeeen-logo-dark.png"
+      width={240}
+      layout="fixed"
+      placeholder="none"
+      alt={''}
+    />
+  </>
+)
 
 export default function PageFooter(props: Props) {
 
   return (
     <div className={`page-footer`}>
       <div className={`page-footer-logo`}>
-        { props.logoImage }
+        { logoImage }
       </div>
       <div className={`page-footer-copyright`}>
           MSeeeeN © {new Date().getFullYear()}, MSEN Inc.

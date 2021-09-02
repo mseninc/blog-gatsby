@@ -2,7 +2,6 @@ import * as React from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import JumpButton from "./jump-button"
-import { useEffect } from "react"
 import ThemeSwitcher from "./theme-switcher"
 import PageFooter from "./page-footer"
 
@@ -67,10 +66,10 @@ const Layout = ({ location, title, children }: Props) => {
       </div>
       <div className={isRootPath ? '' : `global-wrapper`} data-is-root-path={isRootPath}>
         {children}
-    </div>
-      <PageFooter
-        logoImage={headerLogo}
-      />
+      </div>
+      <footer>
+        <PageFooter />
+      </footer>
       <JumpButton />
     </>
   )

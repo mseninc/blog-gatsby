@@ -147,9 +147,9 @@ export default function BlogPostTemplate({ data, location }: Props) {
             />
           </article>
         </main>
-        <footer>
+        <div className="post-bio">
           {bio}
-        </footer>
+        </div>
         <aside className="sidebar">
           {toc}
         </aside>

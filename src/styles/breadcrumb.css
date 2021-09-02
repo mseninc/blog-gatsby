@@ -3,3 +3,13 @@
   background-color: var(--color-bg);
   padding: var(--spacing-2) var(--spacing-3);
 }
+
+.breadcrumb-list ol {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.breadcrumb-list ol::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
