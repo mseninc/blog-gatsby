@@ -131,12 +131,22 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
 }
 
 function getMatchedHeroImagePath(fileAbsolutePath: string, slug: string) {
-  const candidateExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']
+  const candidateExtensions = ['jpg', 'jpeg', 'png']
+  // like `slug.jpg`
   for (const ext of candidateExtensions) {
-    const testPath = path.join(fileAbsolutePath, '..', 'images', `${slug}\.${ext}`)
+    const testPath = path.resolve(fileAbsolutePath, '..', 'images', `${slug}\.${ext}`)
     try {
       fs.statSync(testPath)
-      return path.relative(path.join(fileAbsolutePath, '..'), testPath)
+      return path.relative(path.resolve(fileAbsolutePath, '..'), testPath)
+    }
+    catch {}
+  }
+  // fallback to like `slug-1.jpg`
+  for (const ext of candidateExtensions) {
+    const testPath = path.resolve(fileAbsolutePath, '..', 'images', `${slug}-1\.${ext}`)
+    try {
+      fs.statSync(testPath)
+      return path.relative(path.resolve(fileAbsolutePath, '..'), testPath)
     }
     catch {}
   }
