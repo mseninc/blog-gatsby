@@ -145,12 +145,11 @@ export default function BlogPostTemplate({ data, location }: Props) {
               dangerouslySetInnerHTML={{ __html: post.html }}
               itemProp="articleBody"
             />
-            <hr />
-            <footer>
-              {bio}
-            </footer>
           </article>
         </main>
+        <footer>
+          {bio}
+        </footer>
         <aside className="sidebar">
           {toc}
         </aside>

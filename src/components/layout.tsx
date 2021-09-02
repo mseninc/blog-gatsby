@@ -4,6 +4,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import JumpButton from "./jump-button"
 import { useEffect } from "react"
 import ThemeSwitcher from "./theme-switcher"
+import PageFooter from "./page-footer"
 
 type Props = {
   location: { pathname: string }
@@ -66,10 +67,10 @@ const Layout = ({ location, title, children }: Props) => {
       </div>
       <div className={isRootPath ? '' : `global-wrapper`} data-is-root-path={isRootPath}>
         {children}
-        <footer>
-          © {new Date().getFullYear()}, MSEN Inc.
-        </footer>
-      </div>
+    </div>
+      <PageFooter
+        logoImage={headerLogo}
+      />
       <JumpButton />
     </>
   )

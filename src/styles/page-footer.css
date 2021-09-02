@@ -1,0 +1,21 @@
+.page-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: var(--color-footer-bg);
+}
+
+.page-footer .page-footer-logo {
+  padding: var(--spacing-10);
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.page-footer .page-footer-copyright {
+  padding: var(--spacing-6);
+  font-size: var(--fontSize-0);
+  color: var(--color-text-light-light);
+  text-align: center;
+}

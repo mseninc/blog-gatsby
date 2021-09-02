@@ -96,6 +96,7 @@
   --color-text-invert: #eee;
   --color-heading: #1a202c;
   --color-accent: #d1dce5;
+  --color-footer-bg: white;
   --color-tag-border: #fcfcfc;
   --color-tag-bg: #f1f1f1;
   --color-paginator-link-bg: darkgray;
@@ -113,7 +114,7 @@
   --text-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.5);
   --text-shadow-top-page-hero-copy: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.7);
   --text-shadow-hero-placeholder: var(--text-shadow);
-  --box-shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.2);
+  --box-shadow: 0em 0em 0.5em rgba(0, 0, 0, 0.2);
   --box-shadow-hero-margin: 0em 0em 1.5em rgba(0, 0, 0, 0.5);
 }
 
@@ -128,6 +129,7 @@ body.theme-dark {
   --color-text-invert: rgb(2, 2, 2);
   --color-heading: #e1e1e1;
   --color-accent: #d1dce5;
+  --color-footer-bg: #202026;
   --color-tag-border: #222;
   --color-tag-bg: #444;
   --color-paginator-link-bg: darkgray;
@@ -138,5 +140,6 @@ body.theme-dark {
   --color-top-page-hero-bg: black;
   --color-top-page-hero-copy: white;
   --color-post-card-description-bg: #2e384d;
+
   --box-shadow: 0em 0em 0.5em rgba(255, 255, 255, 0.2);
 }

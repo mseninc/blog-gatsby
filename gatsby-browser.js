@@ -11,6 +11,7 @@ import "./src/styles/variables.css"
 import "./src/styles/global-containers.css"
 import "./src/styles/common-elements.css"
 import "./src/styles/tag.css"
+import "./src/styles/page-footer.css"
 
 // for components
 import "./src/styles/breadcrumb.css"
