@@ -82,10 +82,10 @@ export default function TagsPage(props: Props) {
 
   const breadcrumb: BreadcrumbListItem[] = [
     { name: 'ホーム', current: false },
-    { name: 'タグ索引', current: true, url: '/tags/' },
+    { name: 'タグ一覧', current: true, url: '/tags/' },
   ]
 
-  const siteTitle = `タグ索引 | ${title}`
+  const siteTitle = `タグ一覧 | ${title}`
   return (
     <Layout location={location} title={siteTitle}>
       <Seo

@@ -42,7 +42,7 @@ export default function TagPostList({ pageContext, data, location }: Props) {
   
   const breadcrumb: BreadcrumbListItem[] = [
     { name: 'ホーム', current: false },
-    { name: 'タグ索引', current: false, url: '/tags/' },
+    { name: 'タグ一覧', current: false, url: '/tags/' },
     { name: tag, current: humanPageNumber === 1, url: basePath },
   ]
   if (humanPageNumber !== 1) {
