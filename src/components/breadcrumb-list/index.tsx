@@ -1,3 +1,4 @@
+import { Link } from "gatsby";
 import React from "react";
 import * as styles from "./index.module.css"
 
@@ -21,14 +22,14 @@ export default function BreadcrumbList(props: Props) {
         itemScope
         itemType="https://schema.org/ListItem">
         {!item.current && item.url
-          ? <a
-            itemProp="item"
-            href={item.url}
-            itemScope itemType="https://schema.org/WebPage"
-            itemID={item.url}
-          >
+          ? <Link
+              itemProp="item"
+              to={item.url}
+              itemScope itemType="https://schema.org/WebPage"
+              itemID={item.url}
+            >
             <span itemProp="name">{item.name}</span>
-          </a>
+          </Link>
           : <span itemProp="name">{item.name}</span>
         }
         <meta itemProp="position" content={`${position}`} />
