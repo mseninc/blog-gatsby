@@ -12,8 +12,6 @@ require("ts-node").register({
   },
 })
 
-require("./src/__generated__/gatsby-types")
-
 const {
   createPages,
   onCreateNode,
