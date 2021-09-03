@@ -8,6 +8,16 @@ import PostCard, { PostSummary } from "components/post-card";
 import TopPageHeading from "components/top-page-heading";
 import TopPageHero from "components/top-page-hero";
 import MoreLink from "components/more-link";
+import { tagNameToPageUrl } from "utils/tag";
+
+const featuredTags = [
+  { name: 'AWS', sub: 'Amazon Web Services' },
+  { name: 'Web', sub: 'Web realted technologies' },
+  { name: '仮想化技術', sub: 'Virtualization' },
+  { name: 'Linux', sub: 'Amazon Linux, CentOS, Ubuntu...' },
+  { name: '.NET', sub: '.NET, .NET Framework, C#, VB.NET...' },
+  { name: 'Windows', sub: 'Windows Server, Windows 10' },
+]
 
 type DataType = {
   site: {
@@ -18,12 +28,8 @@ type DataType = {
   latestPosts: {
     nodes?: PostSummary[]
   }
-  topics1: {
-    nodes?: PostSummary[]
-  }
-  topics2: {
-    nodes?: PostSummary[]
-  }
+} & {
+  [topicKey: string]: { nodes?: PostSummary[] }
 }
 
 type Props = {
@@ -34,10 +40,40 @@ type Props = {
 export default function BlogIndex({ data, location }: Props) {
   const siteTitle = data.site.siteMetadata?.title || `Title`
 
-  const latestPosts = data.latestPosts.nodes;
-  const latestPostIdList = latestPosts?.map(x => x.id)
-  const topics1 = data.topics1.nodes?.filter(x => !latestPostIdList?.includes(x.id)).slice(0, 5)
-  const topics2 = data.topics2.nodes?.filter(x => !latestPostIdList?.includes(x.id)).slice(0, 5)
+  const latestPostIdList = data.latestPosts.nodes?.map(x => x.id)
+
+  const latestPosts = data.latestPosts.nodes
+    ? (
+      <div className="global-root-group">
+        <div className="global-wrapper">
+          <TopPageHeading title="最新記事" sub="Latest articles" />
+          <div className={`featured-post-card-list`}>
+            {data.latestPosts.nodes.map((post: PostSummary, n: number) =>
+              <PostCard key={`post-card-${post.id}`} post={post} showDescription={n === 0} />)}
+          </div>
+          <MoreLink to='/posts/' />
+        </div>
+      </div>
+    )
+    : null
+
+  const featuredTagPostLists = featuredTags.map((tag, i) => {
+    const posts = data[`topics${i + 1}`].nodes?.filter(x => !latestPostIdList?.includes(x.id)).slice(0, 5)
+    if (!posts) { return null }
+    const url = tagNameToPageUrl(tag.name)
+    return (
+      <div className="global-root-group">
+        <div className="global-wrapper">
+          <TopPageHeading title={tag.name} sub={tag.sub} />
+          <div className={`featured-post-card-list`}>
+            {posts?.map((post: PostSummary, n: number) =>
+              <PostCard post={post} showDescription={n === 0} />) || null}
+          </div>
+          <MoreLink to={url} />
+        </div>
+      </div>
+    )
+  })
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -48,39 +84,12 @@ export default function BlogIndex({ data, location }: Props) {
       </Helmet>
       <Seo />
       <TopPageHero />
-      {latestPosts
-      ? (
-        <div className="global-root-group">
-          <div className="global-wrapper">
-            <TopPageHeading title="最新記事" sub="Latest articles" />
-            <div className={`featured-post-card-list`}>
-              {latestPosts.map((post: PostSummary, n: number) =>
-                <PostCard key={`post-card-${post.id}`} post={post} showDescription={n === 0} />)}
-            </div>
-            <MoreLink to='/posts/' />
-          </div>
-        </div>
-      )
-      : null}
-      <div className="global-root-group">
-        <div className="global-wrapper">
-          <TopPageHeading title="Web" sub="Web related" />
-          <div className={`featured-post-card-list`}>
-            {topics1?.map((post: PostSummary, n: number) =>
-              <PostCard post={post} showDescription={n === 0} />) || null}
-          </div>
-        </div>
-        <div className="global-wrapper">
-          <TopPageHeading title="AWS" sub="Amazon Web Service" />
-          <div className={`featured-post-card-list`}>
-            {topics2?.map((post: PostSummary, n: number) =>
-              <PostCard post={post} showDescription={n === 0} />) || null}
-          </div>
-        </div>
-      </div>
+      {latestPosts}
+      {featuredTagPostLists}
     </Layout>
   )
 }
+
 
 export const pageQuery = graphql`
   query {
@@ -100,7 +109,7 @@ export const pageQuery = graphql`
     topics1: allMarkdownRemark (
       sort: {fields: frontmatter___date, order: DESC}
       limit: 10
-      filter: {frontmatter: {tags: {eq: "Web"}}}
+      filter: {frontmatter: {tags: {eq: "AWS"}}}
     ) {
       nodes {
         ...PostSummary
@@ -109,7 +118,43 @@ export const pageQuery = graphql`
     topics2: allMarkdownRemark (
       sort: {fields: frontmatter___date, order: DESC}
       limit: 10
-      filter: {frontmatter: {tags: {eq: "AWS"}}}
+      filter: {frontmatter: {tags: {eq: "Web"}}}
+    ) {
+      nodes {
+        ...PostSummary
+      }
+    }
+    topics3: allMarkdownRemark (
+      sort: {fields: frontmatter___date, order: DESC}
+      limit: 10
+      filter: {frontmatter: {tags: {eq: "仮想化技術"}}}
+    ) {
+      nodes {
+        ...PostSummary
+      }
+    }
+    topics4: allMarkdownRemark (
+      sort: {fields: frontmatter___date, order: DESC}
+      limit: 10
+      filter: {frontmatter: {tags: {eq: "Linux"}}}
+    ) {
+      nodes {
+        ...PostSummary
+      }
+    }
+    topics5: allMarkdownRemark (
+      sort: {fields: frontmatter___date, order: DESC}
+      limit: 10
+      filter: {frontmatter: {tags: {eq: ".NET"}}}
+    ) {
+      nodes {
+        ...PostSummary
+      }
+    }
+    topics6: allMarkdownRemark (
+      sort: {fields: frontmatter___date, order: DESC}
+      limit: 10
+      filter: {frontmatter: {tags: {eq: "Windows"}}}
     ) {
       nodes {
         ...PostSummary
