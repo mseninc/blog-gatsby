@@ -70,6 +70,10 @@ a.more-link {
   margin-right: auto;
 }
 
+a.more-link:hover {
+  text-decoration: underline;
+}
+
 .featured-post-card-list {
   --grid-column-count: 3;
   --first-child-column: 1 / 3;
