@@ -5,14 +5,12 @@ import * as styles from "./index.module.css"
 
 export default function JumpButton() {
 
-  const TOP_BOTTOM_THRESHOLD = 100;
-
   const [toBottom, setToBottom] = useState(true);
   const buttonRef = createRef<HTMLButtonElement>();
 
   useEffect(() => {
     const onButtonClick = (e: any) => {
-      const pos = (window.scrollY > TOP_BOTTOM_THRESHOLD)
+      const pos = (window.scrollY > window.innerHeight)
         ? { top: 0, left: 0 }
         : { top: window.document.body.scrollHeight || 99999, left: 0 };
       window.scrollTo({
@@ -23,7 +21,7 @@ export default function JumpButton() {
     };
   
     const onScroll = () => {
-      setToBottom(() => (window.pageYOffset || document.documentElement.scrollTop) < TOP_BOTTOM_THRESHOLD);
+      setToBottom(() => (window.pageYOffset || document.documentElement.scrollTop) < window.innerHeight);
     };
 
     buttonRef.current?.addEventListener('click', onButtonClick)
