@@ -7,10 +7,10 @@ import { tagNameToPageUrl } from "utils/tag"
 import Layout from "components/layout"
 import Seo from "components/seo"
 import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
+import AuthorLink from "components/author-link"
 import TagList from "components/tag-list"
 import Bio from "components/bio"
 import PostToc from "components/post-toc"
-import AuthorLink from "components/author-link"
 
 type DataType = {
   site: {

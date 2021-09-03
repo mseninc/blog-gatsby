@@ -1,9 +1,11 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import { getImage, GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+
 import AuthorLink from "components/author-link";
-import * as styles from "./index.module.css"
 import TagList from "components/tag-list";
+
+import * as styles from "./index.module.css"
 
 export type PostSummary = {
   id: string

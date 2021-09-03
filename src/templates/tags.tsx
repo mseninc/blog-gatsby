@@ -3,9 +3,9 @@ import { graphql } from "gatsby"
 import { PageContext as PageContextOrg } from "types/pagination";
 
 import Layout from "components/layout";
-import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list";
-import Paginator from "components/paginator";
 import Seo from "components/seo";
+import Paginator from "components/paginator";
+import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list";
 import PostCardList from "components/post-card-list";
 import { PostSummary } from "components/post-card";
 
