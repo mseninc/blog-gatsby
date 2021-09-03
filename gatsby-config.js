@@ -8,6 +8,12 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-transformer-yaml`,
     {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://mseeeen.msen.jp/`,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
