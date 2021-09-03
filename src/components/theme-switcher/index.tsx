@@ -30,7 +30,6 @@ export default function ThemeSwitcher(props: {
       const activeClass = dark ? bodyClassOnDark : bodyClassOnLight
       document.body.classList.remove(inactiveClass)
       document.body.classList.add(activeClass)
-      localStorage.setItem(settingKey, dark ? DarkSettingValue : LigthSettingValue)
       if (dark !== isDark) {
         setIsDark(dark)
       }
