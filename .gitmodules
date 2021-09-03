@@ -1,4 +1,0 @@
-[submodule "content/blog"]
-	path = content/blog
-	url = https://github.com/mseninc/blog.git
-	branch = main
