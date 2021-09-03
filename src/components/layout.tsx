@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 import JumpButton from "./jump-button"
@@ -16,6 +16,18 @@ const Layout = ({ location, title, children }: Props) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
 
+  const { site: { siteMetadata: { title: siteTitle } } } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `
+  )
+  
   const headerLogo = (
     <>
       <StaticImage
@@ -60,7 +72,7 @@ const Layout = ({ location, title, children }: Props) => {
         <div className="global-header-wrapper">
           {header}
           <ThemeSwitcher
-            settingKey={`${title}_theme`}
+            settingKey={`${siteTitle}_theme`}
             tooltip={`ダークテーマ/ライトテーマ切り替え`}
             />
         </div>
