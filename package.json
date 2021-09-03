@@ -57,8 +57,8 @@
     "url": "git+https://github.com/mseninc/blog-gatsby.git"
   },
   "scripts": {
+    "update-content": "git submodule update --remote",
     "build": "gatsby build",
-    "build-release": "git submodule update --remote && gatsby build",
     "dev": "gatsby develop",
     "dev-verbose": "gatsby develop --verbose",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
