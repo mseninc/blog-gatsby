@@ -45,22 +45,6 @@ type DataType = {
       heroImage: IGatsbyImageData
     }
   }
-  previous: {
-    fields: {
-      slug: string
-    }
-    frontmatter: {
-      title: string
-    }
-  }
-  next: {
-    fields: {
-      slug: string
-    }
-    frontmatter: {
-      title: string
-    }
-  }
 };
 
 type Props = {
@@ -71,7 +55,6 @@ type Props = {
 export default function BlogPostTemplate({ data, location }: Props) {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const { previous, next } = data
   const { title } = post.frontmatter;
 
   const tags = post.frontmatter.tags;
@@ -161,8 +144,6 @@ export default function BlogPostTemplate({ data, location }: Props) {
 export const pageQuery = graphql`
   query BlogPostBySlug(
     $id: String!
-    $previousPostId: String
-    $nextPostId: String
   ) {
     site {
       siteMetadata {
@@ -206,22 +187,6 @@ export const pageQuery = graphql`
             gatsbyImageData(width: 720, layout: CONSTRAINED)
           }
         }
-      }
-    }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-      }
-    }
-    next: markdownRemark(id: { eq: $nextPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
       }
     }
   }
