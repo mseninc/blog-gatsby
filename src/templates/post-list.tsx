@@ -1,14 +1,13 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { PageContext } from "types/pagination"
 
 import Layout from "components/layout"
 import Seo from "components/seo"
-import PostCardList from "components/post-card-list"
 import Paginator from "components/paginator"
-
+import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list";
+import PostCardList from "components/post-card-list"
 import { PostSummary } from "components/post-card"
-import { PageContext } from "types/pagination"
-
 
 type DataType = {
   site: {
@@ -30,6 +29,15 @@ type Props = {
 
 export default function PostListTemplate({ data, location, pageContext }: Props) {
   const siteTitle = data.site.siteMetadata?.title || `Title`
+  const { humanPageNumber } = pageContext
+
+  const breadcrumb: BreadcrumbListItem[] = [
+    { name: 'ホーム', current: false, url: '/' },
+    { name: '記事一覧', current: humanPageNumber === 1, url: '/posts/' },
+  ]
+  if (humanPageNumber !== 1) {
+    breadcrumb.push({ name: `${humanPageNumber} ページ`, current: true })
+  }
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -38,6 +46,7 @@ export default function PostListTemplate({ data, location, pageContext }: Props)
         description={data.site.siteMetadata?.description}
       />
       <div className="full-wide-container">
+        <BreadcrumbList items={breadcrumb} />
         <main>
           <Paginator pathPrefix='/posts' context={pageContext} />
           <PostCardList posts={data.allMarkdownRemark.nodes} />
