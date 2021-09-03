@@ -26,7 +26,7 @@ export default function AuthorsPage(props: Props) {
 
   return (
     <div>
-      <Seo title={`著者一覧 | ${title}`} />
+      <Seo title={`著者一覧`} />
       <div>
         <h1>著者</h1>
         <ul>
@@ -42,23 +42,6 @@ export default function AuthorsPage(props: Props) {
     </div>
   );
 };
-// TagsPage.propTypes = {
-//   data: PropTypes.shape({
-//     allMarkdownRemark: PropTypes.shape({
-//       group: PropTypes.arrayOf(
-//         PropTypes.shape({
-//           fieldValue: PropTypes.string.isRequired,
-//           totalCount: PropTypes.number.isRequired,
-//         }).isRequired
-//       ),
-//     }),
-//     site: PropTypes.shape({
-//       siteMetadata: PropTypes.shape({
-//         title: PropTypes.string.isRequired,
-//       }),
-//     }),
-//   }),
-// }
 
 export const pageQuery = graphql`
   query {

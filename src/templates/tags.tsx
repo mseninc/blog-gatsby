@@ -37,7 +37,7 @@ export default function TagPostList({ pageContext, data, location }: Props) {
   const { tag, basePath, humanPageNumber } = pageContext
   const { edges } = data.allMarkdownRemark
   
-  const siteTitle = `${tag} | ${data.site.siteMetadata?.title || `Title`}`
+  const { title } = data.site.siteMetadata
 
   const posts = edges.map(x => x.node)
   
@@ -51,9 +51,9 @@ export default function TagPostList({ pageContext, data, location }: Props) {
   }
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={title}>
       <Seo
-        title={siteTitle}
+        title={title}
         description={data.site.siteMetadata?.description}
       />
       <div className="full-wide-container">

@@ -149,6 +149,7 @@ module.exports = {
     // `gatsby-plugin-offline`,
     `gatsby-plugin-root-import`,
     `gatsby-plugin-typegen`,
+    `gatsby-plugin-sitemap`,
   ],
   mapping: {
     "MarkdownRemark.frontmatter.author": `AuthorYaml`,

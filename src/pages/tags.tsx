@@ -33,12 +33,6 @@ type TagObject = {
 export default function TagsPage(props: Props) {
   const {
     data: {
-      site: {
-        siteMetadata: {
-          title,
-          description,
-        },
-      },
       allMarkdownRemark: { group },
     },
     location,
@@ -85,11 +79,12 @@ export default function TagsPage(props: Props) {
     { name: 'タグ一覧', current: true, url: '/tags/' },
   ]
 
-  const siteTitle = `タグ一覧 | ${title}`
+  const title = `タグ一覧`
+  const description = `${title} のタグ一覧です`
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={title}>
       <Seo
-        title={siteTitle}
+        title={title}
         description={description}
       />
       <div className="full-wide-container">
@@ -104,12 +99,6 @@ export default function TagsPage(props: Props) {
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
     allMarkdownRemark(limit: 2000) {
       group(field: frontmatter___tags) {
         fieldValue
