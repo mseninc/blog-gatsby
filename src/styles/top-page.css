@@ -60,18 +60,9 @@
 a.more-link {
   display: block;
   width: 50%;
-  padding: var(--spacing-2);
-  background-color: var(--color-bright);
-  color: var(--color-text-invert);
-  text-decoration: none;
-  text-align: center;
   margin-top: var(--spacing-8);
   margin-left: auto;
   margin-right: auto;
-}
-
-a.more-link:hover {
-  text-decoration: underline;
 }
 
 .featured-post-card-list {

@@ -1,0 +1,70 @@
+.error-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fontSize-2);
+}
+
+.error-page .error-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  margin: auto;
+}
+
+.error-page .error-page-logo-image {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 1s infinite ease-in-out alternate;
+  filter: blur(10px);
+}
+
+.error-page .error-page-info {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.error-page h1 {
+  font-size: calc(var(--fontSize-7) * 3);
+  margin: var(--spacing-0);
+  line-height: var(--lineHeight-none);
+  font-weight: 100;
+}
+
+.error-page .error-page-message {
+  margin: var(--spacing-6) var(--spacing-0);
+}
+
+@keyframes float {
+  100% {
+    transform: translateY(20px);
+  }
+}
+@media (max-width: 450px) {
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -190px;
+  }
+  .message-box {
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -190px;
+    text-align: center;
+  }
+}

@@ -131,7 +131,7 @@ body.theme-dark {
   --color-text: #d1d1d1;
   --color-text-light: #b3bfd3;
   --color-text-light-light: #9fabbe;
-  --color-text-invert: rgb(2, 2, 2);
+  --color-text-invert: #222;
   --color-heading: #e1e1e1;
   --color-accent: #d1dce5;
   --color-footer-bg: #272c36;

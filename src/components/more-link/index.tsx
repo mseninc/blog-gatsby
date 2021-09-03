@@ -10,7 +10,7 @@ export default function MoreLink(props: Props) {
   const label = props.label || 'もっと見る'
 
   return (
-    <Link to={props.to} className={`more-link`}>
+    <Link to={props.to} className={`more-link button`}>
       { label }
     </Link>
   )

@@ -9,6 +9,7 @@ html {
   font-size: var(--fontSize-root);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg-body);
   transition: .5s;
+  min-height: 100vh;
 }
 
 hr {
@@ -34,6 +36,20 @@ a {
 a:hover,
 a:focus {
   text-decoration: none;
+}
+
+a.button {
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--color-bright);
+  color: var(--color-text-invert);
+  text-decoration: none;
+  text-align: center;
+  margin-top: var(--spacing-0);
+  border-radius: var(--corner-radius);
+}
+
+a.button:hover {
+  text-decoration: underline;
 }
 
 .site-logo-light {
