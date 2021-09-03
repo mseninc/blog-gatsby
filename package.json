@@ -1,13 +1,11 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "blog-gatsby",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  },
+  "description": "MSeeeeN Blog generator",
+  "version": "1.0.0",
+  "author": "MSEN Inc. <mseeeen@msen.jp>",
   "dependencies": {
+    "fs-extra": "^10.0.0",
     "gatsby": "^3.13.0",
     "gatsby-awesome-pagination": "^0.3.8",
     "gatsby-plugin-anchor-links": "^1.2.1",
@@ -48,7 +46,7 @@
     "@types/react-helmet": "^6.1.2",
     "prettier": "2.3.2"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://mseeeen.msen.jp",
   "keywords": [
     "gatsby"
   ],
@@ -56,7 +54,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/mseninc/blog-gatsby.git"
   },
   "scripts": {
     "build": "gatsby build",
