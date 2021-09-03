@@ -8,10 +8,6 @@ const { paginate } = require('gatsby-awesome-pagination')
 
 export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-
-  const postTemplate = path.resolve(`./src/templates/post.tsx`)
-  const postListTemplate = path.resolve(`./src/templates/post-list.tsx`)
-  const tagPageTemplate = path.resolve("src/templates/tags.tsx")
   
   type Post = {
     id: string
@@ -31,12 +27,18 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     }
   }
 
+  const isPostPreviewMode = !!process.env.PREVIEW
+  const previewPostSlug = process.env.PREVIEW
+  const previewPostGlob = isPostPreviewMode ? `**/${previewPostSlug}/*.md` : null
+  const previewPostFilter = isPostPreviewMode ? `filter: {fileAbsolutePath: {glob: "${previewPostGlob}"}}` : ''
+
   const result = await graphql<DataType>(
     `
       {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: ASC }
           limit: 1000
+          ${previewPostFilter}
         ) {
           nodes {
             id
@@ -45,7 +47,10 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
             }
           }
         }
-        tagsGroup: allMarkdownRemark(limit: 2000) {
+        tagsGroup: allMarkdownRemark(
+          limit: 2000
+          ${previewPostFilter}
+          ) {
           group(field: frontmatter___tags) {
             fieldValue
             totalCount
@@ -64,6 +69,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   }
 
   const posts = result.data?.allMarkdownRemark.nodes || []
+  const postTemplate = path.resolve(`./src/templates/post.tsx`)
 
   if (posts.length > 0) {
     function getDuplicateSlugs(posts: Post[]) {
@@ -77,20 +83,22 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
       reporter.panicOnBuild(`Duplicate slugs detected ${JSON.stringify(duplicateSlugs)}`)
     }
     posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
       createPage({
         path: post.fields.slug,
         component: postTemplate,
         context: {
           id: post.id,
-          previousPostId,
-          nextPostId,
         },
       })
     })
 
+    if (isPostPreviewMode) {
+      // No page list or tag page generated in post preview mode
+      return
+    }
+
+    const postListTemplate = path.resolve(`./src/templates/post-list.tsx`)
+  
     paginate({
       createPage,
       items: posts,
@@ -101,6 +109,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
 
     // Extract tag data from query
     const tags = result.data?.tagsGroup.group || []
+    const tagPageTemplate = path.resolve("src/templates/tags.tsx")
 
     // Make tag post list pages
     for (const { fieldValue: tagName, totalCount: postCount } of tags) {
