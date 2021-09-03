@@ -7,6 +7,7 @@ import Seo from "components/seo";
 import PostCard, { PostSummary } from "components/post-card";
 import TopPageHeading from "components/top-page-heading";
 import TopPageHero from "components/top-page-hero";
+import MoreLink from "components/more-link";
 
 type DataType = {
   site: {
@@ -56,6 +57,7 @@ export default function BlogIndex({ data, location }: Props) {
               {latestPosts.map((post: PostSummary, n: number) =>
                 <PostCard key={`post-card-${post.id}`} post={post} showDescription={n === 0} />)}
             </div>
+            <MoreLink to='/posts/' />
           </div>
         </div>
       )
