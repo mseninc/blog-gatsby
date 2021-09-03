@@ -1,4 +1,4 @@
-.tag {
+a.tag {
   display: inline-flex;
   align-items: center;
   border: solid 1px;
@@ -13,9 +13,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-a.tag {
   text-decoration: none;
   color: var(--color-text) !important;
 }
@@ -29,11 +26,7 @@ a.tag small {
   border-radius: var(--corner-radius);
 }
 
-.tag-highlight-first .tag:first-child {
-  background-color: var(--color-primary);
-  color: var(--color-text-invert);
-}
-
 .tag-highlight-first a.tag:first-child {
+  background-color: var(--color-primary);
   color: var(--color-text-invert) !important;
 }
