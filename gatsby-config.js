@@ -1,3 +1,9 @@
+const CONTENT_PATH = process.env.CONTENT_PATH
+
+if (!CONTENT_PATH) {
+  throw Error('CONTENT_PATH not provided. Specify the blog contents via CONTENT_PATH environment variable')
+}
+
 module.exports = {
   siteMetadata: {
     title: `MSeeeeN`,
@@ -16,9 +22,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/blog`,
+        path: `${CONTENT_PATH}`,
         name: `blog`,
-        ignore: [`${__dirname}/content/blog/*.md`],
+        ignore: [
+          `${CONTENT_PATH}/*.md`,
+          `${CONTENT_PATH}/.draft/**/*`,
+          `${CONTENT_PATH}/.generator/**/*`,
+        ],
       },
     },
     {
@@ -26,13 +36,6 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `data`,
-        path: `${__dirname}/src/data`,
       },
     },
     {
