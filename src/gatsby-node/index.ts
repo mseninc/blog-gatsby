@@ -27,18 +27,12 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     }
   }
 
-  const isPostPreviewMode = !!process.env.PREVIEW
-  const previewPostSlug = process.env.PREVIEW
-  const previewPostGlob = isPostPreviewMode ? `**/${previewPostSlug}/*.md` : null
-  const previewPostFilter = isPostPreviewMode ? `filter: {fileAbsolutePath: {glob: "${previewPostGlob}"}}` : ''
-
   const result = await graphql<DataType>(
     `
       {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: ASC }
           limit: 1000
-          ${previewPostFilter}
         ) {
           nodes {
             id
@@ -49,7 +43,6 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
         }
         tagsGroup: allMarkdownRemark(
           limit: 2000
-          ${previewPostFilter}
           ) {
           group(field: frontmatter___tags) {
             fieldValue
@@ -91,11 +84,6 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
         },
       })
     })
-
-    if (isPostPreviewMode) {
-      // No page list or tag page generated in post preview mode
-      return
-    }
 
     const postListTemplate = path.resolve(`./src/templates/post-list.tsx`)
   
