@@ -5,6 +5,7 @@ if (!CONTENT_PATH) {
 }
 
 module.exports = {
+  pathPrefix: process.env.PATH_PREFIX || undefined,
   siteMetadata: {
     title: `MSeeeeN`,
     description: `大阪発 IT メディア by MSEN`,
