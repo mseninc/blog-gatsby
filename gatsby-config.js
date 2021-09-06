@@ -1,8 +1,4 @@
-const CONTENT_PATH = process.env.CONTENT_PATH
-
-if (!CONTENT_PATH) {
-  throw Error('CONTENT_PATH not provided. Specify the blog contents via CONTENT_PATH environment variable')
-}
+const CONTENT_PATH = process.env.CONTENT_PATH || 'content'
 
 module.exports = {
   pathPrefix: process.env.PATH_PREFIX || undefined,
@@ -28,7 +24,6 @@ module.exports = {
         ignore: [
           `${CONTENT_PATH}/*.md`,
           `${CONTENT_PATH}/.draft/**/*`,
-          `${CONTENT_PATH}/.generator/**/*`,
         ],
       },
     },
