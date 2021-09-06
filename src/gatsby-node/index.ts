@@ -212,6 +212,12 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
   const { createTypes } = actions
 
   createTypes(`
+    type AuthorYaml implements Node {
+      id: String
+      name: String
+      bio: String
+    }
+
     type MarkdownRemark implements Node {
       frontmatter: Frontmatter
       fields: Fields
@@ -226,7 +232,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
 
     type Fields {
       slug: String
-      heroImagePath: String
+      heroImage: File @fileByRelativePath
     }
   `)
 }
