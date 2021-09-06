@@ -1,4 +1,7 @@
-const CONTENT_PATH = process.env.CONTENT_PATH || 'content'
+const path = require('path')
+
+const contentPath = path.resolve(process.env.CONTENT_PATH || 'content')
+console.debug(`Content path - ${contentPath}`)
 
 module.exports = {
   pathPrefix: process.env.PATH_PREFIX || undefined,
@@ -19,11 +22,11 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${CONTENT_PATH}`,
+        path: contentPath,
         name: `blog`,
         ignore: [
-          `${CONTENT_PATH}/*.md`,
-          `${CONTENT_PATH}/.draft/**/*`,
+          `${contentPath}/*.md`,
+          `${contentPath}/.draft/**/*`,
         ],
       },
     },
