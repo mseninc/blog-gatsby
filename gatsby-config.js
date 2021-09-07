@@ -1,7 +1,9 @@
 const path = require('path')
 
 const contentPath = path.resolve(process.env.CONTENT_PATH || 'content')
+
 console.debug(`Content path - ${contentPath}`)
+console.debug(`Path prefix - ${process.env.PATH_PREFIX}`)
 
 module.exports = {
   pathPrefix: process.env.PATH_PREFIX || undefined,
