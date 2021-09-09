@@ -4,6 +4,7 @@ const contentPath = path.resolve(process.env.CONTENT_PATH || 'content')
 
 console.debug(`CONTENT_PATH - ${contentPath}`)
 console.debug(`PATH_PREFIX - ${process.env.PATH_PREFIX}`)
+console.debug(`GA_TRACKING_ID - ${process.env.GA_TRACKING_ID}`)
 
 const {
   SITE_NAME,
@@ -83,12 +84,12 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
+    process.env.GA_TRACKING_ID ? {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: process.env.GA_TRACKING_ID || '',
+        trackingId: process.env.GA_TRACKING_ID,
       },
-    },
+    } : undefined,
     {
       resolve: `gatsby-plugin-feed`,
       options: {
