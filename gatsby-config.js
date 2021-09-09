@@ -5,12 +5,21 @@ const contentPath = path.resolve(process.env.CONTENT_PATH || 'content')
 console.debug(`Content path - ${contentPath}`)
 console.debug(`Path prefix - ${process.env.PATH_PREFIX}`)
 
+const {
+  SITE_NAME,
+  SITE_URL,
+  SITE_DESCRIPTION,
+  MANIFEST_BG_COLOR,
+  MANIFEST_THEME_COLOR,
+  GA_TRACKING_ID,
+} = require('./site-config')
+
 module.exports = {
   pathPrefix: process.env.PATH_PREFIX || undefined,
   siteMetadata: {
-    title: `MSeeeeN`,
-    description: `大阪発 IT メディア by MSEN`,
-    siteUrl: `https://mseeeen.msen.jp/`,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    siteUrl: SITE_URL,
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -18,7 +27,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://mseeeen.msen.jp/`,
+        siteUrl: SITE_URL,
       },
     },
     {
@@ -75,12 +84,12 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `ADD YOUR TRACKING ID HERE`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: GA_TRACKING_ID,
+      },
+    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -137,11 +146,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `MSeeeeN`,
-        short_name: `MSeeeeN`,
+        name: SITE_NAME,
+        short_name: SITE_NAME,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
+        background_color: MANIFEST_BG_COLOR,
+        theme_color: MANIFEST_THEME_COLOR,
         display: `minimal-ui`,
         icon: `src/images/mseeeen-logo-square.png`,
       },
