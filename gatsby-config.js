@@ -2,8 +2,8 @@ const path = require('path')
 
 const contentPath = path.resolve(process.env.CONTENT_PATH || 'content')
 
-console.debug(`Content path - ${contentPath}`)
-console.debug(`Path prefix - ${process.env.PATH_PREFIX}`)
+console.debug(`CONTENT_PATH - ${contentPath}`)
+console.debug(`PATH_PREFIX - ${process.env.PATH_PREFIX}`)
 
 const {
   SITE_NAME,
@@ -11,7 +11,6 @@ const {
   SITE_DESCRIPTION,
   MANIFEST_BG_COLOR,
   MANIFEST_THEME_COLOR,
-  GA_TRACKING_ID,
 } = require('./site-config')
 
 module.exports = {
@@ -87,7 +86,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: GA_TRACKING_ID,
+        trackingId: process.env.GA_TRACKING_ID || '',
       },
     },
     {

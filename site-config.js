@@ -4,5 +4,4 @@ module.exports = {
   SITE_DESCRIPTION: '大阪発 IT メディア by MSEN',
   MANIFEST_BG_COLOR: `#ffffff`,
   MANIFEST_THEME_COLOR: `#1577e7`,
-  GA_TRACKING_ID: 'UA-76673005-1',
 }
