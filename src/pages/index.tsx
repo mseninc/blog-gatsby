@@ -62,12 +62,16 @@ export default function BlogIndex({ data, location }: Props) {
     if (!posts) { return null }
     const url = tagNameToPageUrl(tag.name)
     return (
-      <div className="global-root-group">
+      <div key={`featured-post-${i}`} className="global-root-group">
         <div className="global-wrapper">
           <TopPageHeading title={tag.name} sub={tag.sub} />
           <div className={`featured-post-card-list`}>
             {posts?.map((post: PostSummary, n: number) =>
-              <PostCard post={post} showDescription={n === 0} />) || null}
+              <PostCard
+                key={`post-${post.id}`}
+                post={post}
+                showDescription={n === 0}
+              />) || null}
           </div>
           <MoreLink to={url} />
         </div>
