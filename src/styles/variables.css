@@ -72,7 +72,7 @@
   --lineHeight-none: 1;
   --lineHeight-tight: 1.2;
   --lineHeight-normal: 1.5;
-  --lineHeight-relaxed: 1.625;
+  --lineHeight-relaxed: 1.9;
 
   --fontSize-0: 0.850rem;
   --fontSize-1: 1.000rem;
@@ -82,7 +82,7 @@
   --fontSize-5: 1.600rem;
   --fontSize-6: 1.800rem;
   --fontSize-7: 2.500rem;
-  --fontSize-toc: 0.9rem;
+  --fontSize-toc: 0.92rem;
   --fontSize-tag: 0.85rem;
   --fontSize-breadcrumb: 0.8rem;
 
@@ -101,13 +101,14 @@
   --color-tag-bg: #f1f1f1;
   --color-paginator-link-bg: darkgray;
   --color-paginator-link-bg-current: steelblue;
-  --color-jump-button-bg: #6197c4;
+  --color-jump-button-bg: var(--color-primary);
   --color-hero-placeholder-bg: linear-gradient(135deg, rgba(9,121,83,1) 0%, rgba(0,145,175,1) 100%);
   --color-hero-placeholder-bg2: linear-gradient(135deg, rgba(171,78,34,1) 0%, rgba(112,45,173,1) 100%);
   --color-hero-placeholder-text: white;
   --color-top-page-hero-bg: black;
   --color-top-page-hero-copy: white;
   --color-post-card-description-bg: #e6f3ff;
+  --color-inline-code-bg: #215aa012;
   
   --corner-radius: 0.25em;
 
@@ -126,7 +127,7 @@
 body.theme-dark {
   --color-bg-body: black;
   --color-bg: #202020;
-  --color-primary: #1577e7;
+  --color-primary: #4d9bf3;
   --color-bright: #2857FF;
   --color-text: #d1d1d1;
   --color-text-light: #b3bfd3;
@@ -139,11 +140,12 @@ body.theme-dark {
   --color-tag-bg: #444;
   --color-paginator-link-bg: darkgray;
   --color-paginator-link-bg-current: steelblue;
-  --color-jump-button-bg: steelblue;
+  --color-jump-button-bg: var(--color-primary);
   --color-hero-placeholder-text: white;
   --color-top-page-hero-bg: black;
   --color-top-page-hero-copy: white;
   --color-post-card-description-bg: #2e384d;
+  --color-inline-code-bg: #ffffff33;
 
   --box-shadow: 0em 0em 0.5em rgba(255, 255, 255, 0.2);
   --color-scrollbar-thumb: #727b88;

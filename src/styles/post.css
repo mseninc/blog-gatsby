@@ -37,6 +37,8 @@
 
 .post h2 {
   font-size: var(--fontSize-5);
+  padding: var(--spacing-2);
+  border-bottom: solid 1px var(--color-accent);
 }
 
 .post h3 {
@@ -78,7 +80,7 @@
   margin: var(--spacing-0) var(--spacing-0) var(--spacing-6) var(--spacing-0);
   padding: var(--spacing-0);
 }
- 
+
 .post ul,
 .post ol {
   margin-right: var(--spacing-0);
@@ -152,7 +154,7 @@
 
 .main-container > main {
   background-color: var(--color-bg);
-  padding: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-6);
   grid-column: 1 / 2;
   grid-row: 2 / 3;
 }
@@ -233,13 +235,14 @@
 
 .gatsby-highlight {
   background-color: #272822;
+  border: solid 1px rgba(255, 255, 255, 0.2);
   border-radius: 0.25em;
   margin: 1em 0;
-  padding: 0.5em 1em;
+  padding: 0 1em;
 }
 
 .gatsby-highlight pre[class*="language-"] {
-  padding: 0;
+  padding: 0.5em 0;
 }
 
 .gatsby-highlight pre[class*="language-"].line-numbers {
@@ -266,6 +269,9 @@
 
 :not(pre) > code[class*="language-"] {
   padding: .1em .25em;
+  color: inherit;
+  background-color: var(--color-inline-code-bg);
+  text-shadow: none;
 }
 
 
@@ -279,11 +285,12 @@
   font-size: var(--fontSize-toc);
   background-color: var(--color-bg);
   margin: 0;
-  padding: var(--spacing-2) var(--spacing-3);
+  padding: var(--spacing-4);
 }
 
 .post-toc::before {
   content: 'もくじ';
+  font-size: var(--fontSize-1);
   display: block;
   height: 2em;
   top: -2em;
@@ -291,6 +298,7 @@
 
 .post-toc a {
   text-decoration: none;
+  color: var(--color-text-light);
 }
 
 .post-toc a:hover {
@@ -300,26 +308,83 @@
 .post-toc ul {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
-.post-toc li {
-  line-height: var(--lineHeight-normal);
-  list-style: none;
+.post-toc ul::before {
+  position: absolute;
+  content: "";
+  width: 2px;
+  background: var(--color-accent);
+  top: 15px;
+  bottom: 8px;
+  left: 5px;
+  border-radius: 0 0 5px 5px;
+  opacity: 0.5;
+}
+
+.post-toc li.post-toc-item {
+  position: relative;
+  line-height: var(--lineHeight-tight);
   margin: 0;
+  margin-top: var(--spacing-2);
 }
 
-.post-toc .post-toc-item-depth-1 {
-  padding-left: 0;
+.post-toc li.post-toc-item::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: 0;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  background: var(--color-accent);
+  border: 2px solid var(--color-bg);
+  transition: background 0.5s ease;
 }
 
-.post-toc .post-toc-item-depth-2 {
-  padding-left: var(--spacing-4);
+.post-toc li.post-toc-item.post-toc-item-active a {
+  color: var(--color-text);
+  font-weight: var(--fontWeight-bold);
 }
 
-.post-toc .post-toc-item-depth-3 {
-  padding-left: var(--spacing-8);
+.post-toc li.post-toc-item.post-toc-item-active::before {
+  background: var(--color-primary);
 }
 
-.post-toc .post-toc-item-depth-4 {
-  padding-left: var(--spacing-12);
+.post-toc li.post-toc-item.post-toc-item-depth-1 {
+  padding-left: var(--spacing-6);
+}
+
+.post-toc li.post-toc-item.post-toc-item-depth-2 {
+  font-size: 0.95em;
+  padding-left: calc(var(--spacing-6) + var(--spacing-1));
+}
+
+.post-toc li.post-toc-item.post-toc-item-depth-2::before {
+  left: 1px;
+  width: 10px;
+  height: 10px;
+}
+
+.post-toc li.post-toc-item.post-toc-item-depth-3 {
+  font-size: 0.95em;
+  padding-left: calc(var(--spacing-6) + var(--spacing-1) * 2);
+}
+
+.post-toc li.post-toc-item.post-toc-item-depth-3::before {
+  left: 2px;
+  width: 8px;
+  height: 8px;
+}
+
+.post-toc li.post-toc-item.post-toc-item-depth-4 {
+  font-size: 1em;
+  padding-left: calc(var(--spacing-6) + var(--spacing-1) * 3);
+}
+
+.post-toc li.post-toc-item.post-toc-item-depth-4::before {
+  left: 3px;
+  width: 6px;
+  height: 6px;
 }
