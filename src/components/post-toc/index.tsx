@@ -23,7 +23,9 @@ export default function PostToc(props: Props) {
       const elems = document.querySelectorAll('h2[id],h3[id],h4[id]')
       if (elems.length === 0) { return; }
       const activeIndex = Array.from(elems).findIndex(x => x.getBoundingClientRect().top - 150 > 0)
-      const activeElem = activeIndex > 0 ? elems[activeIndex - 1] : elems[0]
+      const activeElem = activeIndex === 0
+        ? elems[0]
+        : activeIndex > 0 ? elems[activeIndex - 1] : elems[elems.length - 1]
       setActiveAnchor(activeElem?.id || '')
     };
     document.addEventListener('scroll', onScroll, { passive: true })
