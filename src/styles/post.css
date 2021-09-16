@@ -178,6 +178,7 @@
 .post table td {
   padding: var(--spacing-1) var(--spacing-2);
   border-bottom: 1px solid var(--color-table-border);
+  word-break: break-all;
 }
 
 .post table thead tr th {
