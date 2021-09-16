@@ -115,6 +115,7 @@
   --color-inline-code-bg: #215aa012;
   --color-line-marker-1: #eecc0033;
   --color-line-marker-2: #00cc0033;
+  --color-blockquote-bg: #0000000c;
   
   --corner-radius: 0.25em;
 
@@ -155,6 +156,7 @@ body.theme-dark {
   --color-inline-code-bg: #ffffff33;
   --color-line-marker-1: #eecc0033;
   --color-line-marker-2: #00cc0033;
+  --color-blockquote-bg: #ffffff1c;
 
   --box-shadow: 0em 0em 0.5em rgba(255, 255, 255, 0.2);
   --color-scrollbar-thumb: #727b88;
