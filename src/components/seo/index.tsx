@@ -3,14 +3,20 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 type Props = {
-  description?: string;
-  lang?: string;
-  meta?: any[];
-  title?: string;
-  keywords?: string[];
+  description?: string
+  lang?: string
+  meta?: any[]
+  title?: string
+  keywords?: string[]
 }
 
-export default function Seo({ description, lang, meta, title, keywords }: Props) {
+export default function Seo({
+  description,
+  lang,
+  meta,
+  title,
+  keywords,
+}: Props) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -30,7 +36,7 @@ export default function Seo({ description, lang, meta, title, keywords }: Props)
   return (
     <Helmet
       htmlAttributes={{
-        lang: lang || 'ja',
+        lang: lang || "ja",
       }}
       title={title || defaultTitle}
       titleTemplate={title && defaultTitle ? `%s | ${defaultTitle}` : undefined}
@@ -41,8 +47,8 @@ export default function Seo({ description, lang, meta, title, keywords }: Props)
         },
         {
           name: `keywords`,
-          content: keywords?.join(','),
-          itemprop: 'keywords',
+          content: keywords?.join(","),
+          itemprop: "keywords",
         },
         {
           property: `og:title`,

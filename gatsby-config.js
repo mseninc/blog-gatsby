@@ -1,6 +1,6 @@
-const path = require('path')
+const path = require("path")
 
-const contentPath = path.resolve(process.env.CONTENT_PATH || 'content')
+const contentPath = path.resolve(process.env.CONTENT_PATH || "content")
 
 console.debug(`CONTENT_PATH - ${contentPath}`)
 console.debug(`PATH_PREFIX - ${process.env.PATH_PREFIX}`)
@@ -12,7 +12,7 @@ const {
   SITE_DESCRIPTION,
   MANIFEST_BG_COLOR,
   MANIFEST_THEME_COLOR,
-} = require('./site-config')
+} = require("./site-config")
 
 const plugins = [
   `gatsby-plugin-image`,
@@ -28,10 +28,7 @@ const plugins = [
     options: {
       path: contentPath,
       name: `blog`,
-      ignore: [
-        `${contentPath}/*.md`,
-        `${contentPath}/.draft/**/*`,
-      ],
+      ignore: [`${contentPath}/*.md`, `${contentPath}/.draft/**/*`],
     },
   },
   {
@@ -58,15 +55,15 @@ const plugins = [
           },
         },
         `gatsby-remark-autolink-headers`,
-        'gatsby-remark-prismjs-title',
+        "gatsby-remark-prismjs-title",
         {
           resolve: `gatsby-remark-prismjs`,
           options: {
             classPrefix: "language-",
             aliases: {
-              'xaml': 'xml',
-              'sh': 'bash',
-              'ps': 'powershell',
+              "xaml": "xml",
+              "sh": "bash",
+              "ps": "powershell",
             },
           },
         },
@@ -95,7 +92,7 @@ const plugins = [
       feeds: [
         {
           serialize: ({ query: { site, allMarkdownRemark } }) => {
-            return allMarkdownRemark.nodes.map(node => {
+            return allMarkdownRemark.nodes.map((node) => {
               return Object.assign({}, node.frontmatter, {
                 description: node.excerpt,
                 date: node.frontmatter.date,
@@ -147,8 +144,8 @@ const plugins = [
   {
     resolve: "gatsby-plugin-anchor-links",
     options: {
-      offset: -100
-    }
+      offset: -100,
+    },
   },
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.dev/offline

@@ -18,7 +18,7 @@ type DataType = {
       totalCount: number
     }[]
   }
-};
+}
 
 type Props = {
   data: DataType
@@ -36,11 +36,13 @@ export default function TagsPage(props: Props) {
       allMarkdownRemark: { group },
     },
     location,
-  } = props;
+  } = props
 
-  const tags = group.map(({ fieldValue: tagName, totalCount }) =>
-    ({ tagName, totalCount }))
-  
+  const tags = group.map(({ fieldValue: tagName, totalCount }) => ({
+    tagName,
+    totalCount,
+  }))
+
   const grouped = tags.reduce((p, c) => {
     const firstChar = c.tagName.substring(0, 1)
     if (!p[firstChar]) {
@@ -50,7 +52,7 @@ export default function TagsPage(props: Props) {
     return p
   }, {} as { [firstChar: string]: TagObject[] })
 
-  const tagmap = (Object.keys(grouped).map(firstChar => {
+  const tagmap = Object.keys(grouped).map((firstChar) => {
     const tags = grouped[firstChar]
     tags.sort((a, b) => b.totalCount - a.totalCount)
     return (
@@ -72,26 +74,21 @@ export default function TagsPage(props: Props) {
         </div>
       </div>
     )
-  }))
+  })
 
   const breadcrumb: BreadcrumbListItem[] = [
-    { name: 'ホーム', current: false, url: '/' },
-    { name: 'タグ一覧', current: true, url: '/tags/' },
+    { name: "ホーム", current: false, url: "/" },
+    { name: "タグ一覧", current: true, url: "/tags/" },
   ]
 
   const title = `タグ一覧`
   const description = `${title} のタグ一覧です`
   return (
     <Layout location={location} title={title}>
-      <Seo
-        title={title}
-        description={description}
-      />
+      <Seo title={title} description={description} />
       <div className="full-wide-container">
         <BreadcrumbList items={breadcrumb} />
-        <main>
-          {tagmap}
-        </main>
+        <main>{tagmap}</main>
       </div>
     </Layout>
   )

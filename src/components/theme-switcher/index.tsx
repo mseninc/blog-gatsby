@@ -9,15 +9,14 @@ export default function ThemeSwitcher(props: {
   bodyClassOnDark?: string
   bodyClassOnLight?: string
 }) {
-
   const { settingKey, tooltip } = props
 
-  const PrefersColorScheme = '(prefers-color-scheme: dark)'
-  const DarkSettingValue = 'dark'
-  const LigthSettingValue = 'light'
+  const PrefersColorScheme = "(prefers-color-scheme: dark)"
+  const DarkSettingValue = "dark"
+  const LigthSettingValue = "light"
 
-  const bodyClassOnDark = props.bodyClassOnDark || 'theme-dark'
-  const bodyClassOnLight = props.bodyClassOnLight || 'theme-light'
+  const bodyClassOnDark = props.bodyClassOnDark || "theme-dark"
+  const bodyClassOnLight = props.bodyClassOnLight || "theme-light"
 
   const [isDark, setIsDark] = useState(false)
 
@@ -36,14 +35,17 @@ export default function ThemeSwitcher(props: {
     }
   }, [isDark, settingKey])
 
-  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const val = e.currentTarget.checked ? DarkSettingValue : LigthSettingValue;
-    localStorage.setItem(settingKey, val)
-    setIsDark(e.currentTarget.checked)
-  }, [isDark, settingKey])
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const val = e.currentTarget.checked ? DarkSettingValue : LigthSettingValue
+      localStorage.setItem(settingKey, val)
+      setIsDark(e.currentTarget.checked)
+    },
+    [isDark, settingKey]
+  )
 
-  const className = props.className || 'theme-switcher'
-  const checkboxId = props.checkboxId || 'theme-switcher'
+  const className = props.className || "theme-switcher"
+  const checkboxId = props.checkboxId || "theme-switcher"
 
   return (
     <div className={`${className} ${styles.themeSwitcher}`}>
@@ -52,9 +54,8 @@ export default function ThemeSwitcher(props: {
         type="checkbox"
         checked={isDark}
         onChange={onChange}
-        />
-      <label htmlFor={checkboxId} title={tooltip}/>
+      />
+      <label htmlFor={checkboxId} title={tooltip} />
     </div>
   )
-
 }
