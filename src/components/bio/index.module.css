@@ -14,11 +14,14 @@
   border-radius: 100%;
 }
 
+.bio .main {
+  flex: 1;
+}
+
 .bio .nameInfo {
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-2);
-  margin-right: var(--spacing-2);
 }
 
 .bio .nameInfo a {
@@ -30,10 +33,6 @@
 
 .bio .nameInfo a span {
   margin-left: var(--spacing-1);
-}
-
-.bio .bioText {
-  line-height: var(--lineHeight-tight);
 }
 
 

@@ -17,24 +17,24 @@ const Bio = (props: Props) => {
   const avatarImage = getImage(props.avatarImage)
 
   return (
-    <div className={styles.bio}>
+    <div className={`${styles.bio} bio`}>
       {avatarImage
         ? <GatsbyImage
           image={avatarImage}
-          className={styles.avatar}
+          className={`${styles.avatar} bio-avatar`}
           alt={github}
         />
         : <StaticImage
           src="https://www.gravatar.com/avatar/?d=mp&s=50"
-          className={styles.avatar}
+          className={`${styles.avatar} bio-avatar`}
           width={50}
           height={50}
           layout="fixed"
           alt={`${github} - GitHub`}
         />
       }
-      <div>
-        <div className={styles.nameInfo}>
+      <div className={`${styles.main} bio-main`}>
+        <div className={`${styles.nameInfo} bio-name-info`}>
           <strong>{name}</strong>
           <a href={githubUrl} target="_blank" rel="noreferrer" title={github}>
             <StaticImage
@@ -47,7 +47,7 @@ const Bio = (props: Props) => {
             <span>{github}</span>
           </a>
         </div>
-        <p className={styles.bioText}>{bio}</p>
+        <p className={`${styles.bioText} bio-bio-text`}>{bio}</p>
       </div>
     </div>
   )
