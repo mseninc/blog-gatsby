@@ -184,6 +184,10 @@
   border-bottom: 3px double var(--color-table-border);
 }
 
+.post table thead tr th:not([align]) {
+  text-align: left;
+}
+
 .post strong {
   background: linear-gradient(transparent 60%, var(--color-line-marker-1) 60%);
   padding: 0.1em;
