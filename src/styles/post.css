@@ -167,14 +167,21 @@
 }
 
 .post table {
-  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: var(--spacing-8);
   border-collapse: collapse;
   border-spacing: 0.25rem;
 }
 
+.post table th,
+.post table td {
+  padding: var(--spacing-1) var(--spacing-2);
+  border-bottom: 1px solid var(--color-table-border);
+}
+
 .post table thead tr th {
-  border-bottom: 1px solid var(--color-accent);
+  border-bottom: 3px double var(--color-table-border);
 }
 
 .post strong {
@@ -270,6 +277,11 @@
 
 .post-hero {
   margin-bottom: var(--spacing-5);
+}
+
+.post-bio {
+  line-height: var(--lineHeight-normal);
+  letter-spacing: var(--letterSpacing-relaxed);
 }
 
 .gatsby-highlight-code-line {

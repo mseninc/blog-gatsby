@@ -116,6 +116,7 @@
   --color-line-marker-1: #eecc0033;
   --color-line-marker-2: #00cc0033;
   --color-blockquote-bg: #0000000c;
+  --color-table-border: #00000033;
   
   --corner-radius: 0.25em;
 
@@ -157,6 +158,7 @@ body.theme-dark {
   --color-line-marker-1: #eecc0033;
   --color-line-marker-2: #00cc0033;
   --color-blockquote-bg: #ffffff1c;
+  --color-table-border: #ffffff44;
 
   --box-shadow: 0em 0em 0.5em rgba(255, 255, 255, 0.2);
   --color-scrollbar-thumb: #727b88;
