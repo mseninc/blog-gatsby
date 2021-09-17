@@ -20,7 +20,7 @@ type Props = {
 
 const NotFoundPage = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata.title
-  const { pathname } = location;
+  const { pathname } = location
 
   return (
     <>
@@ -40,7 +40,9 @@ const NotFoundPage = ({ data, location }: Props) => {
           <div className="error-page-info">
             <h1>404</h1>
             <div className="error-page-message">Page not found</div>
-            <Link to='/' className="error-page-link-button button">Go to Home page</Link>
+            <Link to="/" className="error-page-link-button button">
+              Go to Home page
+            </Link>
           </div>
         </div>
       </div>

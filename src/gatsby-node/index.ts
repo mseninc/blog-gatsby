@@ -4,11 +4,15 @@ import { GatsbyNode, Node } from "gatsby"
 import { createFilePath, createRemoteFileNode } from "gatsby-source-filesystem"
 import { tagNameToPageUrl } from "../utils/tag"
 
-const { paginate } = require('gatsby-awesome-pagination')
+const { paginate } = require("gatsby-awesome-pagination")
 
-export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
+export const createPages: GatsbyNode["createPages"] = async ({
+  graphql,
+  actions,
+  reporter,
+}) => {
   const { createPage } = actions
-  
+
   type Post = {
     id: string
     fields: {
@@ -41,9 +45,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
             }
           }
         }
-        tagsGroup: allMarkdownRemark(
-          limit: 2000
-          ) {
+        tagsGroup: allMarkdownRemark(limit: 2000) {
           group(field: frontmatter___tags) {
             fieldValue
             totalCount
@@ -67,13 +69,17 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   if (posts.length > 0) {
     function getDuplicateSlugs(posts: Post[]) {
       const counts = posts.reduce(
-        (p, c) => ({ ...p, [c.fields.slug]: (p[c.fields.slug] || 0) + 1 }), {} as { [slug: string]: number});
-      const duplicates = Object.keys(counts).filter(x => counts[x] > 1);
-      return duplicates.length > 0 ? duplicates : null;
+        (p, c) => ({ ...p, [c.fields.slug]: (p[c.fields.slug] || 0) + 1 }),
+        {} as { [slug: string]: number }
+      )
+      const duplicates = Object.keys(counts).filter((x) => counts[x] > 1)
+      return duplicates.length > 0 ? duplicates : null
     }
-    const duplicateSlugs = getDuplicateSlugs(posts);
+    const duplicateSlugs = getDuplicateSlugs(posts)
     if (duplicateSlugs) {
-      reporter.panicOnBuild(`Duplicate slugs detected ${JSON.stringify(duplicateSlugs)}`)
+      reporter.panicOnBuild(
+        `Duplicate slugs detected ${JSON.stringify(duplicateSlugs)}`
+      )
     }
     posts.forEach((post, index) => {
       createPage({
@@ -86,12 +92,12 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     })
 
     const postListTemplate = path.resolve(`./src/templates/post-list.tsx`)
-  
+
     paginate({
       createPage,
       items: posts,
       itemsPerPage: 30,
-      pathPrefix: '/posts',
+      pathPrefix: "/posts",
       component: postListTemplate,
     })
 
@@ -124,24 +130,32 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
 }
 
 function getMatchedHeroImagePath(fileAbsolutePath: string, slug: string) {
-  const candidateExtensions = ['jpg', 'jpeg', 'png']
+  const candidateExtensions = ["jpg", "jpeg", "png"]
   // like `slug.jpg`
   for (const ext of candidateExtensions) {
-    const testPath = path.resolve(fileAbsolutePath, '..', 'images', `${slug}\.${ext}`)
+    const testPath = path.resolve(
+      fileAbsolutePath,
+      "..",
+      "images",
+      `${slug}\.${ext}`
+    )
     try {
       fs.statSync(testPath)
-      return path.relative(path.resolve(fileAbsolutePath, '..'), testPath)
-    }
-    catch {}
+      return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
+    } catch {}
   }
   // fallback to like `slug-1.jpg`
   for (const ext of candidateExtensions) {
-    const testPath = path.resolve(fileAbsolutePath, '..', 'images', `${slug}-1\.${ext}`)
+    const testPath = path.resolve(
+      fileAbsolutePath,
+      "..",
+      "images",
+      `${slug}-1\.${ext}`
+    )
     try {
       fs.statSync(testPath)
-      return path.relative(path.resolve(fileAbsolutePath, '..'), testPath)
-    }
-    catch {}
+      return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
+    } catch {}
   }
   return null
 }
@@ -164,14 +178,12 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
       author: string
       avatarImage__NODE: any
     }
-  };
+  }
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode })
 
     // Flatten slug (e.g. /kenzauros/2021/hogehoge/ => /hogehoge/)
-    const value = slug.match(/([^/]+)\/$/)
-      ? `/${RegExp.$1}/`
-      : slug;
+    const value = slug.match(/([^/]+)\/$/) ? `/${RegExp.$1}/` : slug
 
     createNodeField({
       name: `slug`,
@@ -180,8 +192,11 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
     })
 
     // Hero image (eye catch image)
-    const filename = slug.match(/([^/]+)\/$/) ? RegExp.$1 : '';
-    const heroImagePath = getMatchedHeroImagePath(mdr.fileAbsolutePath, filename)
+    const filename = slug.match(/([^/]+)\/$/) ? RegExp.$1 : ""
+    const heroImagePath = getMatchedHeroImagePath(
+      mdr.fileAbsolutePath,
+      filename
+    )
     createNodeField({
       name: `heroImage`,
       node,
@@ -190,7 +205,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
 
     // Author avatar from exteranal source
     if (mdr.frontmatter.author) {
-      const url = `https://avatars.githubusercontent.com/${mdr.frontmatter.author}`;
+      const url = `https://avatars.githubusercontent.com/${mdr.frontmatter.author}`
       // https://www.gatsbyjs.com/docs/how-to/images-and-media/preprocessing-external-images/
       const fileNode = await createRemoteFileNode({
         url, // string that points to the URL of the image
@@ -208,10 +223,11 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
   }
 }
 
-export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }) => {
-  const { createTypes } = actions
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
+  ({ actions }) => {
+    const { createTypes } = actions
 
-  createTypes(`
+    createTypes(`
     type AuthorYaml implements Node {
       id: String
       name: String
@@ -235,4 +251,4 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       heroImage: File @fileByRelativePath
     }
   `)
-}
+  }

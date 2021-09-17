@@ -5,7 +5,7 @@ import { PageContext } from "types/pagination"
 import Layout from "components/layout"
 import Seo from "components/seo"
 import Paginator from "components/paginator"
-import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list";
+import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
 import PostCardList from "components/post-card-list"
 import { PostSummary } from "components/post-card"
 
@@ -19,21 +19,25 @@ type DataType = {
   allMarkdownRemark: {
     nodes: PostSummary[]
   }
-};
+}
 
 type Props = {
   data: DataType
   pageContext: PageContext
   location: any
-};
+}
 
-export default function PostListTemplate({ data, location, pageContext }: Props) {
+export default function PostListTemplate({
+  data,
+  location,
+  pageContext,
+}: Props) {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { humanPageNumber } = pageContext
 
   const breadcrumb: BreadcrumbListItem[] = [
-    { name: 'ホーム', current: false, url: '/' },
-    { name: '記事一覧', current: humanPageNumber === 1, url: '/posts/' },
+    { name: "ホーム", current: false, url: "/" },
+    { name: "記事一覧", current: humanPageNumber === 1, url: "/posts/" },
   ]
   if (humanPageNumber !== 1) {
     breadcrumb.push({ name: `${humanPageNumber} ページ`, current: true })
@@ -48,9 +52,9 @@ export default function PostListTemplate({ data, location, pageContext }: Props)
       <div className="full-wide-container">
         <BreadcrumbList items={breadcrumb} />
         <main>
-          <Paginator pathPrefix='/posts' context={pageContext} />
+          <Paginator pathPrefix="/posts" context={pageContext} />
           <PostCardList posts={data.allMarkdownRemark.nodes} />
-          <Paginator pathPrefix='/posts' context={pageContext} />
+          <Paginator pathPrefix="/posts" context={pageContext} />
         </main>
       </div>
     </Layout>
@@ -69,7 +73,7 @@ export const pageQuery = graphql`
       sort: { fields: [frontmatter___date], order: DESC }
       skip: $skip
       limit: $limit
-      ) {
+    ) {
       nodes {
         id
         excerpt(pruneLength: 120)

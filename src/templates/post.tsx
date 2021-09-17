@@ -45,62 +45,63 @@ type DataType = {
       heroImage: IGatsbyImageData
     }
   }
-};
+}
 
 type Props = {
   data: DataType
   location: any
-};
+}
 
 export default function BlogPostTemplate({ data, location }: Props) {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const { title } = post.frontmatter;
+  const { title } = post.frontmatter
 
-  const tags = post.frontmatter.tags;
-  const tagList = tags ? <TagList tags={tags} /> : null;
+  const tags = post.frontmatter.tags
+  const tagList = tags ? <TagList tags={tags} /> : null
 
-  const author = post.frontmatter.author;
-  const authorLink = author
-    ? <AuthorLink
-        github={author.id}
-        name={author.name}
-        avatarImage={post.frontmatter.avatarImage25}
-        />
-    : null;
-  const bio = author
-    ? <Bio
-        github={author.id}
-        name={author.name}
-        bio={author.bio}
-        avatarImage={post.frontmatter.avatarImage}
-        />
-    : null;
+  const author = post.frontmatter.author
+  const authorLink = author ? (
+    <AuthorLink
+      github={author.id}
+      name={author.name}
+      avatarImage={post.frontmatter.avatarImage25}
+    />
+  ) : null
+  const bio = author ? (
+    <Bio
+      github={author.id}
+      name={author.name}
+      bio={author.bio}
+      avatarImage={post.frontmatter.avatarImage}
+    />
+  ) : null
 
-  const { headings } = post;
-  const toc = headings?.length > 0
-    ? <PostToc headings={headings} page={post.fields.slug} />
-    : null;
+  const { headings } = post
+  const toc =
+    headings?.length > 0 ? (
+      <PostToc headings={headings} page={post.fields.slug} />
+    ) : null
 
   const breadcrumb: BreadcrumbListItem[] = [
-    { name: 'ホーム', current: false, url: '/' },
+    { name: "ホーム", current: false, url: "/" },
     { name: title, current: true },
   ]
 
   if (tags?.length) {
-    breadcrumb.splice(1, 0, { name: tags[0], url: tagNameToPageUrl(tags[0]), current: false });
+    breadcrumb.splice(1, 0, {
+      name: tags[0],
+      url: tagNameToPageUrl(tags[0]),
+      current: false,
+    })
   }
 
-  const heroImage = post.fields.heroImage && getImage(post.fields.heroImage);
-  const hero = (heroImage
-    ? <div className="post-hero">
-        <GatsbyImage
-          image={heroImage}
-          alt={title}
-          />
-      </div>
-    : null
-  );
+  const heroImage = post.fields.heroImage && getImage(post.fields.heroImage)
+  const hero = heroImage ? (
+    <div className="post-hero">
+      <GatsbyImage image={heroImage} alt={title} />
+    </div>
+  ) : null
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -112,10 +113,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
       <div className="main-container">
         <BreadcrumbList items={breadcrumb} />
         <main className={`post`}>
-          <article
-            itemScope
-            itemType="http://schema.org/Article"
-          >
+          <article itemScope itemType="http://schema.org/Article">
             <header>
               <h1 itemProp="headline">{title}</h1>
               {tagList}
@@ -131,20 +129,15 @@ export default function BlogPostTemplate({ data, location }: Props) {
             />
           </article>
         </main>
-        <div className="post-bio">
-          {bio}
-        </div>
-        <aside className="sidebar">
-          {toc}
-        </aside>
+        <div className="post-bio">{bio}</div>
+        <aside className="sidebar">{toc}</aside>
       </div>
     </Layout>
-  )}
+  )
+}
 
 export const pageQuery = graphql`
-  query BlogPostBySlug(
-    $id: String!
-  ) {
+  query BlogPostBySlug($id: String!) {
     site {
       siteMetadata {
         title

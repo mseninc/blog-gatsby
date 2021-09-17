@@ -39,8 +39,8 @@ a:focus {
 
 a.button {
   padding: var(--spacing-2) var(--spacing-4);
-  background-color: var(--color-bright);
-  color: var(--color-text-invert);
+  background-color: var(--color-button-bg);
+  color: var(--color-button-text);
   text-decoration: none;
   text-align: center;
   margin-top: var(--spacing-0);
@@ -75,7 +75,7 @@ body.theme-dark .site-logo-dark {
   width: var(--scrollbar-size);
   height: var(--scrollbar-size);
 }
- 
+
 ::-webkit-scrollbar-thumb {
   background: var(--color-scrollbar-thumb);
   border-radius: calc(var(--scrollbar-size) / 2);

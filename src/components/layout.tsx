@@ -16,7 +16,11 @@ const Layout = ({ location, title, children }: Props) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
 
-  const { site: { siteMetadata: { title: siteTitle } } } = useStaticQuery(
+  const {
+    site: {
+      siteMetadata: { title: siteTitle },
+    },
+  } = useStaticQuery(
     graphql`
       query {
         site {
@@ -27,7 +31,7 @@ const Layout = ({ location, title, children }: Props) => {
       }
     `
   )
-  
+
   const headerLogo = (
     <>
       <StaticImage
@@ -74,10 +78,13 @@ const Layout = ({ location, title, children }: Props) => {
           <ThemeSwitcher
             settingKey={`${siteTitle}_theme`}
             tooltip={`ダークテーマ/ライトテーマ切り替え`}
-            />
+          />
         </div>
       </div>
-      <div className={isRootPath ? '' : `global-wrapper`} data-is-root-path={isRootPath}>
+      <div
+        className={isRootPath ? "" : `global-wrapper`}
+        data-is-root-path={isRootPath}
+      >
         {children}
       </div>
       <footer>
