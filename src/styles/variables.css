@@ -92,7 +92,6 @@
   --color-bg-body: #efefef;
   --color-bg: white;
   --color-primary: #0b58af;
-  --color-bright: #2857FF;
   --color-secondary: #09A1A3;
   --color-text: #2e353f;
   --color-text-light: #4f5969;
@@ -117,6 +116,8 @@
   --color-line-marker-2: #00cc0033;
   --color-blockquote-bg: #0000000c;
   --color-table-border: #00000033;
+  --color-button-text: #eee;
+  --color-button-bg: #2857FF;
   
   --corner-radius: 0.25em;
 
@@ -136,7 +137,6 @@ body.theme-dark {
   --color-bg-body: black;
   --color-bg: #202020;
   --color-primary: #4d9bf3;
-  --color-bright: #5779f5;
   --color-secondary: #09A1A3;
   --color-text: #d1d1d1;
   --color-text-light: #b3bfd3;

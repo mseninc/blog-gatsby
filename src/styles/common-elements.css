@@ -39,8 +39,8 @@ a:focus {
 
 a.button {
   padding: var(--spacing-2) var(--spacing-4);
-  background-color: var(--color-bright);
-  color: var(--color-text-invert);
+  background-color: var(--color-button-bg);
+  color: var(--color-button-text);
   text-decoration: none;
   text-align: center;
   margin-top: var(--spacing-0);
