@@ -45,6 +45,8 @@ const plugins = [
         {
           resolve: `gatsby-remark-images`,
           options: {
+            showCaptions: true,
+            markdownCaptions: true,
             maxWidth: 630,
           },
         },
