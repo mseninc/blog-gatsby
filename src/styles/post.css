@@ -289,6 +289,16 @@
   letter-spacing: var(--letterSpacing-relaxed);
 }
 
+.gatsby-resp-image-figcaption {
+  text-align: center;
+  font-size: var(--fontSize-0);
+  padding-top: var(--spacing-2);
+}
+
+.gatsby-resp-image-figcaption p {
+  line-height: var(--lineHeight-normal);
+}
+
 .gatsby-highlight-code-line {
   background-color: darkslategrey;
   display: block;
