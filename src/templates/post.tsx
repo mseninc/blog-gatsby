@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { tagNameToPageUrl } from "utils/tag"
 
+import { FileNode } from "gatsby-plugin-image/dist/src/components/hooks"
 import Layout from "components/layout"
 import Seo from "components/seo"
 import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
@@ -42,7 +43,7 @@ type DataType = {
     }[]
     fields: {
       slug: string
-      heroImage: IGatsbyImageData
+      heroImage: FileNode
     }
   }
 }
@@ -109,6 +110,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
         title={title}
         description={post.frontmatter.description || post.excerpt}
         keywords={tags}
+        imageUrl={post.fields.heroImage?.publicURL}
       />
       <div className="main-container">
         <BreadcrumbList items={breadcrumb} />
@@ -176,6 +178,7 @@ export const pageQuery = graphql`
       fields {
         slug
         heroImage {
+          publicURL
           childImageSharp {
             gatsbyImageData(width: 720, layout: CONSTRAINED)
           }

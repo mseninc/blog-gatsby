@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import defaultOgpImage from "images/mseeeen-ogp-image-1200x630.png"
 
 type Props = {
   description?: string
@@ -8,6 +9,7 @@ type Props = {
   meta?: any[]
   title?: string
   keywords?: string[]
+  imageUrl?: string
 }
 
 export default function Seo({
@@ -16,6 +18,7 @@ export default function Seo({
   meta,
   title,
   keywords,
+  imageUrl,
 }: Props) {
   const { site } = useStaticQuery(
     graphql`
@@ -24,6 +27,7 @@ export default function Seo({
           siteMetadata {
             title
             description
+            siteUrl
           }
         }
       }
@@ -32,6 +36,9 @@ export default function Seo({
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = `${site.siteMetadata?.title} | ${site.siteMetadata.description}`
+  const absoluteImageUrl = imageUrl ?
+    (imageUrl.startsWith('http') ? imageUrl : site.siteMetadata.siteUrl + imageUrl)
+    : site.siteMetadata.siteUrl + defaultOgpImage
 
   return (
     <Helmet
@@ -61,6 +68,10 @@ export default function Seo({
         {
           property: `og:type`,
           content: `website`,
+        },
+        {
+          property: `og:image`,
+          content: absoluteImageUrl,
         },
         {
           name: `twitter:card`,
