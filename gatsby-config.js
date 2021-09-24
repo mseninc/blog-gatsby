@@ -5,6 +5,9 @@ const contentPath = path.resolve(process.env.CONTENT_PATH || "content")
 console.debug(`CONTENT_PATH - ${contentPath}`)
 console.debug(`PATH_PREFIX - ${process.env.PATH_PREFIX}`)
 console.debug(`GA_TRACKING_ID - ${process.env.GA_TRACKING_ID}`)
+console.debug(`S3_BUCKET_NAME - ${process.env.S3_BUCKET_NAME}`)
+console.debug(`S3_REGION - ${process.env.S3_REGION}`)
+console.debug(`S3_REMOVE_NONEXISTENT_OBJECTS - ${process.env.S3_REMOVE_NONEXISTENT_OBJECTS}`)
 
 const {
   SITE_NAME,
@@ -13,6 +16,8 @@ const {
   MANIFEST_BG_COLOR,
   MANIFEST_THEME_COLOR,
 } = require("./site-config")
+
+const siteAddress = new URL(SITE_URL)
 
 const plugins = [
   `gatsby-plugin-image`,
@@ -155,6 +160,18 @@ const plugins = [
   `gatsby-plugin-root-import`,
   `gatsby-plugin-typegen`,
   `gatsby-plugin-sitemap`,
+  {
+    resolve: `gatsby-plugin-s3`,
+    options: {
+      bucketName: process.env.S3_BUCKET_NAME || "msen-blog-preview",
+      region: process.env.S3_REGION || "ap-northeast-1",
+      acl: null,
+      removeNonexistentObjects: process.env.S3_REMOVE_NONEXISTENT_OBJECTS,
+      // https://gatsby-plugin-s3.jari.io/recipes/with-cloudfront/
+      protocol: siteAddress.protocol.slice(0, -1),
+      hostname: siteAddress.hostname,
+    },
+  },
 ]
 
 if (process.env.GA_TRACKING_ID) {
