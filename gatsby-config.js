@@ -16,6 +16,8 @@ const {
   MANIFEST_THEME_COLOR,
 } = require("./site-config")
 
+const siteAddress = new URL(SITE_URL)
+
 const plugins = [
   `gatsby-plugin-image`,
   `gatsby-transformer-yaml`,
@@ -161,9 +163,11 @@ const plugins = [
     resolve: `gatsby-plugin-s3`,
     options: {
       bucketName: process.env.S3_BUCKET_NAME || "msen-blog-preview",
-      protocol: "https",
       acl: null,
       removeNonexistentObjects: process.env.S3_REMOVE_NONEXISTENT_OBJECTS,
+      // https://gatsby-plugin-s3.jari.io/recipes/with-cloudfront/
+      protocol: siteAddress.protocol.slice(0, -1),
+      hostname: siteAddress.hostname,
     },
   },
 ]
