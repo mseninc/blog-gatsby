@@ -5,6 +5,8 @@ const contentPath = path.resolve(process.env.CONTENT_PATH || "content")
 console.debug(`CONTENT_PATH - ${contentPath}`)
 console.debug(`PATH_PREFIX - ${process.env.PATH_PREFIX}`)
 console.debug(`GA_TRACKING_ID - ${process.env.GA_TRACKING_ID}`)
+console.debug(`S3_BUCKET_NAME - ${process.env.S3_BUCKET_NAME}`)
+console.debug(`S3_REMOVE_NONEXISTENT_OBJECTS - ${process.env.S3_REMOVE_NONEXISTENT_OBJECTS}`)
 
 const {
   SITE_NAME,
@@ -155,6 +157,15 @@ const plugins = [
   `gatsby-plugin-root-import`,
   `gatsby-plugin-typegen`,
   `gatsby-plugin-sitemap`,
+  {
+    resolve: `gatsby-plugin-s3`,
+    options: {
+      bucketName: process.env.S3_BUCKET_NAME || "msen-blog-preview",
+      protocol: "https",
+      acl: null,
+      removeNonexistentObjects: process.env.S3_REMOVE_NONEXISTENT_OBJECTS,
+    },
+  },
 ]
 
 if (process.env.GA_TRACKING_ID) {
