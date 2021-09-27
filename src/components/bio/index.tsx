@@ -53,7 +53,7 @@ const Bio = (props: Props) => {
             <span>{github}</span>
           </a>
         </div>
-        <p className={`${styles.bioText} bio-bio-text`}>{bio}</p>
+        <p className={`bio-bio-text`}>{bio}</p>
       </div>
     </div>
   )
