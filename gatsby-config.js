@@ -33,7 +33,11 @@ const plugins = [
     options: {
       path: contentPath,
       name: `blog`,
-      ignore: [`${contentPath}/*.md`, `${contentPath}/.draft/**/*`],
+      ignore: [
+        `${contentPath}/*.md`,
+        `${contentPath}/.draft/**/*`,
+        `${contentPath}/.github/**/*`,
+      ],
     },
   },
   {
