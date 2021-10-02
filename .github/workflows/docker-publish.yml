@@ -24,4 +24,3 @@ jobs:
           registry: ghcr.io
           repository: ${{ github.repository }}
           tags: latest,main
-          tag_with_ref: true
