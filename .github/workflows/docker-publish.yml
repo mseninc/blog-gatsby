@@ -1,6 +1,8 @@
 name: Publish Docker image
 
 on:
+  workflow_dispatch:
+
   push:
     branches:
       - main
@@ -21,4 +23,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           repository: ${{ github.repository }}
+          tags: latest,main
           tag_with_ref: true
