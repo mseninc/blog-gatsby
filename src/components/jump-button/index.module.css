@@ -34,6 +34,7 @@
   height: var(--icon-size);
   transform: rotate(225deg);
   transition: transform 1s;
+  backface-visibility: hidden;
 }
 
 .button.toBottom::before {
