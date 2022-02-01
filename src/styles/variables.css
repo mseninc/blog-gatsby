@@ -112,7 +112,7 @@
   --color-top-page-hero-copy: white;
   --color-post-card-description-bg: #e6f3ff;
   --color-inline-code-bg: #215aa012;
-  --color-line-marker-1: #eecc0033;
+  --color-line-marker-1: #eecc0066;
   --color-line-marker-2: #00cc0033;
   --color-blockquote-bg: #0000000c;
   --color-table-border: #00000033;
@@ -155,7 +155,7 @@ body.theme-dark {
   --color-top-page-hero-copy: white;
   --color-post-card-description-bg: #2e384d;
   --color-inline-code-bg: #ffffff33;
-  --color-line-marker-1: #eecc0033;
+  --color-line-marker-1: #ffdd0033;
   --color-line-marker-2: #00cc0033;
   --color-blockquote-bg: #ffffff1c;
   --color-table-border: #ffffff44;
