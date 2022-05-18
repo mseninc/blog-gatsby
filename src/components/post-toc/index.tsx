@@ -41,6 +41,7 @@ export default function PostToc(props: Props) {
   }, [activeAnchor])
 
   function createHeading(h: Heading) {
+    const text = h.value.replace(/(<([^>]+)>)/gi, '');
     return (
       <li
         key={`post-toc-item-${h.id}`}
@@ -48,7 +49,7 @@ export default function PostToc(props: Props) {
           styles[`depth${h.depth - 1}`]
         } ${h.id === activeAnchor ? "post-toc-item-active" : ""}`}
       >
-        <AnchorLink to={`${props.page}#${h.id}`}>{h.value}</AnchorLink>
+        <AnchorLink to={`${props.page}#${h.id}`}>{text}</AnchorLink>
       </li>
     )
   }
