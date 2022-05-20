@@ -314,7 +314,7 @@
   border: solid 1px rgba(255, 255, 255, 0.2);
   border-radius: 0.25em;
   margin: 1em 0;
-  padding: 0 1em;
+  padding: 0.5em 1em;
   font-size: var(--fontSize-0);
 }
 
@@ -346,7 +346,7 @@
 
 .gatsby-code-title + .gatsby-highlight {
   border-top-left-radius: 0;
-  margin-top: -1px;
+  margin-top: 0;
 }
 
 :not(pre) > code[class*="language-"] {
@@ -355,6 +355,8 @@
   background-color: var(--color-inline-code-bg);
   text-shadow: none;
   letter-spacing: var(--letterSpacing-normal);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 

@@ -43,20 +43,8 @@
   --spacing-32: 8rem;
 
   --fontFamily-sans:
-  "Helvetica Neue",
-  "Helvetica",
-  "Arial",
-  "BIZ UDPGothic",
-  "ヒラギノ角ゴ Pro W3",
-  "Yu Gothic Medium",
-  "游ゴシック Medium",
-  YuGothic,
-  "游ゴシック体",
-  "Hiragino Sans",
-  "Hiragino Kaku Gothic ProN",
-  "Yu Gothic",
-  "Meiryo",
-  "メイリオ",
+  "Noto Sans JP",
+  "Noto Sans CJK",
   sans-serif;
   --font-body: var(--fontFamily-sans);
   --font-heading: var(--fontFamily-sans);
@@ -72,7 +60,7 @@
   --lineHeight-none: 1;
   --lineHeight-tight: 1.2;
   --lineHeight-normal: 1.5;
-  --lineHeight-relaxed: 1.9;
+  --lineHeight-relaxed: 1.75;
 
   --letterSpacing-normal: normal;
   --letterSpacing-relaxed: 0.05em;
