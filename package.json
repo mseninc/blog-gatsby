@@ -6,7 +6,7 @@
   "author": "MSEN Inc. <mseeeen@msen.jp>",
   "dependencies": {
     "fs-extra": "^10.0.0",
-    "gatsby": "^3.13.0",
+    "gatsby": "^3.14.6",
     "gatsby-awesome-pagination": "^0.3.8",
     "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-canonical-urls": "^3.13.0",
