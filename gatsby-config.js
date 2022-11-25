@@ -134,6 +134,7 @@ const plugins = [
               }
             }
           `,
+          title: SITE_NAME,
           output: "/rss.xml",
         },
       ],

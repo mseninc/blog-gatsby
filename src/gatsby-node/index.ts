@@ -213,8 +213,6 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
         createNode, // helper function in gatsby-node to generate the node
         createNodeId, // helper function in gatsby-node to generate the node id
         cache, // Gatsby's cache
-        store, // Gatsby's Redux store
-        reporter,
       })
       if (fileNode) {
         mdr.frontmatter.avatarImage__NODE = fileNode.id
