@@ -23,7 +23,7 @@ type DataType = {
 }
 
 type PageContext = PageContextOrg & {
-  tag: string
+  tagList: string[]
   basePath: string
 }
 
@@ -34,7 +34,7 @@ type Props = {
 }
 
 export default function TagPostList({ pageContext, data, location }: Props) {
-  const { tag, basePath, humanPageNumber } = pageContext
+  const { tagList, basePath, humanPageNumber } = pageContext
   const { edges } = data.allMarkdownRemark
 
   const { title } = data.site.siteMetadata
@@ -44,7 +44,7 @@ export default function TagPostList({ pageContext, data, location }: Props) {
   const breadcrumb: BreadcrumbListItem[] = [
     { name: "ホーム", current: false, url: "/" },
     { name: "タグ一覧", current: false, url: "/tags/" },
-    { name: tag, current: humanPageNumber === 1, url: basePath },
+    { name: tagList[0], current: humanPageNumber === 1, url: basePath },
   ]
   if (humanPageNumber !== 1) {
     breadcrumb.push({ name: `${humanPageNumber} ページ`, current: true })
@@ -66,7 +66,7 @@ export default function TagPostList({ pageContext, data, location }: Props) {
 }
 
 export const pageQuery = graphql`
-  query ($skip: Int!, $limit: Int!, $tag: String) {
+  query ($skip: Int!, $limit: Int!, $tagList: [String]) {
     site {
       siteMetadata {
         title
@@ -77,7 +77,7 @@ export const pageQuery = graphql`
       sort: { frontmatter: { date: DESC } }
       limit: $limit
       skip: $skip
-      filter: { frontmatter: { tags: { eq: $tag } } }
+      filter: { frontmatter: { tags: { in: $tagList } } }
     ) {
       totalCount
       edges {

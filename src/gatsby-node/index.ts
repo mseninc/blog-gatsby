@@ -1,7 +1,10 @@
 import path from "path"
 import fs from "fs"
 import { GatsbyNode, Node } from "gatsby"
-import { createFilePath, createRemoteFileNode } from "gatsby-source-filesystem"
+import {
+  createFilePath,
+  createRemoteFileNode,
+} from "gatsby-source-filesystem"
 import { tagNameToPageUrl } from "../utils/tag"
 
 const { paginate } = require("gatsby-awesome-pagination")
@@ -34,10 +37,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   const result = await graphql<DataType>(
     `
       {
-        allMarkdownRemark(
-          sort: { frontmatter: { date: ASC } }
-          limit: 1000
-        ) {
+        allMarkdownRemark(sort: { frontmatter: { date: ASC } }, limit: 1000) {
           nodes {
             id
             fields {
@@ -103,13 +103,35 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
     // Extract tag data from query
     const tags = result.data?.tagsGroup.group || []
-    const tagPageTemplate = path.resolve("src/templates/tags.tsx")
+
+    // Group tags by the URL (basePath) (e.g. both "Windows-11" and "windows-11" are corresponding to `/windows-11`)
+    const tagGroups = tags
+      .reduce<{
+        [key: string]: {
+          basePath: string
+          tagList: string[]
+          postCount: number
+        }
+      }>((p, { fieldValue: tagName, totalCount: postCount }) => {
+        const basePath = tagNameToPageUrl(tagName)
+        if (basePath in p) {
+          p[basePath].tagList.push(tagName)
+          p[basePath].postCount += postCount
+        } else {
+          p[basePath] = {
+            basePath,
+            tagList: [tagName],
+            postCount,
+          }
+        }
+        return p
+      }, {})
 
     // Make tag post list pages
-    for (const { fieldValue: tagName, totalCount: postCount } of tags) {
+    const tagPageTemplate = path.resolve("src/templates/tags.tsx")
+    for (const { basePath, tagList, postCount } of Object.values(tagGroups)) {
       const postsPerPage = 30
       const numberOfPages = Math.ceil(postCount / postsPerPage)
-      const basePath = tagNameToPageUrl(tagName)
       Array.from({ length: numberOfPages }).forEach((_, i) => {
         createPage({
           path: i === 0 ? basePath : `${basePath}${i + 1}`,
@@ -120,7 +142,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
             numberOfPages,
             pageNumber: i,
             humanPageNumber: i + 1,
-            tag: tagName,
+            tagList,
             basePath,
           },
         })
@@ -200,7 +222,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
       value: heroImagePath,
     })
 
-      // Author avatar from exteranal source
+    // Author avatar from exteranal source
     if (mdr.frontmatter.author) {
       const url = `https://avatars.githubusercontent.com/${mdr.frontmatter.author}`
       // https://www.gatsbyjs.com/docs/how-to/images-and-media/preprocessing-external-images/
