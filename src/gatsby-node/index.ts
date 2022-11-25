@@ -35,7 +35,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     `
       {
         allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
+          sort: { frontmatter: { date: ASC } }
           limit: 1000
         ) {
           nodes {
@@ -46,7 +46,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
           }
         }
         tagsGroup: allMarkdownRemark(limit: 2000) {
-          group(field: frontmatter___tags) {
+          group(field: { frontmatter: { tags: SELECT } }) {
             fieldValue
             totalCount
           }

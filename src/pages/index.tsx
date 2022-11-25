@@ -117,7 +117,7 @@ export const pageQuery = graphql`
       }
     }
     latestPosts: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 5
     ) {
       nodes {
@@ -125,7 +125,7 @@ export const pageQuery = graphql`
       }
     }
     topics1: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 10
       filter: { frontmatter: { tags: { eq: "AWS" } } }
     ) {
@@ -134,7 +134,7 @@ export const pageQuery = graphql`
       }
     }
     topics2: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 10
       filter: { frontmatter: { tags: { eq: "Web" } } }
     ) {
@@ -143,7 +143,7 @@ export const pageQuery = graphql`
       }
     }
     topics3: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 10
       filter: { frontmatter: { tags: { eq: "仮想化技術" } } }
     ) {
@@ -152,7 +152,7 @@ export const pageQuery = graphql`
       }
     }
     topics4: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 10
       filter: { frontmatter: { tags: { eq: "Linux" } } }
     ) {
@@ -161,7 +161,7 @@ export const pageQuery = graphql`
       }
     }
     topics5: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 10
       filter: { frontmatter: { tags: { eq: ".NET" } } }
     ) {
@@ -170,7 +170,7 @@ export const pageQuery = graphql`
       }
     }
     topics6: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 10
       filter: { frontmatter: { tags: { eq: "Windows" } } }
     ) {
