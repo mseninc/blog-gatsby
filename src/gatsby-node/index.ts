@@ -5,6 +5,7 @@ import {
   createFilePath,
   createRemoteFileNode,
 } from "gatsby-source-filesystem"
+import { authorToPageUrl } from "../utils/author"
 import { tagNameToPageUrl } from "../utils/tag"
 
 const { paginate } = require("gatsby-awesome-pagination")
@@ -22,11 +23,24 @@ export const createPages: GatsbyNode["createPages"] = async ({
       slug: string
     }
   }
+  type AuthorYaml = {
+    id: string
+    name: string
+    bio: string
+    github: string
+  }
+
   type DataType = {
     allMarkdownRemark: {
       nodes: Post[]
     }
     tagsGroup: {
+      group: {
+        fieldValue: string
+        totalCount: number
+      }[]
+    }
+    authorsGroup: {
       group: {
         fieldValue: string
         totalCount: number
@@ -47,6 +61,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
         }
         tagsGroup: allMarkdownRemark(limit: 2000) {
           group(field: { frontmatter: { tags: SELECT } }) {
+            fieldValue
+            totalCount
+          }
+        }
+        authorsGroup: allMarkdownRemark(limit: 2000) {
+          group(field: { frontmatter: { author: { github: SELECT } } }) {
             fieldValue
             totalCount
           }
@@ -148,6 +168,31 @@ export const createPages: GatsbyNode["createPages"] = async ({
         })
       })
     }
+
+    // Make author's post list pages
+    const authors = result.data?.authorsGroup.group || []
+    const authorPageTemplate = path.resolve("src/templates/author.tsx")
+    for (const { fieldValue: author, totalCount: postCount } of authors) {
+      const basePath = authorToPageUrl(author)
+      const postsPerPage = 30
+      const numberOfPages = Math.ceil(postCount / postsPerPage)
+      Array.from({ length: numberOfPages }).forEach((_, i) => {
+        createPage({
+          path: i === 0 ? basePath : `${basePath}${i + 1}`,
+          component: authorPageTemplate,
+          context: {
+            limit: postsPerPage,
+            skip: i * postsPerPage,
+            numberOfPages,
+            pageNumber: i,
+            humanPageNumber: i + 1,
+            author,
+            basePath,
+          },
+        })
+      })
+    }
+
   }
 }
 

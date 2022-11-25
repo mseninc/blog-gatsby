@@ -48,7 +48,7 @@ export const query = graphql`
     }
     avatarImage {
       childImageSharp {
-        gatsbyImageData(width: 25, height: 25, layout: FIXED)
+        gatsbyImageData(width: 50, height: 50, layout: FIXED)
       }
     }
     fields {
@@ -105,7 +105,7 @@ export default function PostCard({ post, showDescription }: Props) {
       <div className="post-card-footer">
         <div className="post-card-date">{post.frontmatter.date}</div>
         <div className="post-card-author">
-          {avatarImage && post.frontmatter.author ? (
+          {post.frontmatter.author ? (
             <AuthorLink
               name={post.frontmatter.author.name}
               github={post.frontmatter.author.github}
