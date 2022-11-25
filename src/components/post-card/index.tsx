@@ -16,7 +16,7 @@ export type PostSummary = {
     description?: string
     tags: string[]
     author?: {
-      id: string
+      github: string
       name: string
     }
     avatarImage?: IGatsbyImageData
@@ -42,7 +42,7 @@ export const query = graphql`
       description
       tags
       author {
-        id
+        github
         name
       }
       avatarImage {
@@ -84,7 +84,7 @@ export default function PostCard({ post, showDescription }: Props) {
             >
               <span>
                 {post.frontmatter.tags?.[0] ||
-                  post.frontmatter.author?.id ||
+                  post.frontmatter.author?.github ||
                   ""}
               </span>
             </div>
@@ -108,7 +108,7 @@ export default function PostCard({ post, showDescription }: Props) {
           {avatarImage && post.frontmatter.author ? (
             <AuthorLink
               name={post.frontmatter.author.name}
-              github={post.frontmatter.author.id}
+              github={post.frontmatter.author.github}
               avatarImage={avatarImage}
               reverse={true}
             />

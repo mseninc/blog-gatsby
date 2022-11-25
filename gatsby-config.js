@@ -197,7 +197,4 @@ module.exports = {
     siteUrl: SITE_URL,
   },
   plugins,
-  mapping: {
-    "MarkdownRemark.frontmatter.author": `AuthorYaml`,
-  },
 }

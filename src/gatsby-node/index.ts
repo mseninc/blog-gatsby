@@ -230,6 +230,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       id: String
       name: String
       bio: String
+      github: String
     }
 
     type MarkdownRemark implements Node {
@@ -242,6 +243,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       description: String
       date: Date @dateformat
       avatarImage: File @link(from: "avatarImage__NODE")
+      author: AuthorYaml @link(by: "github")
     }
 
     type Fields {

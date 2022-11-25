@@ -29,9 +29,9 @@ type DataType = {
       description: string
       tags: string[]
       author: {
-        id: string
         name: string
         bio: string
+        github: string
       }
       avatarImage: IGatsbyImageData
       avatarImage25: IGatsbyImageData
@@ -64,14 +64,14 @@ export default function BlogPostTemplate({ data, location }: Props) {
   const author = post.frontmatter.author
   const authorLink = author ? (
     <AuthorLink
-      github={author.id}
+      github={author.github}
       name={author.name}
       avatarImage={post.frontmatter.avatarImage25}
     />
   ) : null
   const bio = author ? (
     <Bio
-      github={author.id}
+      github={author.github}
       name={author.name}
       bio={author.bio}
       avatarImage={post.frontmatter.avatarImage}
@@ -155,9 +155,9 @@ export const pageQuery = graphql`
         description
         tags
         author {
-          id
           name
           bio
+          github
         }
         avatarImage {
           childImageSharp {
