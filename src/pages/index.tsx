@@ -51,7 +51,7 @@ export default function BlogIndex({ data, location }: Props) {
             <PostCard
               key={`post-card-${post.id}`}
               post={post}
-              showDescription={n === 0}
+              showDescription={true}
             />
           ))}
         </div>
@@ -77,7 +77,7 @@ export default function BlogIndex({ data, location }: Props) {
               <PostCard
                 key={`post-${post.id}`}
                 post={post}
-                showDescription={n === 0}
+                showDescription={true}
               />
             )) || null}
           </div>
