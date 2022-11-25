@@ -6,26 +6,29 @@ import {
   StaticImage,
 } from "gatsby-plugin-image"
 import * as styles from "./index.module.css"
+import { Link } from "gatsby-link"
+import { authorToPageUrl } from "utils/author"
 
 type Props = {
   name: string
   github: string
-  avatarImage: IGatsbyImageData
+  avatarImage?: IGatsbyImageData | null
   reverse?: boolean
 }
 
 export default function AuthorLink(props: Props) {
   const github = props.github
   const name = props.name || props.github
-  const avatarImage = getImage(props.avatarImage)
+  const avatarImage = props.avatarImage && getImage(props.avatarImage)
 
   return (
-    <div
+    <Link
+      to={authorToPageUrl(github)}
+      title={`${github} の記事一覧`}
       className={`author-link ${styles.container} ${
         props.reverse ? styles.reverse : ""
       }`}
     >
-      {props.reverse ? <div>{name}</div> : null}
       {avatarImage ? (
         <GatsbyImage
           image={avatarImage}
@@ -42,7 +45,7 @@ export default function AuthorLink(props: Props) {
           alt={`${github} - GitHub`}
         />
       )}
-      {!props.reverse ? <div>{name}</div> : null}
-    </div>
+      <div>{name}</div>
+    </Link>
   )
 }

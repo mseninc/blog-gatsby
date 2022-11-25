@@ -1,13 +1,29 @@
 .container {
   display: inline-flex;
   align-items: center;
+  border-radius: var(--corner-radius);
+  padding: var(--spacing-1) var(--spacing-2);
+  flex-direction: row;
+}
+.container.reverse {
+  flex-direction: row-reverse;
+}
+
+a.container {
+  text-decoration: none;
+  color: inherit;
+  border: solid 1px transparent;
+}
+
+a.container:hover {
+  border-color: var(--color-accent);
 }
 
 .avatar {
   margin-left: var(--spacing-0);
   margin-right: var(--spacing-1);
-  width: 25px;
-  height: 25px;
+  width: 25px !important;
+  height: 25px !important;
   border-radius: 100%;
 }
 
