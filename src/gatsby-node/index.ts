@@ -164,10 +164,8 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
   node,
   actions,
   getNode,
-  store,
-  cache,
   createNodeId,
-  reporter,
+  getCache,
 }) => {
   const { createNode, createNodeField } = actions
 
@@ -176,7 +174,6 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
     fileAbsolutePath: string
     frontmatter: {
       author: string
-      avatarImage__NODE: any
     }
   }
   if (node.internal.type === `MarkdownRemark`) {
@@ -203,7 +200,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
       value: heroImagePath,
     })
 
-    // Author avatar from exteranal source
+      // Author avatar from exteranal source
     if (mdr.frontmatter.author) {
       const url = `https://avatars.githubusercontent.com/${mdr.frontmatter.author}`
       // https://www.gatsbyjs.com/docs/how-to/images-and-media/preprocessing-external-images/
@@ -212,10 +209,10 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
         parentNodeId: mdr.id, // id of the parent node of the fileNode you are going to create
         createNode, // helper function in gatsby-node to generate the node
         createNodeId, // helper function in gatsby-node to generate the node id
-        cache, // Gatsby's cache
+        getCache, // Gatsby's cache
       })
       if (fileNode) {
-        mdr.frontmatter.avatarImage__NODE = fileNode.id
+        createNodeField({ node, name: "avatarImageFile", value: fileNode.id })
       }
     }
   }
@@ -236,13 +233,13 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
     type MarkdownRemark implements Node {
       frontmatter: Frontmatter
       fields: Fields
+      avatarImage: File @link(from: "fields.avatarImageFile")
     }
 
     type Frontmatter {
       title: String
       description: String
       date: Date @dateformat
-      avatarImage: File @link(from: "avatarImage__NODE")
       author: AuthorYaml @link(by: "github")
     }
 

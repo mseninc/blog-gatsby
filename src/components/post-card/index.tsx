@@ -19,8 +19,8 @@ export type PostSummary = {
       github: string
       name: string
     }
-    avatarImage?: IGatsbyImageData
   }
+  avatarImage?: IGatsbyImageData
   fields: {
     slug: string
     heroImage?: IGatsbyImageData
@@ -45,10 +45,10 @@ export const query = graphql`
         github
         name
       }
-      avatarImage {
-        childImageSharp {
-          gatsbyImageData(width: 25, height: 25, layout: FIXED)
-        }
+    }
+    avatarImage {
+      childImageSharp {
+        gatsbyImageData(width: 25, height: 25, layout: FIXED)
       }
     }
     fields {
@@ -66,8 +66,8 @@ export default function PostCard({ post, showDescription }: Props) {
   const heroImage = post.fields.heroImage
     ? getImage(post.fields.heroImage)
     : null
-  const avatarImage = post.frontmatter.avatarImage
-    ? getImage(post.frontmatter.avatarImage)
+  const avatarImage = post.avatarImage
+    ? getImage(post.avatarImage)
     : null
   const description = showDescription
     ? post.frontmatter.description || post.excerpt
