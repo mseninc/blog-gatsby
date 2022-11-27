@@ -236,14 +236,15 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
 }) => {
   const { createNode, createNodeField } = actions
 
-  const mdr = node as Node & {
-    id: string
-    fileAbsolutePath: string
-    frontmatter: {
-      author: string
-    }
-  }
   if (node.internal.type === `MarkdownRemark`) {
+    const mdr = node as Node & {
+      id: string
+      fileAbsolutePath: string
+      frontmatter: {
+        author: string
+      }
+    }
+
     const slug = createFilePath({ node, getNode })
 
     // Flatten slug (e.g. /kenzauros/2021/hogehoge/ => /hogehoge/)
@@ -283,6 +284,20 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
       }
     }
   }
+  if (node.internal.type === `AuthorYaml`) {
+    const authorNode = node as Node & { github: string }
+      const url = `https://avatars.githubusercontent.com/${authorNode.github}`
+      const fileNode = await createRemoteFileNode({
+      url, // string that points to the URL of the image
+      parentNodeId: authorNode.id, // id of the parent node of the fileNode you are going to create
+      createNode, // helper function in gatsby-node to generate the node
+      createNodeId, // helper function in gatsby-node to generate the node id
+      getCache, // Gatsby's cache
+    })
+    if (fileNode) {
+      createNodeField({ node, name: "avatarImageFile", value: fileNode.id })
+    }
+  }
 }
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
@@ -295,6 +310,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       name: String
       bio: String
       github: String
+      avatarImage: File @link(from: "fields.avatarImageFile")
     }
 
     type MarkdownRemark implements Node {

@@ -2,3 +2,8 @@
   background-color: var(--color-bg);
   padding: var(--spacing-4);
 }
+
+/* Author list page */
+.authors .author-bio {
+  margin: var(--spacing-2) var(--spacing-0);
+}

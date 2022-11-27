@@ -6,12 +6,15 @@ import {
   StaticImage,
 } from "gatsby-plugin-image"
 import * as styles from "./index.module.css"
+import { Link } from "gatsby-link"
+import { authorToPageUrl } from "utils/author"
 
 type Props = {
   bio: string
   github: string
   name: string
   avatarImage: IGatsbyImageData
+  showLinks?: boolean
 }
 
 const Bio = (props: Props) => {
@@ -20,6 +23,13 @@ const Bio = (props: Props) => {
   const name = props.name || "名無しの権兵衛"
   const githubUrl = `https://github.com/${github}`
   const avatarImage = getImage(props.avatarImage)
+  const links = props.showLinks && (
+    <div className={`${styles.links} bio-links`}>
+      <Link to={authorToPageUrl(github)} className={`author-page-link button`}>
+        記事一覧
+      </Link>
+    </div>
+  )
 
   return (
     <div className={`${styles.bio} bio`}>
@@ -54,6 +64,7 @@ const Bio = (props: Props) => {
           </a>
         </div>
         <p className={`bio-bio-text`}>{bio}</p>
+        {links}
       </div>
     </div>
   )

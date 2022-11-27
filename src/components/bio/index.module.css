@@ -35,4 +35,9 @@
   margin-left: var(--spacing-1);
 }
 
-
+.bio .links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: var(--spacing-2);
+}

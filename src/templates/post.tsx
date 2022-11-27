@@ -76,6 +76,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
       name={author.name}
       bio={author.bio}
       avatarImage={post.avatarImage}
+      showLinks={true}
     />
   ) : null
 
