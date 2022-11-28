@@ -38,7 +38,7 @@
 .bio .links {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-end;
   margin-top: var(--spacing-2);
 }
 

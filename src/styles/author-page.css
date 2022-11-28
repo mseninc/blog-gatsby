@@ -1,19 +1,20 @@
 .author-bio {
   background-color: var(--color-bg);
   padding: var(--spacing-4);
+  display: flex;
+}
+
+.author-bio .bio {
+  flex: 1;
 }
 
 /* Author list page */
 .authors {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(var(--grid-column-count), 1fr);
   column-gap: var(--spacing-2);
   row-gap: var(--spacing-2);
   margin: var(--spacing-2) var(--spacing-0);
-}
-
-.authors .bio {
-  height: 100%;
 }
 
 .authors .bio-main {
@@ -24,4 +25,39 @@
 
 .authors .bio-bio-text {
   flex: 1;
+}
+
+/* mobile */
+@media screen and (max-width: 480px) {
+  .authors {
+    --grid-column-count: 1;
+  }
+}
+
+/* mobile large */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  .authors {
+    --grid-column-count: 1;
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .authors {
+    --grid-column-count: 2;
+  }
+}
+
+/* pc */
+@media screen and (min-width: 1025px) and (max-width: 1600px) {
+  .authors {
+    --grid-column-count: 3;
+  }
+}
+
+/* wide */
+@media screen and (min-width: 1601px) {
+  .authors {
+    --grid-column-count: 5;
+  }
 }
