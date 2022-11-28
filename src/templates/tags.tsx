@@ -57,7 +57,7 @@ export default function TagPostList({ pageContext, data, location }: Props) {
         <BreadcrumbList items={breadcrumb} />
         <main>
           <Paginator pathPrefix={basePath} context={pageContext} />
-          <PostCardList posts={posts} />
+          <PostCardList posts={posts} showAuthor={true} />
           <Paginator pathPrefix={basePath} context={pageContext} />
         </main>
       </div>

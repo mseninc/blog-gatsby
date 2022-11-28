@@ -53,7 +53,10 @@ export default function PostListTemplate({
         <BreadcrumbList items={breadcrumb} />
         <main>
           <Paginator pathPrefix="/posts" context={pageContext} />
-          <PostCardList posts={data.allMarkdownRemark.nodes} />
+          <PostCardList
+            posts={data.allMarkdownRemark.nodes}
+            showAuthor={true}
+          />
           <Paginator pathPrefix="/posts" context={pageContext} />
         </main>
       </div>

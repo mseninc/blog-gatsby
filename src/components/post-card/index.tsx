@@ -30,6 +30,7 @@ export type PostSummary = {
 type Props = {
   post: PostSummary
   showDescription?: boolean
+  showAuthor?: boolean
 }
 
 export const query = graphql`
@@ -67,7 +68,7 @@ export const query = graphql`
   }
 `
 
-export default function PostCard({ post, showDescription }: Props) {
+export default function PostCard({ post, showDescription, showAuthor }: Props) {
   const heroImage = post.fields.heroImage
     ? getImage(post.fields.heroImage)
     : null
@@ -108,7 +109,7 @@ export default function PostCard({ post, showDescription }: Props) {
       <div className="post-card-footer">
         <div className="post-card-date">{post.frontmatter.date}</div>
         <div className="post-card-author">
-          {post.frontmatter.author ? (
+          {showAuthor && post.frontmatter.author ? (
             <AuthorLink
               name={post.frontmatter.author.name}
               github={post.frontmatter.author.github}

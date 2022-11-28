@@ -52,6 +52,7 @@ export default function BlogIndex({ data, location }: Props) {
               key={`post-card-${post.id}`}
               post={post}
               showDescription={true}
+              showAuthor={true}
             />
           ))}
         </div>
@@ -78,6 +79,7 @@ export default function BlogIndex({ data, location }: Props) {
                 key={`post-${post.id}`}
                 post={post}
                 showDescription={true}
+                showAuthor={true}
               />
             )) || null}
           </div>
