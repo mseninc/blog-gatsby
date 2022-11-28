@@ -182,7 +182,7 @@ export const pageQuery = graphql`
         heroImage {
           publicURL
           childImageSharp {
-            gatsbyImageData(width: 720, layout: CONSTRAINED)
+            gatsbyImageData(width: 960, layout: FULL_WIDTH)
           }
         }
       }
