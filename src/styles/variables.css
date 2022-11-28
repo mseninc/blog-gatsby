@@ -42,10 +42,7 @@
   --spacing-24: 6rem;
   --spacing-32: 8rem;
 
-  --fontFamily-sans:
-  "Noto Sans JP",
-  "Noto Sans CJK",
-  sans-serif;
+  --fontFamily-sans: "Noto Sans JP", "Noto Sans CJK", sans-serif;
   --font-body: var(--fontFamily-sans);
   --font-heading: var(--fontFamily-sans);
   --fontWeight-normal: 400;
@@ -56,7 +53,7 @@
   --fontWeight-black: 900;
 
   --fontSize-root: 16px;
-  
+
   --lineHeight-none: 1;
   --lineHeight-tight: 1.2;
   --lineHeight-normal: 1.5;
@@ -65,14 +62,14 @@
   --letterSpacing-normal: normal;
   --letterSpacing-relaxed: 0.05em;
 
-  --fontSize-0: 0.850rem;
-  --fontSize-1: 1.000rem;
-  --fontSize-2: 1.200rem;
-  --fontSize-3: 1.300rem;
-  --fontSize-4: 1.500rem;
-  --fontSize-5: 1.700rem;
-  --fontSize-6: 2.000rem;
-  --fontSize-7: 2.500rem;
+  --fontSize-0: 0.85rem;
+  --fontSize-1: 1rem;
+  --fontSize-2: 1.2rem;
+  --fontSize-3: 1.3rem;
+  --fontSize-4: 1.5rem;
+  --fontSize-5: 1.7rem;
+  --fontSize-6: 2rem;
+  --fontSize-7: 2.5rem;
   --fontSize-toc: 0.92rem;
   --fontSize-tag: 0.85rem;
   --fontSize-breadcrumb: 0.8rem;
@@ -80,7 +77,7 @@
   --color-bg-body: #efefef;
   --color-bg: white;
   --color-primary: #0b58af;
-  --color-secondary: #09A1A3;
+  --color-secondary: #09a1a3;
   --color-text: #2e353f;
   --color-text-light: #4f5969;
   --color-text-light-light: #8e99aa;
@@ -93,8 +90,16 @@
   --color-paginator-link-bg: darkgray;
   --color-paginator-link-bg-current: steelblue;
   --color-jump-button-bg: var(--color-primary);
-  --color-hero-placeholder-bg: linear-gradient(135deg, rgba(9,121,83,1) 0%, rgba(0,145,175,1) 100%);
-  --color-hero-placeholder-bg2: linear-gradient(135deg, rgba(171,78,34,1) 0%, rgba(112,45,173,1) 100%);
+  --color-hero-placeholder-bg: linear-gradient(
+    135deg,
+    rgba(9, 121, 83, 1) 0%,
+    rgba(0, 145, 175, 1) 100%
+  );
+  --color-hero-placeholder-bg2: linear-gradient(
+    135deg,
+    rgba(171, 78, 34, 1) 0%,
+    rgba(112, 45, 173, 1) 100%
+  );
   --color-hero-placeholder-text: white;
   --color-top-page-hero-bg: black;
   --color-top-page-hero-copy: white;
@@ -105,14 +110,16 @@
   --color-blockquote-bg: #0000000c;
   --color-table-border: #00000033;
   --color-button-text: #eee;
-  --color-button-bg: #2857FF;
-  
+  --color-button-bg: #2857ff;
+  --color-badge-bg-default: #f1f1f1;
+  --color-badge-text-default: #333;
+
   --corner-radius: 0.25em;
 
   --text-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.5);
   --text-shadow-top-page-hero-copy: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.7);
   --text-shadow-hero-placeholder: var(--text-shadow);
-  
+
   --box-shadow: 0em 0em 0.5em rgba(0, 0, 0, 0.2);
   --box-shadow-hero-margin: 0em 0em 1.5em rgba(0, 0, 0, 0.5);
 
@@ -125,7 +132,7 @@ body.theme-dark {
   --color-bg-body: black;
   --color-bg: #202020;
   --color-primary: #4d9bf3;
-  --color-secondary: #09A1A3;
+  --color-secondary: #09a1a3;
   --color-text: #d1d1d1;
   --color-text-light: #b3bfd3;
   --color-text-light-light: #9fabbe;
@@ -147,6 +154,8 @@ body.theme-dark {
   --color-line-marker-2: #00cc0033;
   --color-blockquote-bg: #ffffff1c;
   --color-table-border: #ffffff44;
+  --color-badge-bg-default: #333;
+  --color-badge-text-default: #f1f1f1;
 
   --box-shadow: 0em 0em 0.5em rgba(255, 255, 255, 0.2);
   --color-scrollbar-thumb: #727b88;

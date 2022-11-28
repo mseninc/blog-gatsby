@@ -71,6 +71,18 @@ body.theme-dark .site-logo-dark {
   display: block;
 }
 
+.badge {
+  display: inline-block;
+  white-space: nowrap;
+  line-height: var(--lineHeight-tight);
+  padding-inline-start: var(--spacing-1);
+  padding-inline-end: var(--spacing-1);
+  font-size: var(--fontSize-0);
+  border-radius: var(--corner-radius);
+  background: var(--color-badge-bg-default);
+  color: var(--color-badge-text-default);
+}
+
 ::-webkit-scrollbar {
   width: var(--scrollbar-size);
   height: var(--scrollbar-size);

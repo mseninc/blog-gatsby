@@ -21,6 +21,12 @@ type DataType = {
       avatarImage: IGatsbyImageData
     }[]
   }
+  authorPostCounts: {
+    group: {
+      fieldValue: string
+      totalCount: number
+    }[]
+  }
 }
 
 type Props = {
@@ -32,11 +38,13 @@ export default function Page(props: Props) {
   const {
     data: {
       allAuthorYaml: { nodes: authors },
+      authorPostCounts: { group: postCounts },
     },
     location,
   } = props
 
   const authorElements = authors.map((author) => {
+    const postCount = postCounts.find((x) => x.fieldValue === author.github)
     return (
       <div className="author-bio">
         <Bio
@@ -44,6 +52,7 @@ export default function Page(props: Props) {
           name={author.name}
           bio={author.bio}
           avatarImage={author.avatarImage}
+          postCount={postCount ? postCount.totalCount : 0}
           showLinks={true}
         />
       </div>
@@ -80,6 +89,12 @@ export const pageQuery = graphql`
             gatsbyImageData(width: 50, height: 50, layout: FIXED)
           }
         }
+      }
+    }
+    authorPostCounts: allMarkdownRemark(limit: 2000) {
+      group(field: { frontmatter: { author: { github: SELECT } } }) {
+        fieldValue
+        totalCount
       }
     }
   }

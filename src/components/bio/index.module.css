@@ -41,3 +41,7 @@
   justify-content: flex-start;
   margin-top: var(--spacing-2);
 }
+
+.bio .links .badge {
+  margin-left: var(--spacing-1);
+}

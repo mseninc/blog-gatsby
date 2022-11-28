@@ -14,6 +14,7 @@ type Props = {
   github: string
   name: string
   avatarImage: IGatsbyImageData
+  postCount?: number
   showLinks?: boolean
 }
 
@@ -27,6 +28,11 @@ const Bio = (props: Props) => {
     <div className={`${styles.links} bio-links`}>
       <Link to={authorToPageUrl(github)} className={`author-page-link button`}>
         記事一覧
+        {props.postCount ? (
+          <span
+            className={`${styles.badge} badge`}
+          >{`${props.postCount}`}</span>
+        ) : null}
       </Link>
     </div>
   )

@@ -4,6 +4,24 @@
 }
 
 /* Author list page */
-.authors .author-bio {
+.authors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--spacing-2);
+  row-gap: var(--spacing-2);
   margin: var(--spacing-2) var(--spacing-0);
+}
+
+.authors .bio {
+  height: 100%;
+}
+
+.authors .bio-main {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.authors .bio-bio-text {
+  flex: 1;
 }
