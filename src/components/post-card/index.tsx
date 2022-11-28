@@ -55,7 +55,12 @@ export const query = graphql`
       slug
       heroImage {
         childImageSharp {
-          gatsbyImageData(width: 400, height: 240, layout: CONSTRAINED)
+          gatsbyImageData(
+            width: 400
+            height: 240
+            layout: CONSTRAINED
+            transformOptions: { cropFocus: CENTER }
+          )
         }
       }
     }
@@ -66,9 +71,7 @@ export default function PostCard({ post, showDescription }: Props) {
   const heroImage = post.fields.heroImage
     ? getImage(post.fields.heroImage)
     : null
-  const avatarImage = post.avatarImage
-    ? getImage(post.avatarImage)
-    : null
+  const avatarImage = post.avatarImage ? getImage(post.avatarImage) : null
   const description = showDescription
     ? post.frontmatter.description || post.excerpt
     : null
