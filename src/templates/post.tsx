@@ -32,10 +32,10 @@ type DataType = {
         name: string
         bio: string
         github: string
+        avatarImage: IGatsbyImageData
+        avatarImage25: IGatsbyImageData
       }
     }
-    avatarImage: IGatsbyImageData
-    avatarImage25: IGatsbyImageData
     headings: {
       depth: number
       id: string
@@ -67,7 +67,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
     <AuthorLink
       github={author.github}
       name={author.name}
-      avatarImage={post.avatarImage25}
+      avatarImage={author.avatarImage25}
     />
   ) : null
   const bio = author ? (
@@ -75,7 +75,7 @@ export default function BlogPostTemplate({ data, location }: Props) {
       github={author.github}
       name={author.name}
       bio={author.bio}
-      avatarImage={post.avatarImage}
+      avatarImage={author.avatarImage}
       showLinks={true}
     />
   ) : null
@@ -160,16 +160,16 @@ export const pageQuery = graphql`
           name
           bio
           github
-        }
-      }
-      avatarImage {
-        childImageSharp {
-          gatsbyImageData(width: 50, height: 50, layout: FIXED)
-        }
-      }
-      avatarImage25: avatarImage {
-        childImageSharp {
-          gatsbyImageData(width: 25, height: 25, layout: FIXED)
+          avatarImage {
+            childImageSharp {
+              gatsbyImageData(width: 50, height: 50, layout: FIXED)
+            }
+          }
+          avatarImage25: avatarImage {
+            childImageSharp {
+              gatsbyImageData(width: 25, height: 25, layout: FIXED)
+            }
+          }
         }
       }
       headings {

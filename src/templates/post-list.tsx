@@ -86,12 +86,13 @@ export const pageQuery = graphql`
           description
           tags
           author {
+            github
             name
-          }
-        }
-        avatarImage {
-          childImageSharp {
-            gatsbyImageData(width: 25, height: 25, layout: FIXED)
+            avatarImage {
+              childImageSharp {
+                gatsbyImageData(width: 25, height: 25, layout: FIXED)
+              }
+            }
           }
         }
         fields {

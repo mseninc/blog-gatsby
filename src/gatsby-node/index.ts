@@ -209,7 +209,7 @@ function getMatchedHeroImagePath(fileAbsolutePath: string, slug: string) {
     try {
       fs.statSync(testPath)
       return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
-    } catch {}
+    } catch { }
   }
   // fallback to like `slug-1.jpg`
   for (const ext of candidateExtensions) {
@@ -222,7 +222,7 @@ function getMatchedHeroImagePath(fileAbsolutePath: string, slug: string) {
     try {
       fs.statSync(testPath)
       return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
-    } catch {}
+    } catch { }
   }
   return null
 }
@@ -267,27 +267,12 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
       node,
       value: heroImagePath,
     })
-
-    // Author avatar from exteranal source
-    if (mdr.frontmatter.author) {
-      const url = `https://avatars.githubusercontent.com/${mdr.frontmatter.author}`
-      // https://www.gatsbyjs.com/docs/how-to/images-and-media/preprocessing-external-images/
-      const fileNode = await createRemoteFileNode({
-        url, // string that points to the URL of the image
-        parentNodeId: mdr.id, // id of the parent node of the fileNode you are going to create
-        createNode, // helper function in gatsby-node to generate the node
-        createNodeId, // helper function in gatsby-node to generate the node id
-        getCache, // Gatsby's cache
-      })
-      if (fileNode) {
-        createNodeField({ node, name: "avatarImageFile", value: fileNode.id })
-      }
-    }
   }
+  // Author avatar from exteranal source
   if (node.internal.type === `AuthorYaml`) {
     const authorNode = node as Node & { github: string }
-      const url = `https://avatars.githubusercontent.com/${authorNode.github}`
-      const fileNode = await createRemoteFileNode({
+    const url = `https://avatars.githubusercontent.com/${authorNode.github}`
+    const fileNode = await createRemoteFileNode({
       url, // string that points to the URL of the image
       parentNodeId: authorNode.id, // id of the parent node of the fileNode you are going to create
       createNode, // helper function in gatsby-node to generate the node
@@ -316,7 +301,6 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
     type MarkdownRemark implements Node {
       frontmatter: Frontmatter
       fields: Fields
-      avatarImage: File @link(from: "fields.avatarImageFile")
     }
 
     type Frontmatter {

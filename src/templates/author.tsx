@@ -9,6 +9,7 @@ import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
 import PostCardList from "components/post-card-list"
 import { PostSummary } from "components/post-card"
 import Bio from "components/bio"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 
 type DataType = {
   site: {
@@ -26,6 +27,7 @@ type DataType = {
       name: string
       github: string
       bio: string
+      avatarImage: IGatsbyImageData
     }[]
   }
 }
@@ -52,10 +54,9 @@ export default function AuthorPostList({ pageContext, data, location }: Props) {
 
   if (authors.length !== 1) {
     throw new Error(`Author info for "${github}" not found`)
-    
   }
   const author = authors[0]
-  const avatarImage = posts[0].avatarImage!
+  const avatarImage = author.avatarImage
 
   const breadcrumb: BreadcrumbListItem[] = [
     { name: "ホーム", current: false, url: "/" },
@@ -78,7 +79,7 @@ export default function AuthorPostList({ pageContext, data, location }: Props) {
               name={author.name}
               bio={author.bio}
               avatarImage={avatarImage}
-              />
+            />
           </div>
           <Paginator pathPrefix={basePath} context={pageContext} />
           <PostCardList posts={posts} />
@@ -115,6 +116,11 @@ export const pageQuery = graphql`
         github
         name
         bio
+        avatarImage {
+          childImageSharp {
+            gatsbyImageData(width: 50, height: 50, layout: FIXED)
+          }
+        }
       }
     }
   }
