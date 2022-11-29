@@ -1,10 +1,7 @@
 import path from "path"
 import fs from "fs"
 import { GatsbyNode, Node } from "gatsby"
-import {
-  createFilePath,
-  createRemoteFileNode,
-} from "gatsby-source-filesystem"
+import { createFilePath, createRemoteFileNode } from "gatsby-source-filesystem"
 import { authorToPageUrl } from "../utils/author"
 import { tagNameToPageUrl } from "../utils/tag"
 
@@ -125,27 +122,26 @@ export const createPages: GatsbyNode["createPages"] = async ({
     const tags = result.data?.tagsGroup.group || []
 
     // Group tags by the URL (basePath) (e.g. both "Windows-11" and "windows-11" are corresponding to `/windows-11`)
-    const tagGroups = tags
-      .reduce<{
-        [key: string]: {
-          basePath: string
-          tagList: string[]
-          postCount: number
+    const tagGroups = tags.reduce<{
+      [key: string]: {
+        basePath: string
+        tagList: string[]
+        postCount: number
+      }
+    }>((p, { fieldValue: tagName, totalCount: postCount }) => {
+      const basePath = tagNameToPageUrl(tagName)
+      if (basePath in p) {
+        p[basePath].tagList.push(tagName)
+        p[basePath].postCount += postCount
+      } else {
+        p[basePath] = {
+          basePath,
+          tagList: [tagName],
+          postCount,
         }
-      }>((p, { fieldValue: tagName, totalCount: postCount }) => {
-        const basePath = tagNameToPageUrl(tagName)
-        if (basePath in p) {
-          p[basePath].tagList.push(tagName)
-          p[basePath].postCount += postCount
-        } else {
-          p[basePath] = {
-            basePath,
-            tagList: [tagName],
-            postCount,
-          }
-        }
-        return p
-      }, {})
+      }
+      return p
+    }, {})
 
     // Make tag post list pages
     const tagPageTemplate = path.resolve("src/templates/tags.tsx")
@@ -192,39 +188,38 @@ export const createPages: GatsbyNode["createPages"] = async ({
         })
       })
     }
-
   }
 }
 
 function getMatchedHeroImagePath(fileAbsolutePath: string, slug: string) {
   const candidateExtensions = ["jpg", "jpeg", "png"]
-  // like `slug.jpg`
-  for (const ext of candidateExtensions) {
-    const testPath = path.resolve(
-      fileAbsolutePath,
-      "..",
-      "images",
-      `${slug}\.${ext}`
-    )
-    try {
-      fs.statSync(testPath)
-      return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
-    } catch { }
+
+  const getFirstMatchedPath = (
+    filenameFunc: (slug: string, ext: string) => string
+  ) => {
+    for (const ext of candidateExtensions) {
+      const testPath = path.resolve(
+        fileAbsolutePath,
+        "..",
+        "images",
+        filenameFunc(slug, ext)
+      )
+      try {
+        fs.statSync(testPath)
+        return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
+      } catch { }
+    }
+    return null
   }
-  // fallback to like `slug-1.jpg`
-  for (const ext of candidateExtensions) {
-    const testPath = path.resolve(
-      fileAbsolutePath,
-      "..",
-      "images",
-      `${slug}-1\.${ext}`
-    )
-    try {
-      fs.statSync(testPath)
-      return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
-    } catch { }
-  }
-  return null
+
+  return (
+    // like `HERO.jpg`
+    getFirstMatchedPath((_, ext) => `HERO\.${ext}`) ||
+    // like `<slug>.jpg`
+    getFirstMatchedPath((slug, ext) => `${slug}\.${ext}`) ||
+    // fallback to like `<slug>-1.jpg`
+    getFirstMatchedPath((slug, ext) => `${slug}-1\.${ext}`)
+  )
 }
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
