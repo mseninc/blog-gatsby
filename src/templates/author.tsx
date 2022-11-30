@@ -48,7 +48,7 @@ export default function AuthorPostList({ pageContext, data, location }: Props) {
   const { edges } = data.allMarkdownRemark
   const { nodes: authors } = data.allAuthorYaml
 
-  const { title } = data.site.siteMetadata
+  const { title: siteTitle } = data.site.siteMetadata
 
   const posts = edges.map((x) => x.node)
 
@@ -67,9 +67,14 @@ export default function AuthorPostList({ pageContext, data, location }: Props) {
     breadcrumb.push({ name: `${humanPageNumber} ページ`, current: true })
   }
 
+  const title = `著者 ${author.name} の記事一覧 (${humanPageNumber} ページ)`
+
   return (
-    <Layout location={location} title={title}>
-      <Seo title={title} description={data.site.siteMetadata?.description} />
+    <Layout location={location} title={siteTitle}>
+      <Seo
+        title={title}
+        description={author.bio || data.site.siteMetadata?.description}
+      />
       <div className="full-wide-container">
         <BreadcrumbList items={breadcrumb} />
         <main>

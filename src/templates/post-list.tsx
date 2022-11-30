@@ -46,7 +46,7 @@ export default function PostListTemplate({
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
-        title={siteTitle}
+        title={`記事一覧 (${humanPageNumber} ページ)`}
         description={data.site.siteMetadata?.description}
       />
       <div className="full-wide-container">

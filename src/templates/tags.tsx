@@ -37,7 +37,7 @@ export default function TagPostList({ pageContext, data, location }: Props) {
   const { tagList, basePath, humanPageNumber } = pageContext
   const { edges } = data.allMarkdownRemark
 
-  const { title } = data.site.siteMetadata
+  const { title: siteTitle } = data.site.siteMetadata
 
   const posts = edges.map((x) => x.node)
 
@@ -50,8 +50,10 @@ export default function TagPostList({ pageContext, data, location }: Props) {
     breadcrumb.push({ name: `${humanPageNumber} ページ`, current: true })
   }
 
+  const title = `タグ ${tagList[0]} の記事一覧`
+
   return (
-    <Layout location={location} title={title}>
+    <Layout location={location} title={siteTitle}>
       <Seo title={title} description={data.site.siteMetadata?.description} />
       <div className="full-wide-container">
         <BreadcrumbList items={breadcrumb} />
