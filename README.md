@@ -4,6 +4,18 @@
 
 コンテンツは https://github.com/mseninc/blog で管理しています。
 
+### Package Update
+
+Use `npm-check-updates` to update `package.json`.
+
+```
+$ npx npm-check-updates -u
+$ rm -rf .cache/ public/ node_modules/
+$ npm i
+```
+
+## Docker image for local preview
+
 ### Build Docker image
 
 ```
