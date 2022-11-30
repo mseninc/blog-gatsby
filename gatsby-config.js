@@ -1,7 +1,8 @@
 const path = require("path")
 
 const contentPath = path.resolve(process.env.CONTENT_PATH || "content")
-const s3RemoveNonexistentObjects = `${process.env.S3_REMOVE_NONEXISTENT_OBJECTS}` === "true"
+const s3RemoveNonexistentObjects =
+  `${process.env.S3_REMOVE_NONEXISTENT_OBJECTS}` === "true"
 
 console.debug(`CONTENT_PATH - ${contentPath}`)
 console.debug(`PATH_PREFIX - ${process.env.PATH_PREFIX}`)
@@ -117,7 +118,7 @@ const plugins = [
           query: `
             {
               allMarkdownRemark(
-                sort: { order: DESC, fields: [frontmatter___date] },
+                sort: { frontmatter: { date: DESC } },
                 limit: 100
               ) {
                 nodes {
