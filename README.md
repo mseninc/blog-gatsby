@@ -7,7 +7,7 @@
 ### Build Docker image
 
 ```
-$ sudo docker build . -t <TAG>
+$ sudo docker build . -t <TAG_NAME>
 ```
 
 - `sudo` required on WSL to avoid error `failed to solve with frontend dockerfile.v0: failed to create LLB definition: rpc error: code = Unknown desc = error getting credentials - err: exit status 255, out:`
@@ -17,5 +17,5 @@ $ sudo docker build . -t <TAG>
 ### Run docker container
 
 ```
-$ docker run -d --name blog-gatsby -v $PWD/conent:/content -p 8000:8000 <TAG>
+$ docker run -d --name <CONTAINER_NAME> -v $PWD/content:/content -p 8000:8000 <TAG_NAME>
 ```
