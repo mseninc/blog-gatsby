@@ -303,6 +303,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       description: String
       date: Date @dateformat
       author: AuthorYaml @link(by: "github")
+      tags: [String]
     }
 
     type Fields {
