@@ -7,6 +7,7 @@
 html {
   line-height: var(--lineHeight-normal);
   font-size: var(--fontSize-root);
+  font-weight: var(--fontWeight-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;

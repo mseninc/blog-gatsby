@@ -58,6 +58,6 @@
 /* wide */
 @media screen and (min-width: 1601px) {
   .authors {
-    --grid-column-count: 5;
+    --grid-column-count: 4;
   }
 }

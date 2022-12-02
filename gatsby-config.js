@@ -179,6 +179,19 @@ const plugins = [
       hostname: siteAddress.hostname,
     },
   },
+  {
+    resolve: `gatsby-omni-font-loader`,
+    options: {
+      enableListener: true,
+      preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+      web: [
+        {
+          name: `Noto Sans JP`,
+          file: `https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap`,
+        },
+      ],
+    },
+  },
 ]
 
 if (process.env.GA_TRACKING_ID) {

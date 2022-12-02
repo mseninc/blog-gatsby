@@ -46,11 +46,11 @@
   --font-body: var(--fontFamily-sans);
   --font-heading: var(--fontFamily-sans);
   --fontWeight-normal: 400;
-  --fontWeight-medium: 500;
+  --fontWeight-medium: 400;
   --fontWeight-semibold: 600;
-  --fontWeight-bold: 700;
-  --fontWeight-extrabold: 800;
-  --fontWeight-black: 900;
+  --fontWeight-bold: 600;
+  --fontWeight-extrabold: 600;
+  --fontWeight-black: 600;
 
   --fontSize-root: 16px;
 

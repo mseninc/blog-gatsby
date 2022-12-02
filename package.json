@@ -9,6 +9,7 @@
     "gatsby": "^5.2.0",
     "gatsby-awesome-pagination": "^0.3.8",
     "gatsby-link": "^5.2.0",
+    "gatsby-omni-font-loader": "^2.0.2",
     "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-canonical-urls": "^5.2.0",
     "gatsby-plugin-feed": "^5.2.0",
