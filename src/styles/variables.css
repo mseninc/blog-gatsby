@@ -113,6 +113,7 @@
   --color-button-bg: #2857ff;
   --color-badge-bg-default: #f1f1f1;
   --color-badge-text-default: #333;
+  --color-badge-bg-teal: rgba(0, 145, 175, 1);
 
   --corner-radius: 0.25em;
 

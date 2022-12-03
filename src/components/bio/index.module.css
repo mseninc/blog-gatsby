@@ -42,6 +42,18 @@
   margin-top: var(--spacing-2);
 }
 
+.bio .links a {
+  position: relative;
+}
+
 .bio .links .badge {
-  margin-left: var(--spacing-1);
+  background-color: var(--color-badge-bg-teal);
+  color: white;
+  border: solid 1px var(--color-bg);
+  border-radius: 999px;
+  padding: var(--spacing-0) var(--spacing-2);
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(1em, -50%);
 }
