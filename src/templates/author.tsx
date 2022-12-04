@@ -8,6 +8,8 @@ import Paginator from "components/paginator"
 import BreadcrumbList, { BreadcrumbListItem } from "components/breadcrumb-list"
 import PostCardList from "components/post-card-list"
 import { PostSummary } from "components/post-card"
+import Bio from "components/bio"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 
 type DataType = {
   site: {
@@ -20,10 +22,18 @@ type DataType = {
     totalCount: number
     edges: { node: PostSummary }[]
   }
+  allAuthorYaml: {
+    nodes: {
+      name: string
+      github: string
+      bio: string
+      avatarImage: IGatsbyImageData
+    }[]
+  }
 }
 
 type PageContext = PageContextOrg & {
-  tagList: string[]
+  author: string // github name
   basePath: string
 }
 
@@ -33,33 +43,51 @@ type Props = {
   location: any
 }
 
-export default function TagPostList({ pageContext, data, location }: Props) {
-  const { tagList, basePath, humanPageNumber } = pageContext
+export default function AuthorPostList({ pageContext, data, location }: Props) {
+  const { author: github, basePath, humanPageNumber } = pageContext
   const { edges } = data.allMarkdownRemark
+  const { nodes: authors } = data.allAuthorYaml
 
   const { title: siteTitle } = data.site.siteMetadata
 
   const posts = edges.map((x) => x.node)
 
+  if (authors.length !== 1) {
+    throw new Error(`Author info for "${github}" not found`)
+  }
+  const author = authors[0]
+  const avatarImage = author.avatarImage
+
   const breadcrumb: BreadcrumbListItem[] = [
     { name: "ホーム", current: false, url: "/" },
-    { name: "タグ一覧", current: false, url: "/tags/" },
-    { name: tagList[0], current: humanPageNumber === 1, url: basePath },
+    { name: "著者一覧", current: false, url: "/authors/" },
+    { name: author.name, current: humanPageNumber === 1, url: basePath },
   ]
   if (humanPageNumber !== 1) {
     breadcrumb.push({ name: `${humanPageNumber} ページ`, current: true })
   }
 
-  const title = `タグ ${tagList[0]} の記事一覧`
+  const title = `著者 ${author.name} の記事一覧 (${humanPageNumber} ページ)`
 
   return (
     <Layout location={location} title={siteTitle}>
-      <Seo title={title} description={data.site.siteMetadata?.description} />
+      <Seo
+        title={title}
+        description={author.bio || data.site.siteMetadata?.description}
+      />
       <div className="full-wide-container">
         <BreadcrumbList items={breadcrumb} />
         <main>
+          <div className="author-bio">
+            <Bio
+              github={author.github}
+              name={author.name}
+              bio={author.bio}
+              avatarImage={avatarImage}
+            />
+          </div>
           <Paginator pathPrefix={basePath} context={pageContext} />
-          <PostCardList posts={posts} showAuthor={true} />
+          <PostCardList posts={posts} />
           <Paginator pathPrefix={basePath} context={pageContext} />
         </main>
       </div>
@@ -68,7 +96,7 @@ export default function TagPostList({ pageContext, data, location }: Props) {
 }
 
 export const pageQuery = graphql`
-  query ($skip: Int!, $limit: Int!, $tagList: [String]) {
+  query ($skip: Int!, $limit: Int!, $author: String) {
     site {
       siteMetadata {
         title
@@ -79,12 +107,24 @@ export const pageQuery = graphql`
       sort: { frontmatter: { date: DESC } }
       limit: $limit
       skip: $skip
-      filter: { frontmatter: { tags: { in: $tagList } } }
+      filter: { frontmatter: { author: { github: { eq: $author } } } }
     ) {
       totalCount
       edges {
         node {
           ...PostSummary
+        }
+      }
+    }
+    allAuthorYaml(limit: 1, filter: { github: { eq: $author } }) {
+      nodes {
+        github
+        name
+        bio
+        avatarImage {
+          childImageSharp {
+            gatsbyImageData(width: 50, height: 50, layout: FIXED)
+          }
         }
       }
     }

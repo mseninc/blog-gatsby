@@ -29,7 +29,7 @@ export default function Seo({
             siteUrl
           }
         }
-        ogpDefaultImage: file(name: {eq: "mseeeen-ogp-image-1200x630"}) {
+        ogpDefaultImage: file(name: { eq: "mseeeen-ogp-image-1200x630" }) {
           publicURL
           name
         }
@@ -39,8 +39,10 @@ export default function Seo({
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = `${site.siteMetadata?.title} | ${site.siteMetadata.description}`
-  const absoluteImageUrl = imageUrl ?
-    (imageUrl.startsWith('http') ? imageUrl : site.siteMetadata.siteUrl + imageUrl)
+  const absoluteImageUrl = imageUrl
+    ? imageUrl.startsWith("http")
+      ? imageUrl
+      : site.siteMetadata.siteUrl + imageUrl
     : site.siteMetadata.siteUrl + ogpDefaultImage.publicURL
 
   return (
@@ -49,7 +51,9 @@ export default function Seo({
         lang: lang || "ja",
       }}
       title={title || defaultTitle}
-      titleTemplate={title && defaultTitle ? `%s | ${defaultTitle}` : undefined}
+      titleTemplate={
+        title && defaultTitle ? `%s | ${site.siteMetadata?.title}` : undefined
+      }
       meta={[
         {
           name: `description`,

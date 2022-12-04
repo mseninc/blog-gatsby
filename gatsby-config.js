@@ -1,7 +1,8 @@
 const path = require("path")
 
 const contentPath = path.resolve(process.env.CONTENT_PATH || "content")
-const s3RemoveNonexistentObjects = `${process.env.S3_REMOVE_NONEXISTENT_OBJECTS}` === "true"
+const s3RemoveNonexistentObjects =
+  `${process.env.S3_REMOVE_NONEXISTENT_OBJECTS}` === "true"
 
 console.debug(`CONTENT_PATH - ${contentPath}`)
 console.debug(`PATH_PREFIX - ${process.env.PATH_PREFIX}`)
@@ -117,7 +118,7 @@ const plugins = [
           query: `
             {
               allMarkdownRemark(
-                sort: { order: DESC, fields: [frontmatter___date] },
+                sort: { frontmatter: { date: DESC } },
                 limit: 100
               ) {
                 nodes {
@@ -134,6 +135,7 @@ const plugins = [
               }
             }
           `,
+          title: SITE_NAME,
           output: "/rss.xml",
         },
       ],
@@ -177,6 +179,19 @@ const plugins = [
       hostname: siteAddress.hostname,
     },
   },
+  {
+    resolve: `gatsby-omni-font-loader`,
+    options: {
+      enableListener: true,
+      preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+      web: [
+        {
+          name: `Noto Sans JP`,
+          file: `https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap`,
+        },
+      ],
+    },
+  },
 ]
 
 if (process.env.GA_TRACKING_ID) {
@@ -196,7 +211,4 @@ module.exports = {
     siteUrl: SITE_URL,
   },
   plugins,
-  mapping: {
-    "MarkdownRemark.frontmatter.author": `AuthorYaml`,
-  },
 }

@@ -42,6 +42,7 @@
 .post-card .post-card-tags {
   margin: var(--spacing-2) var(--spacing-2);
   margin-top: var(--spacing-0);
+  flex: 1;
 }
 
 .post-card .post-card-tags .tag {
@@ -63,7 +64,7 @@
 
 .post-card .post-card-description {
   position: relative;
-  flex: 1;
+  /* flex: 1; */
   margin: var(--spacing-3);
   margin-top: var(--spacing-0);
   margin-bottom: var(--spacing-4);

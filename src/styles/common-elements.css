@@ -7,6 +7,7 @@
 html {
   line-height: var(--lineHeight-normal);
   font-size: var(--fontSize-root);
+  font-weight: var(--fontWeight-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
@@ -69,6 +70,18 @@ body.theme-dark .site-logo-light {
 
 body.theme-dark .site-logo-dark {
   display: block;
+}
+
+.badge {
+  display: inline-block;
+  white-space: nowrap;
+  line-height: var(--lineHeight-tight);
+  padding-inline-start: var(--spacing-1);
+  padding-inline-end: var(--spacing-1);
+  font-size: var(--fontSize-0);
+  border-radius: var(--corner-radius);
+  background: var(--color-badge-bg-default);
+  color: var(--color-badge-text-default);
 }
 
 ::-webkit-scrollbar {

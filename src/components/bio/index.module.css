@@ -35,4 +35,25 @@
   margin-left: var(--spacing-1);
 }
 
+.bio .links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: var(--spacing-2);
+}
 
+.bio .links a {
+  position: relative;
+}
+
+.bio .links .badge {
+  background-color: var(--color-badge-bg-teal);
+  color: white;
+  border: solid 1px var(--color-bg);
+  border-radius: 999px;
+  padding: var(--spacing-0) var(--spacing-2);
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(1em, -50%);
+}

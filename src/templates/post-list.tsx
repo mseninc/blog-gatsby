@@ -46,14 +46,17 @@ export default function PostListTemplate({
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
-        title={siteTitle}
+        title={`記事一覧 (${humanPageNumber} ページ)`}
         description={data.site.siteMetadata?.description}
       />
       <div className="full-wide-container">
         <BreadcrumbList items={breadcrumb} />
         <main>
           <Paginator pathPrefix="/posts" context={pageContext} />
-          <PostCardList posts={data.allMarkdownRemark.nodes} />
+          <PostCardList
+            posts={data.allMarkdownRemark.nodes}
+            showAuthor={true}
+          />
           <Paginator pathPrefix="/posts" context={pageContext} />
         </main>
       </div>
@@ -70,7 +73,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       skip: $skip
       limit: $limit
     ) {
@@ -83,11 +86,12 @@ export const pageQuery = graphql`
           description
           tags
           author {
+            github
             name
-          }
-          avatarImage {
-            childImageSharp {
-              gatsbyImageData(width: 25, height: 25, layout: FIXED)
+            avatarImage {
+              childImageSharp {
+                gatsbyImageData(width: 25, height: 25, layout: FIXED)
+              }
             }
           }
         }

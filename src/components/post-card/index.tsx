@@ -16,10 +16,10 @@ export type PostSummary = {
     description?: string
     tags: string[]
     author?: {
-      id: string
+      github: string
       name: string
+      avatarImage?: IGatsbyImageData
     }
-    avatarImage?: IGatsbyImageData
   }
   fields: {
     slug: string
@@ -30,6 +30,7 @@ export type PostSummary = {
 type Props = {
   post: PostSummary
   showDescription?: boolean
+  showAuthor?: boolean
 }
 
 export const query = graphql`
@@ -42,12 +43,12 @@ export const query = graphql`
       description
       tags
       author {
-        id
+        github
         name
-      }
-      avatarImage {
-        childImageSharp {
-          gatsbyImageData(width: 25, height: 25, layout: FIXED)
+        avatarImage {
+          childImageSharp {
+            gatsbyImageData(width: 50, height: 50, layout: FIXED)
+          }
         }
       }
     }
@@ -55,19 +56,21 @@ export const query = graphql`
       slug
       heroImage {
         childImageSharp {
-          gatsbyImageData(width: 400, height: 240, layout: CONSTRAINED)
+          gatsbyImageData(
+            width: 400
+            height: 240
+            layout: CONSTRAINED
+            transformOptions: { cropFocus: CENTER }
+          )
         }
       }
     }
   }
 `
 
-export default function PostCard({ post, showDescription }: Props) {
+export default function PostCard({ post, showDescription, showAuthor }: Props) {
   const heroImage = post.fields.heroImage
     ? getImage(post.fields.heroImage)
-    : null
-  const avatarImage = post.frontmatter.avatarImage
-    ? getImage(post.frontmatter.avatarImage)
     : null
   const description = showDescription
     ? post.frontmatter.description || post.excerpt
@@ -84,7 +87,7 @@ export default function PostCard({ post, showDescription }: Props) {
             >
               <span>
                 {post.frontmatter.tags?.[0] ||
-                  post.frontmatter.author?.id ||
+                  post.frontmatter.author?.github ||
                   ""}
               </span>
             </div>
@@ -105,11 +108,15 @@ export default function PostCard({ post, showDescription }: Props) {
       <div className="post-card-footer">
         <div className="post-card-date">{post.frontmatter.date}</div>
         <div className="post-card-author">
-          {avatarImage && post.frontmatter.author ? (
+          {showAuthor && post.frontmatter.author ? (
             <AuthorLink
               name={post.frontmatter.author.name}
-              github={post.frontmatter.author.id}
-              avatarImage={avatarImage}
+              github={post.frontmatter.author.github}
+              avatarImage={
+                post.frontmatter.author.avatarImage
+                  ? getImage(post.frontmatter.author.avatarImage)
+                  : null
+              }
               reverse={true}
             />
           ) : null}

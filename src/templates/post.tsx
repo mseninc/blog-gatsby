@@ -29,12 +29,12 @@ type DataType = {
       description: string
       tags: string[]
       author: {
-        id: string
         name: string
         bio: string
+        github: string
+        avatarImage: IGatsbyImageData
+        avatarImage25: IGatsbyImageData
       }
-      avatarImage: IGatsbyImageData
-      avatarImage25: IGatsbyImageData
     }
     headings: {
       depth: number
@@ -62,19 +62,21 @@ export default function BlogPostTemplate({ data, location }: Props) {
   const tagList = tags ? <TagList tags={tags} /> : null
 
   const author = post.frontmatter.author
+
   const authorLink = author ? (
     <AuthorLink
-      github={author.id}
+      github={author.github}
       name={author.name}
-      avatarImage={post.frontmatter.avatarImage25}
+      avatarImage={author.avatarImage25}
     />
   ) : null
   const bio = author ? (
     <Bio
-      github={author.id}
+      github={author.github}
       name={author.name}
       bio={author.bio}
-      avatarImage={post.frontmatter.avatarImage}
+      avatarImage={author.avatarImage}
+      showLinks={true}
     />
   ) : null
 
@@ -155,18 +157,18 @@ export const pageQuery = graphql`
         description
         tags
         author {
-          id
           name
           bio
-        }
-        avatarImage {
-          childImageSharp {
-            gatsbyImageData(width: 50, height: 50, layout: FIXED)
+          github
+          avatarImage {
+            childImageSharp {
+              gatsbyImageData(width: 50, height: 50, layout: FIXED)
+            }
           }
-        }
-        avatarImage25: avatarImage {
-          childImageSharp {
-            gatsbyImageData(width: 25, height: 25, layout: FIXED)
+          avatarImage25: avatarImage {
+            childImageSharp {
+              gatsbyImageData(width: 25, height: 25, layout: FIXED)
+            }
           }
         }
       }
@@ -180,7 +182,7 @@ export const pageQuery = graphql`
         heroImage {
           publicURL
           childImageSharp {
-            gatsbyImageData(width: 720, layout: CONSTRAINED)
+            gatsbyImageData(layout: FULL_WIDTH)
           }
         }
       }

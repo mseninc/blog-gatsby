@@ -2,6 +2,7 @@ import path from "path"
 import fs from "fs"
 import { GatsbyNode, Node } from "gatsby"
 import { createFilePath, createRemoteFileNode } from "gatsby-source-filesystem"
+import { authorToPageUrl } from "../utils/author"
 import { tagNameToPageUrl } from "../utils/tag"
 
 const { paginate } = require("gatsby-awesome-pagination")
@@ -19,6 +20,13 @@ export const createPages: GatsbyNode["createPages"] = async ({
       slug: string
     }
   }
+  type AuthorYaml = {
+    id: string
+    name: string
+    bio: string
+    github: string
+  }
+
   type DataType = {
     allMarkdownRemark: {
       nodes: Post[]
@@ -29,15 +37,18 @@ export const createPages: GatsbyNode["createPages"] = async ({
         totalCount: number
       }[]
     }
+    authorsGroup: {
+      group: {
+        fieldValue: string
+        totalCount: number
+      }[]
+    }
   }
 
   const result = await graphql<DataType>(
     `
       {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
+        allMarkdownRemark(sort: { frontmatter: { date: ASC } }, limit: 1000) {
           nodes {
             id
             fields {
@@ -46,7 +57,13 @@ export const createPages: GatsbyNode["createPages"] = async ({
           }
         }
         tagsGroup: allMarkdownRemark(limit: 2000) {
-          group(field: frontmatter___tags) {
+          group(field: { frontmatter: { tags: SELECT } }) {
+            fieldValue
+            totalCount
+          }
+        }
+        authorsGroup: allMarkdownRemark(limit: 2000) {
+          group(field: { frontmatter: { author: { github: SELECT } } }) {
             fieldValue
             totalCount
           }
@@ -103,13 +120,34 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
     // Extract tag data from query
     const tags = result.data?.tagsGroup.group || []
-    const tagPageTemplate = path.resolve("src/templates/tags.tsx")
+
+    // Group tags by the URL (basePath) (e.g. both "Windows-11" and "windows-11" are corresponding to `/windows-11`)
+    const tagGroups = tags.reduce<{
+      [key: string]: {
+        basePath: string
+        tagList: string[]
+        postCount: number
+      }
+    }>((p, { fieldValue: tagName, totalCount: postCount }) => {
+      const basePath = tagNameToPageUrl(tagName)
+      if (basePath in p) {
+        p[basePath].tagList.push(tagName)
+        p[basePath].postCount += postCount
+      } else {
+        p[basePath] = {
+          basePath,
+          tagList: [tagName],
+          postCount,
+        }
+      }
+      return p
+    }, {})
 
     // Make tag post list pages
-    for (const { fieldValue: tagName, totalCount: postCount } of tags) {
+    const tagPageTemplate = path.resolve("src/templates/tags.tsx")
+    for (const { basePath, tagList, postCount } of Object.values(tagGroups)) {
       const postsPerPage = 30
       const numberOfPages = Math.ceil(postCount / postsPerPage)
-      const basePath = tagNameToPageUrl(tagName)
       Array.from({ length: numberOfPages }).forEach((_, i) => {
         createPage({
           path: i === 0 ? basePath : `${basePath}${i + 1}`,
@@ -120,7 +158,31 @@ export const createPages: GatsbyNode["createPages"] = async ({
             numberOfPages,
             pageNumber: i,
             humanPageNumber: i + 1,
-            tag: tagName,
+            tagList,
+            basePath,
+          },
+        })
+      })
+    }
+
+    // Make author's post list pages
+    const authors = result.data?.authorsGroup.group || []
+    const authorPageTemplate = path.resolve("src/templates/author.tsx")
+    for (const { fieldValue: author, totalCount: postCount } of authors) {
+      const basePath = authorToPageUrl(author)
+      const postsPerPage = 30
+      const numberOfPages = Math.ceil(postCount / postsPerPage)
+      Array.from({ length: numberOfPages }).forEach((_, i) => {
+        createPage({
+          path: i === 0 ? basePath : `${basePath}${i + 1}`,
+          component: authorPageTemplate,
+          context: {
+            limit: postsPerPage,
+            skip: i * postsPerPage,
+            numberOfPages,
+            pageNumber: i,
+            humanPageNumber: i + 1,
+            author,
             basePath,
           },
         })
@@ -131,55 +193,53 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
 function getMatchedHeroImagePath(fileAbsolutePath: string, slug: string) {
   const candidateExtensions = ["jpg", "jpeg", "png"]
-  // like `slug.jpg`
-  for (const ext of candidateExtensions) {
-    const testPath = path.resolve(
-      fileAbsolutePath,
-      "..",
-      "images",
-      `${slug}\.${ext}`
-    )
-    try {
-      fs.statSync(testPath)
-      return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
-    } catch {}
+
+  const getFirstMatchedPath = (
+    filenameFunc: (slug: string, ext: string) => string
+  ) => {
+    for (const ext of candidateExtensions) {
+      const testPath = path.resolve(
+        fileAbsolutePath,
+        "..",
+        "images",
+        filenameFunc(slug, ext)
+      )
+      try {
+        fs.statSync(testPath)
+        return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
+      } catch { }
+    }
+    return null
   }
-  // fallback to like `slug-1.jpg`
-  for (const ext of candidateExtensions) {
-    const testPath = path.resolve(
-      fileAbsolutePath,
-      "..",
-      "images",
-      `${slug}-1\.${ext}`
-    )
-    try {
-      fs.statSync(testPath)
-      return path.relative(path.resolve(fileAbsolutePath, ".."), testPath)
-    } catch {}
-  }
-  return null
+
+  return (
+    // like `HERO.jpg`
+    getFirstMatchedPath((_, ext) => `HERO\.${ext}`) ||
+    // like `<slug>.jpg`
+    getFirstMatchedPath((slug, ext) => `${slug}\.${ext}`) ||
+    // fallback to like `<slug>-1.jpg`
+    getFirstMatchedPath((slug, ext) => `${slug}-1\.${ext}`)
+  )
 }
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
   node,
   actions,
   getNode,
-  store,
-  cache,
   createNodeId,
-  reporter,
+  getCache,
 }) => {
   const { createNode, createNodeField } = actions
 
-  const mdr = node as Node & {
-    id: string
-    fileAbsolutePath: string
-    frontmatter: {
-      author: string
-      avatarImage__NODE: any
-    }
-  }
   if (node.internal.type === `MarkdownRemark`) {
+    const mdr = node as Node & {
+      id: string
+      fileAbsolutePath: string
+      frontmatter: {
+        author: string
+      }
+    }
+
     const slug = createFilePath({ node, getNode })
 
     // Flatten slug (e.g. /kenzauros/2021/hogehoge/ => /hogehoge/)
@@ -202,23 +262,20 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = async ({
       node,
       value: heroImagePath,
     })
-
-    // Author avatar from exteranal source
-    if (mdr.frontmatter.author) {
-      const url = `https://avatars.githubusercontent.com/${mdr.frontmatter.author}`
-      // https://www.gatsbyjs.com/docs/how-to/images-and-media/preprocessing-external-images/
-      const fileNode = await createRemoteFileNode({
-        url, // string that points to the URL of the image
-        parentNodeId: mdr.id, // id of the parent node of the fileNode you are going to create
-        createNode, // helper function in gatsby-node to generate the node
-        createNodeId, // helper function in gatsby-node to generate the node id
-        cache, // Gatsby's cache
-        store, // Gatsby's Redux store
-        reporter,
-      })
-      if (fileNode) {
-        mdr.frontmatter.avatarImage__NODE = fileNode.id
-      }
+  }
+  // Author avatar from exteranal source
+  if (node.internal.type === `AuthorYaml`) {
+    const authorNode = node as Node & { github: string }
+    const url = `https://avatars.githubusercontent.com/${authorNode.github}`
+    const fileNode = await createRemoteFileNode({
+      url, // string that points to the URL of the image
+      parentNodeId: authorNode.id, // id of the parent node of the fileNode you are going to create
+      createNode, // helper function in gatsby-node to generate the node
+      createNodeId, // helper function in gatsby-node to generate the node id
+      getCache, // Gatsby's cache
+    })
+    if (fileNode) {
+      createNodeField({ node, name: "avatarImageFile", value: fileNode.id })
     }
   }
 }
@@ -232,6 +289,8 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       id: String
       name: String
       bio: String
+      github: String
+      avatarImage: File @link(from: "fields.avatarImageFile")
     }
 
     type MarkdownRemark implements Node {
@@ -243,7 +302,8 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       title: String
       description: String
       date: Date @dateformat
-      avatarImage: File @link(from: "avatarImage__NODE")
+      author: AuthorYaml @link(by: "github")
+      tags: [String]
     }
 
     type Fields {
