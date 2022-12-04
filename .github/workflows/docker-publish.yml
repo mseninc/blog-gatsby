@@ -38,5 +38,6 @@ jobs:
       - name: Push image
         uses: docker/build-push-action@v3
         with:
+          context: .
           push: true
           tags: ${{ github.event.inputs.tag || 'mseninc/blog-gatsby:latest' }}
