@@ -7,7 +7,7 @@ on:
       tag:
         description: "Tag"
         required: false
-        default: "ghcr.io/mseninc/blog-gatsby/blog-gatsby:latest"
+        default: "ghcr.io/mseninc/blog-gatsby:latest"
 
   push:
     branches:
