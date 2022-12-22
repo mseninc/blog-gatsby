@@ -1,13 +1,15 @@
-import * as React from "react"
 import { graphql } from "gatsby"
+import * as React from "react"
 import { Helmet } from "react-helmet"
 
+import ClientOnly from "components/client-only"
 import Layout from "components/layout"
-import Seo from "components/seo"
+import MoreLink from "components/more-link"
 import PostCard, { PostSummary } from "components/post-card"
+import SearchBox from "components/search-box"
+import Seo from "components/seo"
 import TopPageHeading from "components/top-page-heading"
 import TopPageHero from "components/top-page-hero"
-import MoreLink from "components/more-link"
 import { tagNameToPageUrl } from "utils/tag"
 
 const featuredTags = [
@@ -105,6 +107,13 @@ export default function BlogIndex({ data, location }: Props) {
       </Helmet>
       <Seo />
       <TopPageHero />
+      <div className="global-root-group search-group">
+        <div className="global-wrapper">
+          <ClientOnly>
+            <SearchBox />
+          </ClientOnly>
+        </div>
+      </div>
       {latestPosts}
       {featuredTagPostLists}
     </Layout>
