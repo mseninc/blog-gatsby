@@ -217,8 +217,8 @@ module.exports = {
     description: SITE_DESCRIPTION,
     siteUrl: SITE_URL,
     googleProgrammableSearchUrl:
-      process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL | "",
-    googleAdsenseUrl: process.env.GOOGLE_ADSENSE_URL | "",
+      process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL || "",
+    googleAdsenseUrl: process.env.GOOGLE_ADSENSE_URL || "",
   },
   plugins,
 }
