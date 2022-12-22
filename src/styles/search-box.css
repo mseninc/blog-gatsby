@@ -1,0 +1,83 @@
+/* ========== 検索ボックス ========== */
+/* gsc-** が Google Search Box のスタイル */
+
+/* コンテナーのパディング調整 */
+.global-root-group.search-group {
+  padding: var(--spacing-2) var(--spacing-0);
+}
+
+.global-root-group > .global-wrapper {
+  padding: var(--spacing-0);
+}
+
+/* gsc コンテナー */
+.gsc-control-cse {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  font-family: revert !important; /* 本文フォントに戻す */
+}
+
+form.gsc-search-box {
+  margin-bottom: 0 !important; /* マージン削除 */
+}
+
+table.gsc-search-box {
+  margin-bottom: 0 !important; /* マージン削除 */
+}
+
+.gsc-search-box-tools .gsc-search-box .gsc-input {
+  padding-right: var(--spacing-2) !important; /* 入力欄右側のパディング */
+}
+
+.gsc-input-box {
+  border-radius: var(--corner-radius) !important;
+  padding: 0 !important;
+}
+
+.gsc-input-box input {
+  line-height: normal !important;
+}
+
+button.gsc-search-button {
+  font-size: 1rem;
+  border-radius: var(--corner-radius);
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+
+button.gsc-search-button > svg {
+  transform: scale(1.3);
+}
+
+/* ========== 検索結果一覧 ========== */
+
+/* 並び順セレクター */
+.gsc-control-cse .gsc-option-menu-container {
+  white-space: pre;
+}
+
+/* タイトルと画像・本文の間 */
+.gsc-control-cse .gsc-table-result {
+  margin-top: var(--spacing-2);
+  font-family: revert !important; /* 本文フォントに戻す */
+}
+
+/* サムネイル画像 */
+.gs-web-image-box,
+.gs-promotion-image-box {
+  margin-right: var(--spacing-2) !important;
+  width: auto !important;
+  padding: 0 !important;
+}
+
+/* サムネイル画像最大幅設定 */
+.gs-web-image-box .gs-image,
+.gs-promotion-image-box .gs-promotion-image {
+  max-width: 120px !important;
+}
+
+/* サムネイル画像のリンクタグのボーダー除去 */
+a.gs-image {
+  border: 0 !important;
+}

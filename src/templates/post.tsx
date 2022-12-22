@@ -17,6 +17,7 @@ type DataType = {
   site: {
     siteMetadata: {
       title: string
+      googleAdsenseUrl: string
     }
   }
   markdownRemark: {
@@ -51,6 +52,16 @@ type DataType = {
 type Props = {
   data: DataType
   location: any
+}
+
+export const Head = ({ data }: Props) => {
+  return data.site.siteMetadata.googleAdsenseUrl ? (
+    <script
+      async
+      src={data.site.siteMetadata.googleAdsenseUrl}
+      crossOrigin="anonymous"
+    ></script>
+  ) : null
 }
 
 export default function BlogPostTemplate({ data, location }: Props) {
@@ -145,6 +156,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        googleAdsenseUrl
       }
     }
     markdownRemark(id: { eq: $id }) {

@@ -115,7 +115,7 @@
   --color-badge-text-default: #333;
   --color-badge-bg-teal: rgba(0, 145, 175, 1);
 
-  --corner-radius: 0.25em;
+  --corner-radius: 0.25rem;
 
   --text-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.5);
   --text-shadow-top-page-hero-copy: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.7);

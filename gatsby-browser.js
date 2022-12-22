@@ -18,6 +18,7 @@ import "./src/styles/breadcrumb.css"
 import "./src/styles/post-card.css"
 import "./src/styles/paginator.css"
 import "./src/styles/post-card-list.css"
+import "./src/styles/search-box.css"
 
 // for pages
 import "./src/styles/top-page.css"
