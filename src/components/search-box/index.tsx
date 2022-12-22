@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby"
-import React from "react"
+import React, { useEffect } from "react"
 import { Helmet } from "react-helmet"
 
 type DataType = {
@@ -20,6 +20,19 @@ export default function SearchBox() {
       }
     }
   `)
+
+  useEffect(() => {
+    const timeoutId = setInterval(() => {
+      const input = document.querySelector<HTMLInputElement>(
+        ".gsc-input-box input[type=text]"
+      )
+      if (input) {
+        input.placeholder = "ここから記事を検索できます"
+        clearInterval(timeoutId)
+      }
+    }, 250)
+    return () => clearInterval(timeoutId)
+  }, [])
 
   return data.site.siteMetadata.googleProgrammableSearchUrl ? (
     <>
