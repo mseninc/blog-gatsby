@@ -156,6 +156,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        googleAdsenseUrl
       }
     }
     markdownRemark(id: { eq: $id }) {
