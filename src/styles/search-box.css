@@ -1,5 +1,7 @@
 /* ========== 検索ボックス ========== */
+/* gsc-** が Google Search Box のスタイル */
 
+/* コンテナーのパディング調整 */
 .global-root-group.search-group {
   padding: var(--spacing-2) var(--spacing-0);
 }
@@ -8,22 +10,23 @@
   padding: var(--spacing-0);
 }
 
+/* gsc コンテナー */
 .gsc-control-cse {
   background-color: transparent !important;
   border-color: transparent !important;
-  font-family: revert !important;
+  font-family: revert !important; /* 本文フォントに戻す */
 }
 
 form.gsc-search-box {
-  margin-bottom: 0 !important;
+  margin-bottom: 0 !important; /* マージン削除 */
 }
 
 table.gsc-search-box {
-  margin-bottom: 0 !important;
+  margin-bottom: 0 !important; /* マージン削除 */
 }
 
 .gsc-search-box-tools .gsc-search-box .gsc-input {
-  padding-right: var(--spacing-2) !important;
+  padding-right: var(--spacing-2) !important; /* 入力欄右側のパディング */
 }
 
 .gsc-input-box {
@@ -57,7 +60,7 @@ button.gsc-search-button > svg {
 /* タイトルと画像・本文の間 */
 .gsc-control-cse .gsc-table-result {
   margin-top: var(--spacing-2);
-  font-family: revert !important;
+  font-family: revert !important; /* 本文フォントに戻す */
 }
 
 /* サムネイル画像 */
