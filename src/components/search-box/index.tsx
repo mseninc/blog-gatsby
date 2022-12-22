@@ -1,16 +1,35 @@
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import { Helmet } from "react-helmet"
 
+type DataType = {
+  site: {
+    siteMetadata: {
+      googleProgrammableSearchUrl: string
+    }
+  }
+}
+
 export default function SearchBox() {
-  return (
+  const data = useStaticQuery<DataType>(graphql`
+    query SearchBoxQuery {
+      site {
+        siteMetadata {
+          googleProgrammableSearchUrl
+        }
+      }
+    }
+  `)
+
+  return data.site.siteMetadata.googleProgrammableSearchUrl ? (
     <>
       <Helmet>
         <script
           async
-          src="https://cse.google.com/cse.js?cx=e58962d21dcb441fb"
-        ></script>
+          src={data.site.siteMetadata.googleProgrammableSearchUrl}
+        />
       </Helmet>
       <div className="gcse-search"></div>
     </>
-  )
+  ) : null
 }

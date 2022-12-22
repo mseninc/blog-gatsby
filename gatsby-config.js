@@ -1,4 +1,7 @@
 const path = require("path")
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 const contentPath = path.resolve(process.env.CONTENT_PATH || "content")
 const s3RemoveNonexistentObjects =
@@ -10,6 +13,9 @@ console.debug(`GA_TRACKING_ID - ${process.env.GA_TRACKING_ID}`)
 console.debug(`S3_BUCKET_NAME - ${process.env.S3_BUCKET_NAME}`)
 console.debug(`S3_REGION - ${process.env.S3_REGION}`)
 console.debug(`S3_REMOVE_NONEXISTENT_OBJECTS - ${s3RemoveNonexistentObjects}`)
+console.debug(
+  `GOOGLE_PROGRAMMABLE_SEARCH_URL - ${process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL}`
+)
 
 const {
   SITE_NAME,
@@ -209,6 +215,7 @@ module.exports = {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     siteUrl: SITE_URL,
+    googleProgrammableSearchUrl: process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL,
   },
   plugins,
 }
