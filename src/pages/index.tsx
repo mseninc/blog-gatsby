@@ -1,6 +1,5 @@
 import { graphql } from "gatsby"
 import * as React from "react"
-import { Helmet } from "react-helmet"
 
 import ClientOnly from "components/client-only"
 import Layout from "components/layout"
@@ -10,6 +9,7 @@ import SearchBox from "components/search-box"
 import Seo from "components/seo"
 import TopPageHeading from "components/top-page-heading"
 import TopPageHero from "components/top-page-hero"
+import WebFont from "components/web-font"
 import { tagNameToPageUrl } from "utils/tag"
 
 const featuredTags = [
@@ -93,18 +93,7 @@ export default function BlogIndex({ data, location }: Props) {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <Helmet>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="crossOrigin"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap"
-          rel="stylesheet"
-        />
-      </Helmet>
+      <WebFont />
       <Seo />
       <TopPageHero />
       <div className="global-root-group search-group">
