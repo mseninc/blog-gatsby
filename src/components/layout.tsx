@@ -1,10 +1,10 @@
-import * as React from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+import * as React from "react"
 
 import JumpButton from "./jump-button"
-import ThemeSwitcher from "./theme-switcher"
 import PageFooter from "./page-footer"
+import ThemeSwitcher from "./theme-switcher"
 
 type Props = {
   location: { pathname: string }

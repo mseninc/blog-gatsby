@@ -42,7 +42,7 @@
   --spacing-24: 6rem;
   --spacing-32: 8rem;
 
-  --fontFamily-sans: "Noto Sans JP", "Noto Sans CJK", sans-serif;
+  --fontFamily-sans: "Noto Sans JP", "Noto Sans CJK", "Meiryo UI", sans-serif;
   --font-body: var(--fontFamily-sans);
   --font-heading: var(--fontFamily-sans);
   --fontWeight-normal: 400;
