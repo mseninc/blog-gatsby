@@ -6,8 +6,12 @@
   padding: var(--spacing-2) var(--spacing-0);
 }
 
-.global-root-group > .global-wrapper {
+/* 表示時にコンテナーサイズが変化するためサイズを固定 */
+.global-root-group.search-group > .global-wrapper {
   padding: var(--spacing-0);
+  height: 64px;
+  display: grid;
+  align-items: center;
 }
 
 /* gsc コンテナー */
@@ -15,6 +19,20 @@
   background-color: transparent !important;
   border-color: transparent !important;
   font-family: revert !important; /* 本文フォントに戻す */
+
+  /* 突然表示されるのを緩和するためアニメーション */
+  animation-name: searchBoxFadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+@keyframes searchBoxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 form.gsc-search-box {
