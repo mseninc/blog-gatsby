@@ -16,7 +16,6 @@ console.debug(`S3_REMOVE_NONEXISTENT_OBJECTS - ${s3RemoveNonexistentObjects}`)
 console.debug(
   `GOOGLE_PROGRAMMABLE_SEARCH_URL - ${process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL}`
 )
-console.debug(`GOOGLE_ADSENSE_URL - ${process.env.GOOGLE_ADSENSE_URL}`)
 
 const {
   SITE_NAME,
@@ -205,7 +204,6 @@ module.exports = {
     siteUrl: SITE_URL,
     googleProgrammableSearchUrl:
       process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL || "",
-    googleAdsenseUrl: process.env.GOOGLE_ADSENSE_URL || "",
   },
   plugins,
 }
