@@ -20,6 +20,10 @@
   border-color: transparent !important;
   font-family: revert !important; /* 本文フォントに戻す */
 
+  /* opacity が設定された画像等がこのコンテナーより前面に出てしまう対策 */
+  position: relative;
+  z-index: 1;
+
   /* 突然表示されるのを緩和するためアニメーション */
   animation-name: searchBoxFadeIn;
   animation-duration: 2s;
