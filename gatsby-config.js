@@ -14,7 +14,7 @@ console.debug(`S3_BUCKET_NAME - ${process.env.S3_BUCKET_NAME}`)
 console.debug(`S3_REGION - ${process.env.S3_REGION}`)
 console.debug(`S3_REMOVE_NONEXISTENT_OBJECTS - ${s3RemoveNonexistentObjects}`)
 console.debug(
-  `GOOGLE_PROGRAMMABLE_SEARCH_URL - ${process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL}`
+  `GOOGLE_PROGRAMMABLE_SEARCH_URL - ${process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL}`,
 )
 
 const {
@@ -108,6 +108,10 @@ const plugins = [
           }
         }
       `,
+      setup: (options) => ({
+        ...options,
+        custom_namespaces: { media: "http://search.yahoo.com/mrss/" },
+      }),
       feeds: [
         {
           serialize: ({ query: { site, allMarkdownRemark } }) => {
@@ -117,7 +121,18 @@ const plugins = [
                 date: node.frontmatter.date,
                 url: site.siteMetadata.siteUrl + node.fields.slug,
                 guid: site.siteMetadata.siteUrl + node.fields.slug,
-                custom_elements: [{ "content:encoded": node.html }],
+                custom_elements: [
+                  {
+                    "media:content": {
+                      _attr: {
+                        url:
+                          site.siteMetadata.siteUrl +
+                          node.fields.heroImage?.publicURL,
+                        media: "image",
+                      },
+                    },
+                  },
+                ],
               })
             })
           },
@@ -129,9 +144,11 @@ const plugins = [
               ) {
                 nodes {
                   excerpt
-                  html
                   fields {
                     slug
+                    heroImage {
+                      publicURL
+                    }
                   }
                   frontmatter {
                     title
