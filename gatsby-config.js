@@ -83,6 +83,7 @@ const plugins = [
               "xaml": "xml",
               "sh": "bash",
               "ps": "powershell",
+              "cmd": "batch",
             },
           },
         },
