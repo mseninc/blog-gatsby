@@ -14,6 +14,21 @@ $ rm -rf .cache/ public/ node_modules/
 $ npm i
 ```
 
+### Build locally
+
+```
+$ NODE_OPTIONS=--max-old-space-size=8192 CONTENT_PATH=content npx gatsby build
+$ CONTENT_PATH=content npx gatsby serve -p 8000
+```
+
+ビルド中に Killed と表示される場合は、メモリが不足している可能性が高いので、 WSL の場合は swap を増やすなどしてください。
+
+```
+[wsl2]
+memory=12GB
+swap=6GB
+```
+
 ## Docker image for local preview
 
 ### Build Docker image

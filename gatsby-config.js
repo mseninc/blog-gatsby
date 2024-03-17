@@ -14,7 +14,7 @@ console.debug(`S3_BUCKET_NAME - ${process.env.S3_BUCKET_NAME}`)
 console.debug(`S3_REGION - ${process.env.S3_REGION}`)
 console.debug(`S3_REMOVE_NONEXISTENT_OBJECTS - ${s3RemoveNonexistentObjects}`)
 console.debug(
-  `GOOGLE_PROGRAMMABLE_SEARCH_URL - ${process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL}`
+  `GOOGLE_PROGRAMMABLE_SEARCH_URL - ${process.env.GOOGLE_PROGRAMMABLE_SEARCH_URL}`,
 )
 
 const {
@@ -83,11 +83,19 @@ const plugins = [
               "xaml": "xml",
               "sh": "bash",
               "ps": "powershell",
+              "cmd": "batch",
             },
           },
         },
         `gatsby-remark-copy-linked-files`,
         `gatsby-remark-smartypants`,
+        {
+          resolve: `gatsby-remark-katex`,
+          options: {
+            // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
+            strict: `ignore`,
+          },
+        },
       ],
     },
   },
@@ -108,6 +116,10 @@ const plugins = [
           }
         }
       `,
+      setup: (options) => ({
+        ...options,
+        custom_namespaces: { media: "http://search.yahoo.com/mrss/" },
+      }),
       feeds: [
         {
           serialize: ({ query: { site, allMarkdownRemark } }) => {
@@ -117,7 +129,18 @@ const plugins = [
                 date: node.frontmatter.date,
                 url: site.siteMetadata.siteUrl + node.fields.slug,
                 guid: site.siteMetadata.siteUrl + node.fields.slug,
-                custom_elements: [{ "content:encoded": node.html }],
+                custom_elements: [
+                  {
+                    "media:content": {
+                      _attr: {
+                        url:
+                          site.siteMetadata.siteUrl +
+                          node.fields.heroImage?.publicURL,
+                        media: "image",
+                      },
+                    },
+                  },
+                ],
               })
             })
           },
@@ -129,9 +152,11 @@ const plugins = [
               ) {
                 nodes {
                   excerpt
-                  html
                   fields {
                     slug
+                    heroImage {
+                      publicURL
+                    }
                   }
                   frontmatter {
                     title
@@ -189,9 +214,14 @@ const plugins = [
 
 if (process.env.GA_TRACKING_ID) {
   plugins.push({
-    resolve: `gatsby-plugin-google-analytics`,
+    resolve: `gatsby-plugin-google-gtag`,
     options: {
-      trackingId: process.env.GA_TRACKING_ID,
+      trackingIds: [
+        process.env.GA_TRACKING_ID, // Google Analytics / GA
+      ],
+      pluginConfig: {
+        head: true,
+      },
     },
   })
 }
